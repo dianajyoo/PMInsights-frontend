@@ -4,6 +4,7 @@ import NavBar from './components/NavBar'
 import SignUpForm from './components/SignUpForm'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
+import SleepContainer from './components/SleepContainer'
 
 import logo from './logo.svg';
 import './App.css';
@@ -33,6 +34,9 @@ class App extends Component {
             <Route
               exact path='/home'
               render={(props) => <Home {...props} />} />
+            <Route
+              exact path='/profile'
+              render={(props) => <SleepContainer {...props} />} />
           </React.Fragment>
         </Router>
       </div>
