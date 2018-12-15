@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './components/NavBar'
-import SignUpForm from './components/SignUpForm'
-import LoginForm from './components/LoginForm'
-import Home from './components/Home'
-import SleepContainer from './components/SleepContainer'
+import { connect } from 'react-redux';
 
+import NavBar from './components/NavBar';
+import SignUpForm from './components/SignUpForm';
+import LoginForm from './components/LoginForm';
+import Home from './components/Home';
+import SleepContainer from './components/SleepContainer';
+import ProfileContainer from './components/ProfileContainer';
+
+import '../node_modules/semantic-ui/dist/semantic.min.css';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+const BASE_URL = 'http://localhost:3000'
 
-  componentDidMount() {
-    fetch('http://localhost:3000/sleep')
-      .then(res => res.json())
-      .then(console.log)
-      .catch(console.error)
-  }
+class App extends Component {
 
   render() {
     return (
       <div className="App">
-        sleepTracker
         <Router>
           <React.Fragment>
             <NavBar /><br />
+            <ProfileContainer />
             <Route
               exact path='/signup'
               render={(props) => <SignUpForm {...props} />} />
@@ -44,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

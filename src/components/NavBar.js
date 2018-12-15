@@ -13,11 +13,11 @@ export default class NavBar extends React.Component {
         </Menu.Item>
 
         <Menu.Item name='signup'>
-          <NavLink to="/signup" className="nav-signup">Sign Up</NavLink>
+          <NavLink to="/signup" className="nav-signup"><i class="user plus icon"></i></NavLink>
         </Menu.Item>
 
         <Menu.Item name='login' >
-          <NavLink to="/login" className="nav-login">Login</NavLink>
+          <NavLink to="/login" className="nav-login"><i class="user icon"></i></NavLink>
         </Menu.Item>
       </Menu>
     )

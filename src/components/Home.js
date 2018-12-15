@@ -5,7 +5,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div className='welcome' style={ {height: 1000, backgroundRepeat: 'no-repeat', backgroundImage: 'url(' + require('../imgs/clouds.jpg') + ')'} }>
+      <div className='welcome' style={ {height: 1000, backgroundRepeat: 'no-repeat', backgroundImage: 'url(' + require('../imgs/moon.jpg') + ')'} }>
       </div>
     )
   }
