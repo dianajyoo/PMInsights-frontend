@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { fetchUserData } from '../actionCreators/userActions'
 
 const BASE_URL = 'http://localhost:3000'
 
-class ProfileContainer extends React.Component {
+class Profile extends React.Component {
 
   componentDidMount() {
     // fetch(`${BASE_URL}/user`)
@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

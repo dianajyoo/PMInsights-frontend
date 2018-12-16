@@ -34,3 +34,9 @@
 .profile {
   float: left;
 }
+
+.progress-bar {
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
