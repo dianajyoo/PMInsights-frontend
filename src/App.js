@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import NavBar from './components/NavBar'
-import SignUpForm from './components/login/SignUpForm'
-import LoginForm from './components/login/LoginForm'
+import SignUpForm from './components/forms/SignUpForm'
+import LoginForm from './components/forms/LoginForm'
+import SleepForm from './components/forms/SleepForm'
 import Home from './components/Home'
 import SleepContainer from './components/SleepContainer'
 import Dashboard from './components/Dashboard'
@@ -35,11 +36,14 @@ class App extends Component {
               exact path='/home'
               render={(props) => <Home {...props} />} />
             <Route
-              exact path='/profile'
+              exact path='/dashboard'
               render={(props) => <Dashboard {...props} />} />
             <Route
               exact path='/sleep_stats'
               render={(props) => <SleepContainer {...props} />} />
+            <Route
+              exact path='/sleep_form'
+              render={(props) => <SleepForm {...props} />} />
           </React.Fragment>
         </Router>
       </div>
