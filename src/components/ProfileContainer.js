@@ -18,7 +18,22 @@ class ProfileContainer extends React.Component {
     console.log(this.props.user)
     return (
       <div className='profile'>
-        {this.props.user.firstName}
+        <div>
+          {this.props.user.firstName}
+          <br />
+          <br />
+          <img src={this.props.user.avatar} alt='' /><br /><br />
+        </div>
+        Height: {this.props.user.height} cm
+        Weight: {this.props.user.weight} kg
+        <br />
+        <br />
+        <br />
+        My Sleep Goals (link)
+        <br />
+        <br/>
+        <br/>
+        Statistics (link)
       </div>
     )
   }
