@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchUserData } from './actionCreators/userActions'
 
 import NavBar from './components/NavBar'
 import SignUpForm from './components/forms/SignUpForm'
@@ -15,9 +17,22 @@ import '../node_modules/semantic-ui/dist/semantic.min.css'
 import logo from './logo.svg'
 import './App.css'
 
-const BASE_URL = 'http://localhost:3000'
+// grab hash of current url
+var current_hash = window.location.hash
+
+// grab access token from url
+if (current_hash.includes("token")) {
+  var access_token = current_hash.split('&')[0].split('=')[1]
+}
 
 class App extends Component {
+
+  componentDidMount() {
+
+    console.log(current_hash)
+    // debugger
+    this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json')
+  }
 
   render() {
     return (
@@ -44,4 +59,16 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    access_token: state.token
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: url => dispatch(fetchUserData(url, access_token))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,3 +1,5 @@
+// import { access_token } from '../App.js'
+
 export const fetchHasErrored = (bool) => {
   return {
       type: 'FETCH_HAS_ERRORED',
@@ -19,14 +21,14 @@ export const fetchUserSuccess = (user) => {
 
 // <--- redux thunk here --->
 
-export const fetchUserData = (url) => {
+export const fetchUserData = (url, token) => {
     return (dispatch) => {
       dispatch(fetchIsLoading(true));
       fetch(url, {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkRGQ0wiLCJzdWIiOiI3MkNWUzMiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBybG9jIHJ3ZWkgcmhyIHJwcm8gcm51dCByc2xlIiwiZXhwIjoxNTQ1MjMzMjY5LCJpYXQiOjE1NDQ2NDM2MzJ9.a8TDnT5PPBwDe7OsM5HmCkzdxDxp74tIscGcRMULIRs"
+          "Authorization": "Bearer " + token
         }
       })
         .then(res => {
