@@ -18,6 +18,13 @@ export const fetchUserSuccess = (user) => {
       user
   }
 }
+export const storeToken = (access_token) => {
+  return {
+      type: 'STORE_TOKEN',
+      token: access_token
+  }
+}
+
 
 // <--- redux thunk here --->
 

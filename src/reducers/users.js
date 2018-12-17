@@ -1,7 +1,8 @@
 const initialState = {
   user: {},
   fetchIsLoading: false,
-  fetchHasErrored: false
+  fetchHasErrored: false,
+  token: ''
 }
 
 const userReducer = (state = initialState, action) => {
@@ -12,6 +13,9 @@ const userReducer = (state = initialState, action) => {
       return {...state, fetchIsLoading: action.fetchIsLoading}
     case 'FETCH_USER_SUCCESS':
       return {...state, user: action.user}
+    case "STORE_TOKEN":
+      // debugger
+      return {...state, token: action.token}
     default:
       return state
   }

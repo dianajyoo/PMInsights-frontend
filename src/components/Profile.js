@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 class Profile extends React.Component {
 
@@ -17,8 +18,8 @@ class Profile extends React.Component {
           {this.props.user.user ? <img src={this.props.user.user.avatar} alt='profile pic' /> : null}
           <br />
         </div>
-        Height: {this.props.user.user ? this.props.user.user.height : 0} cm
-        Weight: {this.props.user.user ? this.props.user.user.weight : 0} kg
+        Height: {this.props.user.user ? this.props.user.user.height : 'N/A'} cm
+        Weight: {this.props.user.user ? this.props.user.user.weight : 'N/A'} kg
         <br />
         <br />
         <br />
@@ -26,7 +27,7 @@ class Profile extends React.Component {
         <br />
         <br/>
         <br/>
-        Statistics (link)
+        <NavLink to='/sleep_stats' className='statistics'>Statistics</NavLink>
       </div>
     )
   }

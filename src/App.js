@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchUserData } from './actionCreators/userActions'
+// import {} from './actionCreators/userActions'
 
 import NavBar from './components/NavBar'
 import SignUpForm from './components/forms/SignUpForm'
@@ -17,29 +18,39 @@ import '../node_modules/semantic-ui/dist/semantic.min.css'
 import logo from './logo.svg'
 import './App.css'
 
-// grab hash of current url
-var current_hash = window.location.hash
-
-// grab access token from url
-if (current_hash.includes("token")) {
-  var access_token = current_hash.split('&')[0].split('=')[1]
-}
 
 class App extends Component {
 
   componentDidMount() {
 
-    console.log(current_hash)
+    let access_token
+    let user_id
+
+    // grab hash of current url
+    const current_hash = window.location.hash
+
+    // grab access token from url
+    if (current_hash.includes('token') && current_hash.includes('user_id')) {
+      access_token = current_hash.split('&')[0].split('=')[1]
+      user_id = current_hash.split('&')[1].split('=')[1]
+    }
+
+    console.log(access_token)
     // debugger
-    this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json')
+    this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', access_token)
+
+    // if (access_token.length > 0) {
+    //   this.props.storeToken(access_token)
+    // }
   }
 
   render() {
+    console.log(this.props)
     return (
       <Router>
         <div className='App'>
           <NavBar /><br />
-          <Profile />
+
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/signup' component={SignUpForm} />
@@ -61,13 +72,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    access_token: state.token
+    token: state.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: url => dispatch(fetchUserData(url, access_token))
+    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token)),
+    storeToken: access_token => dispatch({type: "STORE_TOKEN", token: access_token})
   }
 }
 
