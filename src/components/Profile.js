@@ -11,21 +11,26 @@ class Profile extends React.Component {
     //   .then(res => res.json())
     //   .then(json => {
     //   })
-    this.props.fetchData(`${BASE_URL}/user`)
+    // this.props.fetchData(`${BASE_URL}/user`)
+    this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json')
   }
 
   render() {
-    console.log(this.props.user)
+    if (this.props.user.user) {
+      console.log(this.props.user)
+    }
+
     return (
       <div className='profile'>
         <div>
-          {this.props.user.firstName}
+          {this.props.user.user ? this.props.user.user.firstName : null}
           <br />
           <br />
-          <img src={this.props.user.avatar} alt='' /><br /><br />
+          {this.props.user.user ? <img src={this.props.user.user.avatar} alt=''/> : null}
+          <br />
         </div>
-        Height: {this.props.user.height} cm
-        Weight: {this.props.user.weight} kg
+        Height: {this.props.user.user ? this.props.user.user.height: 0} cm
+        Weight: {this.props.user.user ? this.props.user.user.weight: 0} kg
         <br />
         <br />
         <br />

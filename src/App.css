@@ -33,11 +33,19 @@
 
 .profile {
   float: left;
-  width: 25em;
+  width: 20em;
+  padding: 25px 25px 25px 25px;
+  background-color: white;
+  height: 50em;
 }
 
 .progress-bar {
   margin: auto;
   justify-content: center;
   align-items: center;
+}
+
+body {
+  background-image: url('./imgs/clouds.jpg') !important;
+  background-repeat: no-repeat;
 }

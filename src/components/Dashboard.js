@@ -5,7 +5,7 @@ import GoalCard from './cards/GoalCard'
 class Dashboard extends React.Component {
   render() {
     return (
-      <div className='profile-container'>
+      <div className='profile-container' style={{backgroundColor: "#dadce3", height: 1000}}>
         <SleepCard />
         <GoalCard />
       </div>
