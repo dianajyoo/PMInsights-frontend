@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchUserData } from './actionCreators/userActions'
-// import {} from './actionCreators/userActions'
 
 import NavBar from './components/NavBar'
 import SignUpForm from './components/forms/SignUpForm'
@@ -39,23 +38,22 @@ class App extends Component {
     // debugger
     this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', access_token)
 
-    // if (access_token.length > 0) {
-    //   this.props.storeToken(access_token)
-    // }
+    if (access_token) {
+      this.props.storeToken(access_token)
+    }
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props.token)
     return (
       <Router>
         <div className='App'>
-          <NavBar /><br />
-
+          <NavBar />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/signup' component={SignUpForm} />
             <Route path='/login' component={LoginForm} />
-            <Route path='/sleep_form' component={SleepForm} />
+            <Route path='/sleep_goal' component={SleepForm} />
             <Route
               path='/dashboard'
               render={(props) => <Dashboard {...props} />} />

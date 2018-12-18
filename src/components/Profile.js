@@ -12,18 +12,17 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div>
-          {this.props.user.user ? this.props.user.user.firstName : null}
-          <br />
+          <h2>{this.props.user.user ? this.props.user.user.firstName.toUpperCase() : null}</h2>
           <br />
           {this.props.user.user ? <img src={this.props.user.user.avatar} alt='profile pic' /> : null}
           <br />
         </div>
-        Height: {this.props.user.user ? this.props.user.user.height : 'N/A'} cm
-        Weight: {this.props.user.user ? this.props.user.user.weight : 'N/A'} kg
+        <h4>Height:</h4> {this.props.user.user ? this.props.user.user.height : 'N/A'} cm
+        <h4>Weight:</h4> {this.props.user.user ? this.props.user.user.weight : 'N/A'} kg
         <br />
         <br />
         <br />
-        My Sleep Goals (link)
+        <NavLink to='/sleep_goal' className='goals'>Add Sleep Goal</NavLink>
         <br />
         <br/>
         <br/>
