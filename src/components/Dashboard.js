@@ -6,7 +6,7 @@ import Profile from './Profile'
 class Dashboard extends React.Component {
   render() {
     return (
-      <div className='profile-container'>
+      <div className='dashboard'>
         <Profile />
         <SleepCard />
         <GoalCard />

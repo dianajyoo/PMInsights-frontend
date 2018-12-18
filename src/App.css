@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One');
+
 .App {
   text-align: center;
 }
@@ -45,7 +47,7 @@
   align-items: center;
 }
 
-body {
+/* body {
   background-image: url('./imgs/background.jpg') !important;
   background-repeat: no-repeat;
   background-size: cover;
@@ -53,4 +55,20 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   font-family: 'Staatliches', cursive;
+} */
+
+
+/* Home Page */
+.welcome {
+  background-color: rgba(248, 224, 202);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.title {
+  font-family: 'Fugaz One', cursive;
+  font-size: 4em;
+  color: rgba(78, 0, 61);
+  position: relative;
+  top: 5em;
 }

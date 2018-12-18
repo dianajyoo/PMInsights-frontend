@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const GoalCard = () => {
   return (
     <div className='goal-card'>
-      <NavLink to='/sleep_form' className='sleep-form'>ADD SLEEP GOAL</NavLink>
+      <NavLink to='/sleep_goal' className='sleep-goal-form'>ADD SLEEP GOAL</NavLink>
     </div>
   )
 }

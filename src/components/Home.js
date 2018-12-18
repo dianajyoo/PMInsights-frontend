@@ -1,13 +1,16 @@
 import React from 'react'
-import SleepContainer from './SleepContainer'
+import MenuContainer from './MenuContainer'
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 
   render() {
     return (
       <div className='welcome'>
-        <h1>SLEEP TRACKER</h1>
+        <MenuContainer />
+        <h1 className='title'>sleeptracker</h1>
       </div>
     )
   }
 }
+
+export default Home

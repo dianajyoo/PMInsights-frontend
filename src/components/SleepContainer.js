@@ -4,8 +4,8 @@ import { fetchSleepData } from '../actionCreators/userActions'
 
 import Profile from './Profile'
 
-import { Progress } from 'react-sweet-progress';
-import "react-sweet-progress/lib/style.css";
+import { Progress } from 'react-sweet-progress'
+import "react-sweet-progress/lib/style.css"
 
 class SleepContainer extends React.Component {
 
