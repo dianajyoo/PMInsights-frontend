@@ -1,5 +1,5 @@
 import React from 'react'
-import BurgerButton from './BurgerButton'
+import BurgerButton from './menu/BurgerButton'
 
 class MenuContainer extends React.Component {
 

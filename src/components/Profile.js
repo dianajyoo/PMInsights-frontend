@@ -22,7 +22,7 @@ class Profile extends React.Component {
         <br />
         <br />
         <br />
-        <NavLink to='/sleep_goal' className='goals'>Add Sleep Goal</NavLink>
+        <NavLink to='/add_goal' className='goals'>Add Sleep Goal</NavLink>
         <br />
         <br/>
         <br/>

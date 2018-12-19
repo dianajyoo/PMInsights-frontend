@@ -6,7 +6,9 @@ const initialState = {
   sleep: {},
   goalDate: '',
   bedtimeTarget: '',
-  wakeupTarget: ''
+  wakeupTarget: '',
+  fitBitUser: {},
+  goals: []
 }
 
 const userReducer = (state = initialState, action) => {
@@ -24,7 +26,7 @@ const userReducer = (state = initialState, action) => {
         ...state, user: action.user
       }
     case 'STORE_TOKEN':
-      // debugger
+      localStorage.setItem("token", action.token)
       return {
         ...state, token: action.token
       }
@@ -43,6 +45,14 @@ const userReducer = (state = initialState, action) => {
     case 'SET_WAKEUP_TIME':
       return {
         ...state, wakeupTarget: action.wakeupTarget
+      }
+    case "SET_FITBIT_USER":
+      return {
+        ...state, fitBitUser: action.user
+      }
+    case "SET_GOALS":
+      return {
+        ...state, goals: action.goals
       }
     default:
       return state

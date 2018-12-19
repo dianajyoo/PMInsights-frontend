@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 import { fetchUserData } from './actionCreators/userActions'
 
 import NavBar from './components/NavBar'
+import Home from './components/Home'
 import SignUpForm from './components/forms/SignUpForm'
 import LoginForm from './components/forms/LoginForm'
 import SleepForm from './components/forms/SleepForm'
-import Home from './components/Home'
 import SleepContainer from './components/SleepContainer'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
+import Goals from './components/Goals'
 import NoMatch from './components/NoMatch'
 
 import '../node_modules/semantic-ui/dist/semantic.min.css'
@@ -53,7 +54,8 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/signup' component={SignUpForm} />
             <Route path='/login' component={LoginForm} />
-            <Route path='/sleep_goal' component={SleepForm} />
+            <Route path='/add_goal' component={SleepForm} />
+            <Route path='/my_goals' component={Goals} />
             <Route
               path='/dashboard'
               render={(props) => <Dashboard {...props} />} />

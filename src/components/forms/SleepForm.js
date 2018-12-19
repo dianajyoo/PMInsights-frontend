@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals } from '../../actionCreators/userActions'
+import { fetchSleepGoals, fetchBackendUserData } from '../../actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -12,6 +12,12 @@ class SleepForm extends React.Component {
     dateEvent: {},
     bedtimeEvent: {},
     wakeupEvent: {}
+  }
+
+  componentDidMount() {
+    if (this.props.user.user){
+      this.props.fetchUserData(this.props.token, this.props.user.user)
+    }
   }
 
   handleChange = (e, date) => {
@@ -68,13 +74,14 @@ class SleepForm extends React.Component {
 
     console.log('got here')
 
-    this.props.fetchData(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
+    this.props.fetchData(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
 
     // console.log(this.props.token)
     console.log(this.handleBedtimeChange(this.state.bedtimeEvent))
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className='datetime'>
 
@@ -109,7 +116,7 @@ class SleepForm extends React.Component {
         <br /><br />
 
         <label>
-          <h4>Wakeup Target:</h4>
+          <h4>Wakeup Time Target:</h4>
             <form onSubmit={e => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
               <DatePicker
                 selected={this.state.startDate}
@@ -132,17 +139,22 @@ class SleepForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     token: state.token,
     goalDate: state.goalDate,
     bedtimeTarget: state.bedtimeTarget,
-    wakeupTarget: state.wakeupTarget
+    wakeupTarget: state.wakeupTarget,
+    fitBitUser: state.fitBitUser
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (goalDate, bedtimeTarget, wakeupTarget, token) => {
-      dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, token))
+    fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+      dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
+    },
+    fetchUserData: (token, user) => {
+      dispatch(fetchBackendUserData(token, user))
     }
   }
 }

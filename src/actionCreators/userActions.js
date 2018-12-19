@@ -54,6 +54,20 @@ export const setWakeupTime = (time) => {
   }
 }
 
+export const setFitbitUser = (user) => {
+  return {
+    type: 'SET_FITBIT_USER',
+    user: user
+  }
+}
+
+export const setGoals = (goals) => {
+  return {
+    type: 'SET_GOALS',
+    goals: goals
+  }
+}
+
 
 // <--- redux thunk here --->
 
@@ -88,7 +102,7 @@ export const fetchSleepData = (url, token) => {
     }
 }
 
-export const fetchSleepGoals = (goalDate, bedtimeTarget, wakeupTarget, token) => {
+export const fetchSleepGoals = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser, token) => {
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/goals', {
         method: 'POST',
@@ -99,7 +113,8 @@ export const fetchSleepGoals = (goalDate, bedtimeTarget, wakeupTarget, token) =>
         body: JSON.stringify({
           goalDate: goalDate,
           bedtimeTarget: bedtimeTarget,
-          wakeupTarget: wakeupTarget
+          wakeupTarget: wakeupTarget,
+          user_id: fitBitUser.id
         })
       })
         .then(res => res.json())
@@ -110,5 +125,43 @@ export const fetchSleepGoals = (goalDate, bedtimeTarget, wakeupTarget, token) =>
           dispatch(setWakeupTime(data.wakeupTarget))
         })
         .catch(console.error)
+    }
+}
+
+export const fetchBackendUserData = (token, fitBitUser) => {
+    return (dispatch) => {
+      fetch('http://localhost:3000/api/v1/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(user => {
+            if (fitBitUser.encodedId === user.encodedId){
+              dispatch(setFitbitUser(user))
+            }
+          })
+        })
+        .catch(() => dispatch(fetchHasErrored(true)))
+    }
+}
+
+export const fetchGoalData = (token) => {
+    return (dispatch) => {
+      fetch('http://localhost:3000/api/v1/goals', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(setGoals(data))
+        })
+        .catch(() => dispatch(fetchHasErrored(true)))
     }
 }
