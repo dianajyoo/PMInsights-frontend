@@ -1,12 +1,19 @@
 import React from 'react'
-import '../BurgerButton.css'
+import '../../styling/BurgerButton.css'
+import menu from '../../imgs/menu.png'
+
+import { Button } from 'semantic-ui-react'
 
 const BurgerButton = props => {
   return (
-    <div className='burger'>
-      <button type='button' id='burger-btn' onMouseDown={e => props.onMouseDown(e)}></button>
+    <div id='menu-icon' onMouseDown={e => {props.handleMouseDown(e)}}>
+      <Button circular icon='bars' size='huge' />
     </div>
   )
 }
 
 export default BurgerButton
+
+// <i id='menu-icon' class="bars icon"></i>
+// <button type='button' id='menu-icon' onMouseDown={e => props.handleMouseDown(e)}></button>
+// <img src={menu} alt='icon' className='menu-icon' onMouseDown={e => {props.handleMouseDown(e)}} />

@@ -1,9 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals, fetchBackendUserData } from '../../actionCreators/userActions'
+import { fetchSleepGoals, fetchBackendUserData, fetchEditedGoals } from '../../actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
+
+import { Form, Container, Grid } from 'semantic-ui-react'
+
+let mapDispatchToProps
 
 class SleepForm extends React.Component {
 
@@ -15,6 +19,7 @@ class SleepForm extends React.Component {
   }
 
   componentDidMount() {
+    console.log(window.location.href.includes('goal'))
     if (this.props.user.user){
       this.props.fetchUserData(this.props.token, this.props.user.user)
     }
@@ -72,66 +77,77 @@ class SleepForm extends React.Component {
   handleSubmit = (handleChange, handleBedtimeChange, handleWaketimeChange, e) => {
     e.preventDefault()
 
-    console.log('got here')
-
-    this.props.fetchData(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
-
-    // console.log(this.props.token)
-    console.log(this.handleBedtimeChange(this.state.bedtimeEvent))
+    if (window.location.href.includes('edit')) {
+      this.props.fetchEditedGoals(this.props.id,
+        this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
+    }
+    else {
+      this.props.fetchData(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
+    }
   }
 
   render() {
     console.log(this.props)
     return (
-      <div className='datetime'>
+      <div className='goal-form'>
+        <Container>
+          <Grid>
+            <Grid.Row centered>
+              <Grid.Column width={6}>
+                <Form onSubmit={(e) => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
 
-        <label>
-          <h4>Goal Date:</h4>
-            <form onSubmit={(e) => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={e => this.handleChange(e)}
-              />
-            </form>
+                  <label>
+                    <h4>Goal Date:</h4>
+                      <Form.Group >
+                        <DatePicker
+                          selected={this.state.startDate}
+                          onChange={e => this.handleChange(e)}
+                        />
+                      </Form.Group>
 
-        </label>
+                  </label>
 
-        <br /><br />
+                  <br /><br />
 
-        <label>
-          <h4>Bedtime Target:</h4>
-            <form onSubmit={e => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={e => this.handleBedtimeChange(e)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                dateFormat="h:mm aa"
-                timeCaption="Time"
-              />
-            </form>
-        </label>
+                  <label>
+                    <h4>Bedtime Target:</h4>
+                      <Form.Group >
+                        <DatePicker
+                          selected={this.state.startDate}
+                          onChange={e => this.handleBedtimeChange(e)}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={15}
+                          dateFormat='h:mm aa'
+                          timeCaption='Time'
+                        />
+                      </Form.Group>
+                  </label>
 
-        <br /><br />
+                  <br /><br />
 
-        <label>
-          <h4>Wakeup Time Target:</h4>
-            <form onSubmit={e => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={e => this.handleWaketimeChange(e)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                dateFormat="h:mm aa"
-                timeCaption="Time"
-              />
-              <br />
-              <input type='submit'/>
-            </form>
-        </label>
+                  <label>
+                    <h4>Wakeup Time Target:</h4>
+                      <Form.Group >
+                        <DatePicker
+                          selected={this.state.startDate}
+                          onChange={e => this.handleWaketimeChange(e)}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={15}
+                          dateFormat='h:mm aa'
+                          timeCaption='Time'
+                        />
+                        <br /><br />
+                        <input type='submit'/>
+                      </Form.Group>
+                  </label>
 
+                </Form>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </div>
     )
   }
@@ -148,16 +164,18 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
-      dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
-    },
-    fetchUserData: (token, user) => {
-      dispatch(fetchBackendUserData(token, user))
+  mapDispatchToProps = dispatch => {
+    return {
+      fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+        dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
+      },
+      fetchUserData: (token, user) => {
+        dispatch(fetchBackendUserData(token, user))
+      },
+      fetchEditedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
+        dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
+      }
     }
   }
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SleepForm)

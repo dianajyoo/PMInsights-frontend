@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchUserData } from './actionCreators/userActions'
 
 import NavBar from './components/NavBar'
+import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
 import SignUpForm from './components/forms/SignUpForm'
 import LoginForm from './components/forms/LoginForm'
@@ -11,7 +12,7 @@ import SleepForm from './components/forms/SleepForm'
 import SleepContainer from './components/SleepContainer'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
-import Goals from './components/Goals'
+import GoalContainer from './components/GoalContainer'
 import NoMatch from './components/NoMatch'
 
 import '../node_modules/semantic-ui/dist/semantic.min.css'
@@ -49,19 +50,24 @@ class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <NavBar />
+        <span className='overlay'></span>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/signup' component={SignUpForm} />
             <Route path='/login' component={LoginForm} />
             <Route path='/add_goal' component={SleepForm} />
-            <Route path='/my_goals' component={Goals} />
+            <Route
+              exact path='/my_goals'
+              render={(props) => <GoalContainer {...props} />} />
             <Route
               path='/dashboard'
               render={(props) => <Dashboard {...props} />} />
             <Route
               path='/sleep_stats'
               render={(props) => <SleepContainer {...props} />} />
+            <Route
+              exact path='/my_goals/edit/:goalId'
+              render={(props) => <GoalContainer {...props} />} />
             <Route component={NoMatch} />
           </Switch>
         </div>
@@ -79,7 +85,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token)),
-    storeToken: access_token => dispatch({type: "STORE_TOKEN", token: access_token})
+    storeToken: access_token => dispatch({type: 'STORE_TOKEN', token: access_token})
   }
 }
 

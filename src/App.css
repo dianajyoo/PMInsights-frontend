@@ -2,9 +2,12 @@
 
 .App {
   text-align: center;
+  background-color: rgba(199, 66, 67);
+  height: 100vh;
+  position: relative;
 }
 
-.App-logo {
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
@@ -31,14 +34,16 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .profile {
   float: left;
-  width: 20em;
+  margin-top: 1em;
+  margin-left: 1.5em;
+  height: 95vh;
+  width: 20vw;
   padding: 25px 25px 25px 25px;
   background-color: white;
-  height: 50em;
 }
 
 .progress-bar {
@@ -59,16 +64,44 @@
 
 
 /* Home Page */
-.welcome {
-  background-color: rgba(248, 224, 202);
-  height: 100vh;
-  overflow: hidden;
-}
-
 .title {
   font-family: 'Fugaz One', cursive;
-  font-size: 4em;
-  color: rgba(78, 0, 61);
+  font-size: 5em;
+  color: white;
   position: relative;
   top: 5em;
+  margin-left: 0.3em;
+}
+
+/* Cards */
+.sleep-card {
+  /* padding: 20px 20px 20px 20px;
+  background-color: white; */
+}
+
+/* Forms */
+.goal-form {
+  position: relative;
+  margin: auto;
+}
+
+/* overlay */
+.overlay {
+  position: fixed;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Goal */
+.grid-container {
+  display: grid;
+  grid-row-gap: 15em;
 }

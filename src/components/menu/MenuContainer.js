@@ -1,5 +1,6 @@
 import React from 'react'
-import BurgerButton from './menu/BurgerButton'
+import Menu from './Menu'
+import BurgerButton from './BurgerButton'
 
 class MenuContainer extends React.Component {
 
@@ -23,8 +24,8 @@ class MenuContainer extends React.Component {
   render() {
     return (
       <div className='menu-container'>
-        MenuContainer
-        <BurgerButton onMouseDown={this.handleMouseDown} />
+        <BurgerButton handleMouseDown={this.handleMouseDown} />
+        <Menu handleMouseDown={this.handleMouseDown} show={this.state.show} />
       </div>
     )
   }
