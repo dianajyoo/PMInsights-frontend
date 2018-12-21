@@ -19,7 +19,6 @@ class SleepForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log(window.location.href.includes('goal'))
     if (this.props.user.user){
       this.props.fetchUserData(this.props.token, this.props.user.user)
     }

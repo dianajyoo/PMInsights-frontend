@@ -16,7 +16,7 @@ class GoalContainer extends React.Component {
     this.props.fetchGoalData(this.props.token)
   }
 
-  handleEditGoal = goal => {
+  handleClickedGoal = goal => {
     this.setState({
       editGoal: goal
     })
@@ -25,8 +25,9 @@ class GoalContainer extends React.Component {
   render() {
     console.log(this.state.editGoal)
     let goals
-    if (this.props.goals.length > 0){
-        goals = this.props.goals.map(goal => <Goal props={this.props} goal={goal} handleEditGoal={this.handleEditGoal} />)
+
+    if (this.props.goals.length > 0) {
+        goals = this.props.goals.map(goal => <Goal props={this.props} goal={goal} handleClickedGoal={this.handleClickedGoal} />)
     }
 
     return (
@@ -48,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchGoalData: (access_token) => dispatch(fetchGoalData(access_token)),
+    fetchGoalData: (access_token) => dispatch(fetchGoalData(access_token))
   }
 }
 

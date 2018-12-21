@@ -100,6 +100,36 @@ export const editWakeupTime = (time) => {
   }
 }
 
+// DELETE
+
+export const deleteGoals = (goals) => {
+  return {
+    type: 'SET_GOALS',
+    goals: goals
+  }
+}
+
+export const deleteGoalDate = (date) => {
+  return {
+    type: 'SET_GOAL_DATE',
+    goalDate: date
+  }
+}
+
+export const deleteBedtime = (time) => {
+  return {
+    type: 'SET_BEDTIME',
+    bedtimeTarget: time
+  }
+}
+
+export const deleteWakeupTime = (time) => {
+  return {
+    type: 'SET_WAKEUP_TIME',
+    wakeupTarget: time
+  }
+}
+
 
 // <--- redux thunk here --->
 
@@ -219,6 +249,27 @@ export const fetchEditedGoals = (goalId, goalDate, bedtimeTarget, wakeupTarget, 
           dispatch(editGoalDate(data.goalDate))
           dispatch(editBedtime(data.bedtimeTarget))
           dispatch(editWakeupTime(data.wakeupTarget))
+        })
+        .catch(console.error)
+    }
+}
+
+// FETCH DELETE
+export const fetchDeleteGoals = (goalId, token) => {
+    return (dispatch) => {
+      fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          id: goalId
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(deleteGoals(data.id))
         })
         .catch(console.error)
     }

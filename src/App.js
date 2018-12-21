@@ -68,6 +68,9 @@ class App extends Component {
             <Route
               exact path='/my_goals/edit/:goalId'
               render={(props) => <GoalContainer {...props} />} />
+            <Route
+              exact path='/my_goals/delete/:goalId'
+              render={(props) => <GoalContainer {...props} />} />
             <Route component={NoMatch} />
           </Switch>
         </div>

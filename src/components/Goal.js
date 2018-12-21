@@ -1,13 +1,21 @@
 import React from 'react'
 import EditGoal from './EditGoal'
 
+import { connect } from 'react-redux'
+import { fetchDeleteGoals } from '../actionCreators/userActions'
+
 class Goal extends React.Component {
 
   handleEdit = () => {
     this.props.props.history.replace(`/my_goals/edit/${this.props.goal.id}`)
 
-    this.props.handleEditGoal(this.props.goal)
+    this.props.handleClickedGoal(this.props.goal)
   }
+
+  handleDelete = () => {
+    this.props.deleteGoal(this.props.goal.id, this.props.token)
+  }
+
 
   render() {
     return (
@@ -22,10 +30,26 @@ class Goal extends React.Component {
           <br />
 
           <button type='button' onClick={this.handleEdit}>edit</button>
+          <button type='button' onClick={this.handleDelete}>delete</button>
         </div>
       </div>)
     )
   }
 }
 
-export default Goal
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    goals: state.goals,
+    token: state.token
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoals(goalId, access_token))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Goal)
