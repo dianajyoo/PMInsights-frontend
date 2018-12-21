@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Goal from './Goal'
 import Profile from './Profile'
 import EditGoal from './EditGoal'
-import { fetchGoalData } from '../actionCreators/userActions'
+import { fetchData, fetchUserData, fetchGoalData } from '../actionCreators/userActions'
 
 class GoalContainer extends React.Component {
 
@@ -13,6 +13,13 @@ class GoalContainer extends React.Component {
   }
 
   componentDidMount() {
+
+    const userToken = localStorage.getItem('token')
+    console.log('in the goal container')
+    if(userToken) {
+      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+
     this.props.fetchGoalData(this.props.token)
   }
 
@@ -49,7 +56,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchGoalData: (access_token) => dispatch(fetchGoalData(access_token))
+    fetchGoalData: (access_token) => dispatch(fetchGoalData(access_token)),
+    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 

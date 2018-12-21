@@ -7,7 +7,8 @@ class Home extends React.Component {
 
   componentDidMount(){
     const userToken = localStorage.getItem('token')
-    if(userToken) {
+
+    if (userToken) {
       this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
   }
@@ -31,7 +32,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token)),
+    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 

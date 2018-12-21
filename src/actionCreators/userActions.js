@@ -1,10 +1,3 @@
-export const fetchHasErrored = (bool) => {
-  return {
-    type: 'FETCH_HAS_ERRORED',
-    hasErrored: bool
-  }
-}
-
 export const fetchIsLoading = (bool) => {
   return {
     type: 'FETCH_IS_LOADING',
@@ -145,12 +138,17 @@ export const fetchUserData = (url, token) => {
       })
         .then(res => res.json())
         .then(user => dispatch(fetchUserSuccess(user)))
-        .catch(() => dispatch(fetchHasErrored(true)))
+        .then( data => {
+          console.log(data)
+          fetchSleepData(`https://api.fitbit.com/1.2/user/-/sleep/date/2018-12-18.json`, token)(dispatch)
+        })
+        .catch(console.error)
     }
 }
 
 export const fetchSleepData = (url, token) => {
     return (dispatch) => {
+      console.log("in fetchSleepData", dispatch, url, token);
       fetch(url, {
         method: 'GET',
         headers: {
@@ -160,8 +158,9 @@ export const fetchSleepData = (url, token) => {
       })
         .then(res => res.json())
         .then(data => {
+          console.log("test", data)
           dispatch(storeSleepData(data))})
-        .catch(() => dispatch(fetchHasErrored(true)))
+        .catch(console.error)
     }
 }
 
@@ -182,7 +181,7 @@ export const fetchBackendUserData = (token, fitBitUser) => {
             }
           })
         })
-        .catch(() => dispatch(fetchHasErrored(true)))
+        .catch(console.error)
     }
 }
 
@@ -199,7 +198,7 @@ export const fetchGoalData = (token) => {
         .then(data => {
           dispatch(setGoals(data))
         })
-        .catch(() => dispatch(fetchHasErrored(true)))
+        .catch(console.error)
     }
 }
 

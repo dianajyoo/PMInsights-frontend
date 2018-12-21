@@ -3,11 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchUserData } from './actionCreators/userActions'
 
-import NavBar from './components/NavBar'
 import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
-import SignUpForm from './components/forms/SignUpForm'
-import LoginForm from './components/forms/LoginForm'
 import SleepForm from './components/forms/SleepForm'
 import SleepContainer from './components/SleepContainer'
 import Dashboard from './components/Dashboard'
@@ -24,6 +21,12 @@ class App extends Component {
 
   componentDidMount() {
 
+    const userToken = localStorage.getItem('token')
+    console.log('in home with helen')
+    if (userToken) {
+      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+
     let access_token
     let user_id
 
@@ -38,7 +41,7 @@ class App extends Component {
 
     console.log(access_token)
     // debugger
-    this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', access_token)
+    // this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', access_token)
 
     if (access_token) {
       this.props.storeToken(access_token)
@@ -53,8 +56,6 @@ class App extends Component {
         <span className='overlay'></span>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/signup' component={SignUpForm} />
-            <Route path='/login' component={LoginForm} />
             <Route path='/add_goal' component={SleepForm} />
             <Route
               exact path='/my_goals'

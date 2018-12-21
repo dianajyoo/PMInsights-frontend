@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals, fetchBackendUserData, fetchEditedGoals } from '../../actionCreators/userActions'
+import { fetchSleepGoals, fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -19,6 +19,13 @@ class SleepForm extends React.Component {
   }
 
   componentDidMount() {
+
+    const userToken = localStorage.getItem('token')
+
+    if(userToken) {
+      this.props.fetchSleepData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+
     if (this.props.user.user){
       this.props.fetchUserData(this.props.token, this.props.user.user)
     }
@@ -166,6 +173,7 @@ const mapStateToProps = state => {
   mapDispatchToProps = dispatch => {
     return {
       fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+        console.log("in mapDispatchToProps", user);
         dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
       },
       fetchUserData: (token, user) => {
@@ -173,7 +181,8 @@ const mapStateToProps = state => {
       },
       fetchEditedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
         dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
-      }
+      },
+      fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
     }
   }
 

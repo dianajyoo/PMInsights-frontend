@@ -2,7 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
+import { fetchData, fetchUserData } from '../actionCreators/userActions'
+
 class Profile extends React.Component {
+
+  componentDidMount() {
+    const userToken = localStorage.getItem('token')
+    console.log('in home with helen')
+    if(userToken) {
+      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+  }
 
   render() {
     if (this.props.user.user) {
@@ -40,5 +50,10 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token))
+  }
+}
 
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

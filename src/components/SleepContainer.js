@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepData } from '../actionCreators/userActions'
+import { fetchSleepData, fetchUserData } from '../actionCreators/userActions'
 
 import Profile from './Profile'
 
@@ -10,7 +10,13 @@ import "react-sweet-progress/lib/style.css"
 class SleepContainer extends React.Component {
 
   componentDidMount() {
-    this.props.fetchData(`https://api.fitbit.com/1.2/user/-/sleep/date/2018-12-16.json`, this.props.token)
+
+    const userToken = localStorage.getItem('token')
+
+    if(userToken) {
+      this.props.fetchSleepData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+
   }
 
   render() {
@@ -58,7 +64,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (url, access_token) => dispatch(fetchSleepData(url, access_token))
+    // fetchData: (url, access_token) => dispatch(fetchSleepData(url, access_token)),
+    fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 
