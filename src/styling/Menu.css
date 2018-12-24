@@ -1,7 +1,7 @@
 #flyout-menu {
-  width: 30vw;
-  height: 100vh;
-  background-color: white;
+  width: 10vw;
+  height: 40vh;
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,12 +20,34 @@
   overflow: hidden;
 }
 
-#flyout-menu h2 a {
-  color: #333;
-  margin-left: 15px;
+#flyout-menu a {
+  color: white;
   text-decoration: none;
 }
 
-#flyout-menu h2 a:hover {
+#flyout-menu a:hover {
   text-decoration: none;
+}
+
+/* menu buttons */
+.grid-user {
+  padding: 6em 0em 0em 1.5em;
+  font-size: 1.15em;
+}
+
+.grid-chart {
+  padding: 2em 0em 0em 1.5em;
+  font-size: 1.15em;
+}
+
+i {
+  color: white;
+}
+
+#user {
+  background-color: rgba(61, 66, 195);
+}
+
+#chart {
+  background-color: rgba(228, 65, 4);
 }

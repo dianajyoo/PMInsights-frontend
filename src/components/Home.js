@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { fetchUserData } from "../actionCreators/userActions"
+
 import MenuContainer from './menu/MenuContainer'
 
 class Home extends React.Component {
@@ -18,7 +19,9 @@ class Home extends React.Component {
     return (
       <div className='welcome'>
         <MenuContainer />
-        <h1 className='title'>sleeptracker</h1>
+        <div className='title'>
+          <span id='title-1'>SLEEPTRACKER</span>
+        </div>
       </div>
     )
   }
