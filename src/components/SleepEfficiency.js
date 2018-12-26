@@ -31,25 +31,19 @@ class SleepContainer extends React.Component {
     }
 
     return (
-      <div>
-        <Profile />
-        <div className='progress-circle'>
-          <h2>Sleep Efficiency</h2>
-          <Progress
-            type="circle"
-            width={300}
-            strokeWidth={10}
-            percent={efficiency}
-          />
-        </div>
-        <br />
-        <div className='sleep-stats'>
-        <h3>Date of Sleep:</h3>
-        { this.props.sleep_data.sleep ? this.props.sleep_data.sleep[0].dateOfSleep : ' N/A' } <br /><br />
-
-        <h3>Duration of Sleep:</h3>
-        { this.props.sleep_data.sleep ? hours_slept + ' hrs' : ' N/A' }
-        </div>
+      <div className='progress-circle'>
+        <Progress
+          type="circle"
+          width={175}
+          strokeWidth={10}
+          percent={efficiency}
+          theme={{
+            active: {
+              trailColor: 'rgb(244,244,244)',
+              color: 'rgb(228,65,4)'
+            }
+          }}
+        />
       </div>
     )
   }
@@ -70,3 +64,11 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SleepContainer)
+
+// <div className='sleep-stats'>
+// <h3>Date of Sleep:</h3>
+// { this.props.sleep_data.sleep ? this.props.sleep_data.sleep[0].dateOfSleep : ' N/A' } <br /><br />
+//
+// <h3>Duration of Sleep:</h3>
+// { this.props.sleep_data.sleep ? hours_slept + ' hrs' : ' N/A' }
+// </div>

@@ -1,15 +1,16 @@
 import React from 'react'
-import SleepCard from './cards/SleepCard'
-import GoalCard from './cards/GoalCard'
+import Cards from './Cards'
 import Profile from './Profile'
+
+import '../styling/Dashboard.css'
 
 class Dashboard extends React.Component {
   render() {
     return (
       <div className='dashboard'>
         <Profile />
-        <SleepCard />
-        <GoalCard />
+        <Cards />
+        <div id='mountain'></div>
       </div>
     )
   }

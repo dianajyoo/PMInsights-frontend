@@ -8,35 +8,38 @@ class Profile extends React.Component {
 
   componentDidMount() {
     const userToken = localStorage.getItem('token')
-    console.log('in home with helen')
-    if(userToken) {
+
+    if (userToken) {
       this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
   }
 
   render() {
-    if (this.props.user.user) {
-      console.log(this.props.user)
-    }
-
     return (
       <div className='profile'>
-        <div>
-          <h2>{this.props.user.user ? this.props.user.user.firstName.toUpperCase() : null}</h2>
-          <br />
-          {this.props.user.user ? <img src={this.props.user.user.avatar} alt='profile pic' /> : null}
-          <br />
-        </div>
-        <h4>Height:</h4> {this.props.user.user ? this.props.user.user.height : 'N/A'} cm
-        <h4>Weight:</h4> {this.props.user.user ? this.props.user.user.weight : 'N/A'} kg
-        <br />
-        <br />
-        <br />
-        <NavLink to='/add_goal' className='goals'>Add Sleep Goal</NavLink>
-        <br />
-        <br/>
-        <br/>
-        <NavLink to='/sleep_stats' className='statistics'>Statistics</NavLink>
+        <span id='identity'>
+          <span id='name'>{this.props.user.user ? this.props.user.user.firstName : null}</span>
+          {this.props.user.user ? <img class='ui massive circular image' id='photo' src={this.props.user.user.avatar} alt='profile pic' /> : null}
+
+          <span id='map'>
+            <i class="map marker alternate icon"></i>
+            {this.props.user.user ? this.props.user.user.timezone : null}
+          </span>
+        </span>
+
+        <span id='biometrics'>
+          {this.props.user.user ? this.props.user.user.height + ' cm ': null}
+
+          {this.props.user.user ? this.props.user.user.weight + ' kg' : null}
+
+          <span className='profile-link'>
+            <i class="star outline icon"></i><NavLink to='/add_goal' className='navlink'>Add Sleep Goal</NavLink>
+          </span>
+
+          <span className='profile-link'>
+            <i class="chart bar outline icon"></i><NavLink to='/sleep_stats' className='navlink'>Statistics</NavLink>
+          </span>
+        </span>
       </div>
     )
   }

@@ -6,7 +6,7 @@ import { fetchUserData } from './actionCreators/userActions'
 import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
 import SleepForm from './components/forms/SleepForm'
-import SleepContainer from './components/SleepContainer'
+import SleepEfficiency from './components/SleepEfficiency'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
 import GoalContainer from './components/GoalContainer'
@@ -53,7 +53,6 @@ class App extends Component {
     return (
       <Router>
         <div className='App'>
-        <span className='overlay'></span>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/add_goal' component={SleepForm} />
@@ -65,7 +64,7 @@ class App extends Component {
               render={(props) => <Dashboard {...props} />} />
             <Route
               path='/sleep_stats'
-              render={(props) => <SleepContainer {...props} />} />
+              render={(props) => <SleepEfficiency {...props} />} />
             <Route
               exact path='/my_goals/edit/:goalId'
               render={(props) => <GoalContainer {...props} />} />
