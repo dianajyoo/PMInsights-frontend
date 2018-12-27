@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { fetchUserData } from "../actionCreators/userActions"
+import { fetchUserData } from "../store/actionCreators/userActions"
 
 import MenuContainer from './menu/MenuContainer'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals, fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../actionCreators/userActions'
+import { fetchSleepGoals, fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../store/actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { fetchUserData } from '../actionCreators/userActions'
+import { fetchUserData } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
 
@@ -47,7 +47,7 @@ class Profile extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user.user
   }
 }
 

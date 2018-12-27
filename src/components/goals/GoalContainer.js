@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Goal from './Goal'
 import Profile from '../Profile'
 import EditGoal from './EditGoal'
-import { fetchData, fetchUserData, fetchGoalData } from '../../actionCreators/userActions'
+import { fetchUserData, fetchGoalData } from '../../store/actionCreators/userActions'
 
 class GoalContainer extends React.Component {
 

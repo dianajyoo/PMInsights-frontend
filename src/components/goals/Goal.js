@@ -2,7 +2,7 @@ import React from 'react'
 import EditGoal from './EditGoal'
 
 import { connect } from 'react-redux'
-import { fetchUserData, fetchDeleteGoals } from '../../actionCreators/userActions'
+import { fetchUserData, fetchDeleteGoals } from '../../store/actionCreators/userActions'
 
 class Goal extends React.Component {
 

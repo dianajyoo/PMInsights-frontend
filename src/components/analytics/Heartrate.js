@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchHeartRate } from '../../actionCreators/userActions'
+import { fetchHeartRate } from '../../store/actionCreators/userActions'
 
 import '../../styling/Heartrate.css'
 
@@ -15,7 +15,7 @@ class Heartrate extends React.Component {
   render() {
     return (
       <div className='bpm'>
-        <img src={require('../../imgs/heart.png')} alt={'goal'} />
+        <img src={require('../../imgs/heart.png')} alt={'heart'} />
         {this.props.heartRate['activities-heart'] ? this.props.heartRate['activities-heart'][0].value.restingHeartRate + ' bpm' : null}
       </div>
     )
@@ -24,7 +24,7 @@ class Heartrate extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    heartRate: state.heartRate
+    heartRate: state.heartRate.heartRate
   }
 }
 
