@@ -7,9 +7,7 @@ import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
 
 import { Form, Container, Grid } from 'semantic-ui-react'
 
-let mapDispatchToProps
-
-class SleepForm extends React.Component {
+class GoalForm extends React.Component {
 
   state = {
     startDate: new Date(),
@@ -22,11 +20,11 @@ class SleepForm extends React.Component {
 
     const userToken = localStorage.getItem('token')
 
-    if(userToken) {
+    if (userToken) {
       this.props.fetchSleepData('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
-    if (this.props.user.user){
+    if (this.props.user.user) {
       this.props.fetchUserData(this.props.token, this.props.user.user)
     }
   }
@@ -93,7 +91,6 @@ class SleepForm extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='goal-form'>
         <Container>
@@ -110,7 +107,6 @@ class SleepForm extends React.Component {
                           onChange={e => this.handleChange(e)}
                         />
                       </Form.Group>
-
                   </label>
 
                   <br /><br />
@@ -159,7 +155,7 @@ class SleepForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
     token: state.token,
@@ -170,20 +166,20 @@ const mapStateToProps = state => {
   }
 }
 
-  mapDispatchToProps = dispatch => {
-    return {
-      fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
-        console.log("in mapDispatchToProps", user);
-        dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
-      },
-      fetchUserData: (token, user) => {
-        dispatch(fetchBackendUserData(token, user))
-      },
-      fetchEditedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
-        dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
-      },
-      fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+      console.log("in mapDispatchToProps", user);
+      dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
+    },
+    fetchUserData: (token, user) => {
+      dispatch(fetchBackendUserData(token, user))
+    },
+    fetchEditedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
+      dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
+    },
+    fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
+  }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SleepForm)
+export default connect(mapStateToProps, mapDispatchToProps)(GoalForm)

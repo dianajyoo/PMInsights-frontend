@@ -5,11 +5,10 @@ import { fetchUserData } from './actionCreators/userActions'
 
 import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
-import SleepForm from './components/forms/SleepForm'
-import SleepEfficiency from './components/SleepEfficiency'
+import GoalForm from './components/goals/GoalForm'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
-import GoalContainer from './components/GoalContainer'
+import GoalContainer from './components/goals/GoalContainer'
 import NoMatch from './components/NoMatch'
 
 import '../node_modules/semantic-ui/dist/semantic.min.css'
@@ -22,7 +21,7 @@ class App extends Component {
   componentDidMount() {
 
     const userToken = localStorage.getItem('token')
-    console.log('in home with helen')
+
     if (userToken) {
       this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
@@ -40,8 +39,6 @@ class App extends Component {
     }
 
     console.log(access_token)
-    // debugger
-    // this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', access_token)
 
     if (access_token) {
       this.props.storeToken(access_token)
@@ -55,16 +52,13 @@ class App extends Component {
         <div className='App'>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/add_goal' component={SleepForm} />
-            <Route
-              exact path='/my_goals'
-              render={(props) => <GoalContainer {...props} />} />
             <Route
               path='/dashboard'
               render={(props) => <Dashboard {...props} />} />
+            <Route path='/add_goal' component={GoalForm} />
             <Route
-              path='/sleep_stats'
-              render={(props) => <SleepEfficiency {...props} />} />
+              exact path='/my_goals'
+              render={(props) => <GoalContainer {...props} />} />
             <Route
               exact path='/my_goals/edit/:goalId'
               render={(props) => <GoalContainer {...props} />} />
@@ -88,7 +82,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token)),
-    storeToken: access_token => dispatch({type: 'STORE_TOKEN', token: access_token})
+    storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token})
   }
 }
 

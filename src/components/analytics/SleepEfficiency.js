@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepData, fetchUserData } from '../actionCreators/userActions'
+import { fetchUserData } from '../../actionCreators/userActions'
 
-import Profile from './Profile'
+import Profile from '../Profile'
 
 import { Progress } from 'react-sweet-progress'
 import "react-sweet-progress/lib/style.css"
 
-class SleepContainer extends React.Component {
+class SleepEfficiency extends React.Component {
 
   componentDidMount() {
 
@@ -20,7 +20,6 @@ class SleepContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let efficiency
     let hours_slept
 
@@ -50,20 +49,19 @@ class SleepContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    token: state.token,
     sleep: state.sleep
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SleepContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SleepEfficiency)
 
 // <div className='sleep-stats'>
 // <h3>Date of Sleep:</h3>

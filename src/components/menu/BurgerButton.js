@@ -4,7 +4,7 @@ import menu from '../../imgs/menu.png'
 
 import { Button } from 'semantic-ui-react'
 
-const BurgerButton = props => {
+const BurgerButton = (props) => {
   return (
     <div id='menu-icon' onMouseDown={e => {props.handleMouseDown(e)}}>
       <Button id ='bars' circular icon='bars' size='huge' />

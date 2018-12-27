@@ -1,8 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
-import SleepEfficiency from './SleepEfficiency'
-import PieChart from './PieChart'
+import SleepEfficiency from './analytics/SleepEfficiency'
+import PieChart from './analytics/PieChart'
 import Heartrate from './analytics/Heartrate'
 
 const Cards = () => {
@@ -24,8 +23,8 @@ const Cards = () => {
       </div>
 
       <div className='goal-card'>
-        <span className='card-title'>My Sleep Goals</span>
-        <img src={require('../imgs/goal.png')} alt={'goal'} id='goal' />
+        <span className='card-title'>Sleep Pattern</span>
+        insert chart here
       </div>
     </div>
   )

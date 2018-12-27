@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 import '../../styling/Menu.css'
 
-const Menu = props => {
+const Menu = (props) => {
 
   var show = 'hide'
 

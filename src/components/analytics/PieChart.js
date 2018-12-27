@@ -88,7 +88,7 @@ class TwoLevelPieChart extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.token,
     sleep: state.sleep

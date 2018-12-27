@@ -2,16 +2,16 @@ import React from 'react'
 import EditGoal from './EditGoal'
 
 import { connect } from 'react-redux'
-import { fetchData, fetchUserData, fetchDeleteGoals } from '../actionCreators/userActions'
+import { fetchUserData, fetchDeleteGoals } from '../../actionCreators/userActions'
 
 class Goal extends React.Component {
 
   componentDidMount() {
 
     const userToken = localStorage.getItem('token')
-    console.log('in home with helen')
-    if(userToken) {
-      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+
+    if (userToken) {
+      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
   }
@@ -47,16 +47,16 @@ class Goal extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.token
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoals(goalId, access_token)),
-    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 

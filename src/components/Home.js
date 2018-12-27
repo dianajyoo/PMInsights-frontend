@@ -10,12 +10,11 @@ class Home extends React.Component {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {
-      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='welcome'>
         <MenuContainer />
@@ -27,16 +26,10 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    user: state.user
+    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(null, mapDispatchToProps)(Home)
