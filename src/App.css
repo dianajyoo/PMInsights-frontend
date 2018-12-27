@@ -140,9 +140,16 @@
   /* opacity: 0.7; */
 }
 
-.goals, .analytics, .heartrate, .efficiency {
+.card-title {
+  position: absolute;
   font-size: 1.5em;
-  margin-top: 0.05em;
+  margin-left: 2.5em;
+}
+
+#piechart {
+  position: absolute;
+  margin-left: -13em;
+  margin-top: -5em;
 }
 
 .grid-container {

@@ -13,8 +13,8 @@ class SleepContainer extends React.Component {
 
     const userToken = localStorage.getItem('token')
 
-    if(userToken) {
-      this.props.fetchSleepData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    if (userToken) {
+      this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
   }
@@ -24,23 +24,24 @@ class SleepContainer extends React.Component {
     let efficiency
     let hours_slept
 
-    if (this.props.sleep_data.sleep) {
-      efficiency = this.props.sleep_data.sleep[0].efficiency
+    if (this.props.sleep.sleep) {
+      efficiency = this.props.sleep.sleep[0].efficiency
+
       // round to one decimal place
-      hours_slept = Math.round((this.props.sleep_data.sleep[0].duration / 3600000) * 10 / 10)
+      hours_slept = Math.round((this.props.sleep.sleep[0].duration / 3600000) * 10 / 10)
     }
 
     return (
       <div className='progress-circle'>
         <Progress
           type="circle"
-          width={175}
-          strokeWidth={10}
+          width={160}
+          strokeWidth={13}
           percent={efficiency}
           theme={{
             active: {
-              trailColor: 'rgb(244,244,244)',
-              color: 'rgb(228,65,4)'
+              trailColor: 'rgb(236,236,236)',
+              color: 'rgb(133,207,218)'
             }
           }}
         />
@@ -52,14 +53,13 @@ class SleepContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.token,
-    sleep_data: state.sleep
+    sleep: state.sleep
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // fetchData: (url, access_token) => dispatch(fetchSleepData(url, access_token)),
-    fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 

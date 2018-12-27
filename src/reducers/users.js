@@ -7,7 +7,8 @@ const initialState = {
   bedtimeTarget: '',
   wakeupTarget: '',
   fitBitUser: {},
-  goals: []
+  goals: [],
+  heartRate: {}
 }
 
 const userReducer = (state = initialState, action) => {
@@ -61,9 +62,29 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, wakeupTarget: action.wakeupTarget
       }
-    case "EDIT_GOALS":
+    case 'EDIT_GOALS':
       return {
         ...state, goals: action.goals
+      }
+    case 'DELETE_GOAL_DATE':
+      return {
+        ...state, goalDate: action.goalDate
+      }
+    case 'DELETE_BEDTIME':
+      return {
+        ...state, bedtimeTarget: action.bedtimeTarget
+      }
+    case 'DELETE_WAKEUP_TIME':
+      return {
+        ...state, wakeupTarget: action.wakeupTarget
+      }
+    case 'DELETE_GOALS':
+      return {
+        ...state, goals: action.goals
+      }
+    case 'GET_HEART_RATE':
+      return {
+        ...state, heartRate: action.heartRate
       }
     default:
       return state

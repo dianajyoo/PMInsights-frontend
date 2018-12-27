@@ -67,28 +67,28 @@ export const setFitbitUser = (user) => {
 
 export const editGoals = (goals) => {
   return {
-    type: 'SET_GOALS',
+    type: 'EDIT_GOALS',
     goals: goals
   }
 }
 
 export const editGoalDate = (date) => {
   return {
-    type: 'SET_GOAL_DATE',
+    type: 'EDIT_GOAL_DATE',
     goalDate: date
   }
 }
 
 export const editBedtime = (time) => {
   return {
-    type: 'SET_BEDTIME',
+    type: 'EDIT_BEDTIME',
     bedtimeTarget: time
   }
 }
 
 export const editWakeupTime = (time) => {
   return {
-    type: 'SET_WAKEUP_TIME',
+    type: 'EDIT_WAKEUP_TIME',
     wakeupTarget: time
   }
 }
@@ -97,29 +97,38 @@ export const editWakeupTime = (time) => {
 
 export const deleteGoals = (goals) => {
   return {
-    type: 'SET_GOALS',
+    type: 'DELETE_GOALS',
     goals: goals
   }
 }
 
 export const deleteGoalDate = (date) => {
   return {
-    type: 'SET_GOAL_DATE',
+    type: 'DELETE_GOAL_DATE',
     goalDate: date
   }
 }
 
 export const deleteBedtime = (time) => {
   return {
-    type: 'SET_BEDTIME',
+    type: 'DELETE_BEDTIME',
     bedtimeTarget: time
   }
 }
 
 export const deleteWakeupTime = (time) => {
   return {
-    type: 'SET_WAKEUP_TIME',
+    type: 'DELETE_WAKEUP_TIME',
     wakeupTarget: time
+  }
+}
+
+// HEART RATE
+
+export const getHeartRate = (heartRate) => {
+  return {
+    type: 'GET_HEART_RATE',
+    heartRate: heartRate
   }
 }
 
@@ -139,7 +148,6 @@ export const fetchUserData = (url, token) => {
         .then(res => res.json())
         .then(user => dispatch(fetchUserSuccess(user)))
         .then( data => {
-          console.log(data)
           fetchSleepData(`https://api.fitbit.com/1.2/user/-/sleep/date/2018-12-18.json`, token)(dispatch)
         })
         .catch(console.error)
@@ -148,7 +156,6 @@ export const fetchUserData = (url, token) => {
 
 export const fetchSleepData = (url, token) => {
     return (dispatch) => {
-      console.log("in fetchSleepData", dispatch, url, token);
       fetch(url, {
         method: 'GET',
         headers: {
@@ -158,8 +165,23 @@ export const fetchSleepData = (url, token) => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("test", data)
           dispatch(storeSleepData(data))})
+        .catch(console.error)
+    }
+}
+
+export const fetchHeartRate = (token) => {
+    return (dispatch) => {
+      fetch(`https://api.fitbit.com/1/user/-/activities/heart/date/2018-12-18/1d.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(getHeartRate(data))})
         .catch(console.error)
     }
 }
@@ -176,7 +198,7 @@ export const fetchBackendUserData = (token, fitBitUser) => {
         .then(res => res.json())
         .then(data => {
           data.forEach(user => {
-            if (fitBitUser.encodedId === user.encodedId){
+            if (fitBitUser.encodedId === user.encodedId) {
               dispatch(setFitbitUser(user))
             }
           })
