@@ -6,7 +6,7 @@ import Profile from '../Profile'
 import EditGoal from './EditGoal'
 import { fetchUserData, fetchGoalData } from '../../store/actionCreators/userActions'
 
-class GoalContainer extends React.Component {
+class AllGoals extends React.Component {
 
   state = {
     editGoal: {}
@@ -17,10 +17,10 @@ class GoalContainer extends React.Component {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {
-      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
-    this.props.getGoal(userToken)
+    this.props.goal(userToken)
   }
 
   handleClickedGoal = (goal) => {
@@ -48,16 +48,16 @@ class GoalContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    goals: state.goals
+    user: state.user.user,
+    goals: state.setGoal.goals
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGoal: (access_token) => dispatch(fetchGoalData(access_token)),
-    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    goal: (access_token) => dispatch(fetchGoalData(access_token)),
+    user: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoalContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AllGoals)

@@ -146,7 +146,7 @@ export const fetchUserData = (url, token) => {
         }
       })
         .then(res => res.json())
-        .then(user => dispatch(fetchUserSuccess(user)))
+        // .then(user => dispatch(fetchUserSuccess(user)))
         .then( data => {
           fetchSleepData(`https://api.fitbit.com/1.2/user/-/sleep/date/2018-12-18.json`, token)(dispatch)
         })

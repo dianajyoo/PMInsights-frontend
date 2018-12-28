@@ -11,7 +11,7 @@ class Goal extends React.Component {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {
-      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
   }
@@ -49,14 +49,14 @@ class Goal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token
+    token: state.user.token
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoals(goalId, access_token)),
-    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    user: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
 }
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchUserData } from './actionCreators/userActions'
+import { fetchUserData } from './store/actionCreators/userActions'
 
 import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
 import GoalForm from './components/goals/GoalForm'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
-import GoalContainer from './components/goals/GoalContainer'
+import AllGoals from './components/goals/AllGoals'
 import NoMatch from './components/NoMatch'
 
 import '../node_modules/semantic-ui/dist/semantic.min.css'
@@ -58,13 +58,13 @@ class App extends Component {
             <Route path='/add_goal' component={GoalForm} />
             <Route
               exact path='/my_goals'
-              render={(props) => <GoalContainer {...props} />} />
+              render={(props) => <AllGoals {...props} />} />
             <Route
               exact path='/my_goals/edit/:goalId'
-              render={(props) => <GoalContainer {...props} />} />
+              render={(props) => <AllGoals {...props} />} />
             <Route
               exact path='/my_goals/delete/:goalId'
-              render={(props) => <GoalContainer {...props} />} />
+              render={(props) => <AllGoals {...props} />} />
             <Route component={NoMatch} />
           </Switch>
         </div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reducer from './reducers/index'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import reducer from './store/reducers/index'
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals, fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../store/actionCreators/userActions'
+import { fetchSleepGoals,fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../store/actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -21,11 +21,11 @@ class GoalForm extends React.Component {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {
-      this.props.fetchSleepData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
     if (this.props.user.user) {
-      this.props.fetchUserData(this.props.token, this.props.user.user)
+      this.props.backendUser(this.props.token, this.props.user.user)
     }
   }
 
@@ -82,11 +82,11 @@ class GoalForm extends React.Component {
     e.preventDefault()
 
     if (window.location.href.includes('edit')) {
-      this.props.fetchEditedGoals(this.props.id,
+      this.props.editedGoals(this.props.id,
         this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
     }
     else {
-      this.props.fetchData(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
+      this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
     }
   }
 
@@ -157,28 +157,28 @@ class GoalForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    token: state.token,
-    goalDate: state.goalDate,
-    bedtimeTarget: state.bedtimeTarget,
-    wakeupTarget: state.wakeupTarget,
-    fitBitUser: state.fitBitUser
+    user: state.user.user,
+    token: state.user.token,
+    fitBitUser: state.user.fitBitUser,
+    goalDate: state.setGoal.goalDate,
+    bedtimeTarget: state.setGoal.bedtimeTarget,
+    wakeupTarget: state.setGoal.wakeupTarget
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+    sleepGoal: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
       console.log("in mapDispatchToProps", user);
       dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
     },
-    fetchUserData: (token, user) => {
+    backendUser: (token, user) => {
       dispatch(fetchBackendUserData(token, user))
     },
-    fetchEditedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
+    editedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
       dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
     },
-    fetchSleepData: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
   }
 
