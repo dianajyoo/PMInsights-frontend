@@ -4,6 +4,7 @@ import { fetchSleepGoals,fetchBackendUserData, fetchUserData, fetchEditedGoals }
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
+import '../../styling/GoalForm.css'
 
 import { Form, Container, Grid } from 'semantic-ui-react'
 
@@ -47,17 +48,18 @@ class GoalForm extends React.Component {
     let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
     let minutes = e.toString().split(' ')[4].split(':')[1]
 
-    if (militaryHour > 12) {
-      militaryHour -= 12
-    }
-
     this.setState({
       bedtimeEvent: e
     })
 
-    console.log(militaryHour.toString() + ':' + minutes)
-
-    return militaryHour.toString() + ':' + minutes
+    if (militaryHour > 12) {
+      militaryHour -= 12
+      console.log(militaryHour.toString() + ':' + minutes + ' PM')
+      return militaryHour.toString() + ':' + minutes + ' PM'
+    } else {
+      console.log(militaryHour.toString() + ':' + minutes + ' AM')
+      return militaryHour.toString() + ':' + minutes + ' AM'
+    }
   }
 
   handleWaketimeChange = (e) => {
@@ -65,17 +67,18 @@ class GoalForm extends React.Component {
     let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
     let minutes = e.toString().split(' ')[4].split(':')[1]
 
-    if (militaryHour > 12) {
-      militaryHour -= 12
-    }
-
     this.setState({
       wakeupEvent: e
     })
 
-    console.log(militaryHour.toString() + ':' + minutes)
-
-    return militaryHour.toString() + ':' + minutes
+    if (militaryHour > 12) {
+      militaryHour -= 12
+      console.log(militaryHour.toString() + ':' + minutes + ' PM')
+      return militaryHour.toString() + ':' + minutes + ' PM'
+    } else {
+      console.log(militaryHour.toString() + ':' + minutes + ' AM')
+      return militaryHour.toString() + ':' + minutes + ' AM'
+    }
   }
 
   handleSubmit = (handleChange, handleBedtimeChange, handleWaketimeChange, e) => {
@@ -83,7 +86,8 @@ class GoalForm extends React.Component {
 
     if (window.location.href.includes('edit')) {
       this.props.editedGoals(this.props.id,
-        this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
+        this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
+        this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
     }
     else {
       this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
@@ -97,55 +101,61 @@ class GoalForm extends React.Component {
           <Grid>
             <Grid.Row centered>
               <Grid.Column width={6}>
-                <Form onSubmit={(e) => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
+                <div className='form'>
+                  <Form onSubmit={(e) => this.handleSubmit(this.handleChange, this.handleBedtimeChange, this.handleWaketimeChange, e)}>
 
-                  <label>
-                    <h4>Goal Date:</h4>
-                      <Form.Group >
-                        <DatePicker
-                          selected={this.state.startDate}
-                          onChange={e => this.handleChange(e)}
-                        />
-                      </Form.Group>
-                  </label>
+                    <label>
+                      Goal Date
+                        <Form.Group style={{minWidth:3}} >
+                          <DatePicker
+                            className='datepicker'
+                            isClearable={false}
+                            selected={this.state.startDate}
+                            onChange={e => this.handleChange(e)}
+                          />
+                        </Form.Group>
+                    </label>
 
-                  <br /><br />
+                    <label>
+                      Bedtime Target
+                        <Form.Group >
+                          <DatePicker
+                            className='datepicker'
+                            isClearable={false}
+                            selected={this.state.startDate}
+                            onChange={e => this.handleBedtimeChange(e)}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={15}
+                            dateFormat='h:mm aa'
+                            timeCaption='Time'
+                          />
+                        </Form.Group>
+                    </label>
 
-                  <label>
-                    <h4>Bedtime Target:</h4>
-                      <Form.Group >
-                        <DatePicker
-                          selected={this.state.startDate}
-                          onChange={e => this.handleBedtimeChange(e)}
-                          showTimeSelect
-                          showTimeSelectOnly
-                          timeIntervals={15}
-                          dateFormat='h:mm aa'
-                          timeCaption='Time'
-                        />
-                      </Form.Group>
-                  </label>
+                    <label>
+                      Wakeup Time Target
+                        <Form.Group >
+                          <DatePicker
+                            className='datepicker'
+                            isClearable={false}
+                            selected={this.state.startDate}
+                            onChange={e => this.handleWaketimeChange(e)}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={15}
+                            dateFormat='h:mm aa'
+                            timeCaption='Time'
+                          />
+                        </Form.Group>
+                    </label>
 
-                  <br /><br />
+                    <button className="circular ui icon button" id='submit-btn'>
+                      <i className="plus icon"></i>
+                    </button>
 
-                  <label>
-                    <h4>Wakeup Time Target:</h4>
-                      <Form.Group >
-                        <DatePicker
-                          selected={this.state.startDate}
-                          onChange={e => this.handleWaketimeChange(e)}
-                          showTimeSelect
-                          showTimeSelectOnly
-                          timeIntervals={15}
-                          dateFormat='h:mm aa'
-                          timeCaption='Time'
-                        />
-                        <br /><br />
-                        <input type='submit'/>
-                      </Form.Group>
-                  </label>
-
-                </Form>
+                  </Form>
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -180,6 +190,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalForm)

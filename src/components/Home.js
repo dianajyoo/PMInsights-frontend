@@ -6,7 +6,7 @@ import MenuContainer from './menu/MenuContainer'
 
 class Home extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {

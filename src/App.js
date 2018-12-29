@@ -5,7 +5,6 @@ import { fetchUserData } from './store/actionCreators/userActions'
 
 import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
-import GoalForm from './components/goals/GoalForm'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
 import AllGoals from './components/goals/AllGoals'
@@ -23,7 +22,7 @@ class App extends Component {
     const userToken = localStorage.getItem('token')
 
     if (userToken) {
-      this.props.fetchData('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
 
     let access_token
@@ -37,8 +36,6 @@ class App extends Component {
       access_token = current_hash.split('&')[0].split('=')[1]
       user_id = current_hash.split('&')[1].split('=')[1]
     }
-
-    console.log(access_token)
 
     if (access_token) {
       this.props.storeToken(access_token)
@@ -55,7 +52,6 @@ class App extends Component {
             <Route
               path='/dashboard'
               render={(props) => <Dashboard {...props} />} />
-            <Route path='/add_goal' component={GoalForm} />
             <Route
               exact path='/my_goals'
               render={(props) => <AllGoals {...props} />} />
@@ -73,15 +69,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.token
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (url, access_token) => dispatch(fetchUserData(url, access_token)),
+    user: (url, access_token) => dispatch(fetchUserData(url, access_token)),
     storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token})
   }
 }

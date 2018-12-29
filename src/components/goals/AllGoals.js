@@ -34,7 +34,7 @@ class AllGoals extends React.Component {
     let goals
 
     if (this.props.goals.length > 0) {
-        goals = this.props.goals.map(goal => <Goal props={this.props} goal={goal} handleClickedGoal={this.handleClickedGoal} />)
+      goals = this.props.goals.map(goal => <Goal props={this.props} goal={goal} handleClickedGoal={this.handleClickedGoal} />)
     }
 
     return (

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
+import ModalManager from './ModalManager'
 import { fetchUserData } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
@@ -22,7 +23,7 @@ class Profile extends React.Component {
           {this.props.user.user ? <img class='ui massive circular image' id='photo' src={this.props.user.user.avatar} alt='profile pic' /> : null}
 
           <span id='map'>
-            <i class="map marker alternate icon"></i>
+            <i className="map marker alternate icon"></i>
             {this.props.user.user ? this.props.user.user.timezone : null}
           </span>
         </span>
@@ -33,11 +34,11 @@ class Profile extends React.Component {
           {this.props.user.user ? this.props.user.user.weight + ' kg' : null}
 
           <span className='profile-link'>
-            <i class="star outline icon"></i><NavLink to='/add_goal' className='navlink'>Add Sleep Goal</NavLink>
+            <i className="star outline icon"></i><ModalManager />
           </span>
 
           <span className='profile-link'>
-            <i class="chart bar outline icon"></i><NavLink to='/sleep_stats' className='navlink'>Statistics</NavLink>
+            <i className="chart bar outline icon"></i><NavLink to='/sleep_stats' className='navlink'>Statistics</NavLink>
           </span>
         </span>
       </div>
