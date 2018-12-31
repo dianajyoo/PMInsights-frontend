@@ -1,6 +1,5 @@
 import React from 'react'
 import EditGoal from './EditGoal'
-import ModalManager from '../ModalManager'
 import ModalEdit from '../ModalEdit'
 
 import { connect } from 'react-redux'

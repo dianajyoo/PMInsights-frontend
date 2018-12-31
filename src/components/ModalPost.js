@@ -2,9 +2,9 @@ import React from 'react'
 import { Modal, Form, Button } from 'semantic-ui-react'
 
 import GoalForm from './goals/GoalForm'
-import '../styling/ModalManager.css'
+import '../styling/ModalPost.css'
 
-class ModalManager extends React.Component {
+class ModalPost extends React.Component {
 
   state = {
     showModal: false
@@ -38,4 +38,4 @@ class ModalManager extends React.Component {
   }
 }
 
-export default ModalManager
+export default ModalPost

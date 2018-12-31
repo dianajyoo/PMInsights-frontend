@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import ModalManager from './ModalManager'
+import ModalPost from './ModalPost'
 import { fetchUserData } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
@@ -34,7 +34,7 @@ class Profile extends React.Component {
           {this.props.user.user ? this.props.user.user.weight + ' kg' : null}
 
           <span className='profile-link'>
-            <i className="star outline icon"></i><ModalManager />
+            <i className="star outline icon"></i><ModalPost />
           </span>
 
           <span className='profile-link'>
