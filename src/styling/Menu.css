@@ -1,5 +1,6 @@
 #flyout-menu {
-  width: 10vw;
+  display: grid;
+  width: 15vw;
   height: 40vh;
   background-color: transparent;
   position: fixed;
@@ -7,7 +8,7 @@
   left: 0;
   transition: transform .3s
               cubic-bezier(0, .52, 0, 1);
-  overflow: scroll;
+  overflow: hidden;
   z-index: 1000;
 }
 
@@ -30,14 +31,20 @@
 }
 
 /* menu buttons */
-.grid-user {
-  padding: 6em 0em 0em 1.5em;
-  font-size: 1.15em;
+#grid-user {
+  /* padding: 6em 0em 0em 1.5em; */
+  margin-top: 5em;
+  margin-left: -4em;
 }
 
-.grid-chart {
+#grid-chart {
+  /* padding: 2em 0em 0em 1.5em; */
+  margin-left: -4em;
+}
+
+#grid-chart, #grid-user {
+  position: fixed;
   padding: 2em 0em 0em 1.5em;
-  font-size: 1.15em;
 }
 
 i {
@@ -51,3 +58,9 @@ i {
 #chart {
   background-color: rgba(228, 65, 4);
 }
+
+/* .grid-container {
+  display: grid;
+  grid-template-columns: 25em 25em 25em;
+  grid-template-rows: 25em 25em;
+} */

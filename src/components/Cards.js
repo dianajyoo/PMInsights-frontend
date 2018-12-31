@@ -3,6 +3,7 @@ import React from 'react'
 import SleepEfficiency from './analytics/SleepEfficiency'
 import PieChart from './analytics/PieChart'
 import Heartrate from './analytics/Heartrate'
+import LineGraph from './analytics/LineGraph'
 
 const Cards = () => {
   return (
@@ -22,9 +23,9 @@ const Cards = () => {
         <Heartrate />
       </div>
 
-      <div className='goal-card'>
+      <div className='chart-card'>
         <span className='card-title'>Sleep Pattern</span>
-        insert chart here
+        <span id='linegraph'><LineGraph /></span>
       </div>
     </div>
   )

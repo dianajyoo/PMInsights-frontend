@@ -65,10 +65,10 @@ export const setFitbitUser = (user) => {
 
 // EDIT
 
-export const editGoals = (goals) => {
+export const editGoal = (goal) => {
   return {
-    type: 'EDIT_GOALS',
-    goals: goals
+    type: 'EDIT_GOAL',
+    goal: goal
   }
 }
 
@@ -95,31 +95,10 @@ export const editWakeupTime = (time) => {
 
 // DELETE
 
-export const deleteGoals = (goals) => {
+export const deleteGoal = (goalId) => {
   return {
-    type: 'DELETE_GOALS',
-    goals: goals
-  }
-}
-
-export const deleteGoalDate = (date) => {
-  return {
-    type: 'DELETE_GOAL_DATE',
-    goalDate: date
-  }
-}
-
-export const deleteBedtime = (time) => {
-  return {
-    type: 'DELETE_BEDTIME',
-    bedtimeTarget: time
-  }
-}
-
-export const deleteWakeupTime = (time) => {
-  return {
-    type: 'DELETE_WAKEUP_TIME',
-    wakeupTarget: time
+    type: 'DELETE_GOAL',
+    id: goalId
   }
 }
 
@@ -250,7 +229,7 @@ export const fetchSleepGoals = (goalDate, bedtimeTarget, wakeupTarget, fitBitUse
 }
 
 // FETCH PATCH
-export const fetchEditedGoals = (goalId, goalDate, bedtimeTarget, wakeupTarget, token) => {
+export const fetchEditedGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget, token) => {
     return (dispatch) => {
       fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
         method: 'PATCH',
@@ -266,16 +245,18 @@ export const fetchEditedGoals = (goalId, goalDate, bedtimeTarget, wakeupTarget, 
       })
         .then(res => res.json())
         .then(data => {
-          dispatch(editGoalDate(data.goalDate))
-          dispatch(editBedtime(data.bedtimeTarget))
-          dispatch(editWakeupTime(data.wakeupTarget))
+          console.log(data)
+          dispatch(editGoal(data))
+          // dispatch(editGoalDate(data.goalDate))
+          // dispatch(editBedtime(data.bedtimeTarget))
+          // dispatch(editWakeupTime(data.wakeupTarget))
         })
         .catch(console.error)
     }
 }
 
 // FETCH DELETE
-export const fetchDeleteGoals = (goalId, token) => {
+export const fetchDeleteGoal = (goalId, token) => {
     return (dispatch) => {
       fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
         method: 'DELETE',
@@ -289,7 +270,7 @@ export const fetchDeleteGoals = (goalId, token) => {
       })
         .then(res => res.json())
         .then(data => {
-          dispatch(deleteGoals(data.id))
+          dispatch(deleteGoal(data.id))
         })
         .catch(console.error)
     }

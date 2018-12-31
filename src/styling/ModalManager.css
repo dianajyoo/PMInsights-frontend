@@ -3,10 +3,10 @@
 #content {
   background-image:
   linear-gradient(
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.6)
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
     ),
-  url('../imgs/sleeping.jpg');
+  url('../imgs/clock.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Noto Sans', sans-serif;
@@ -17,4 +17,5 @@
   background-color: rgba(133,207,218);
   color: rgba(38,44,51);
   font-weight: 700;
+  font-size: 2em;
 }

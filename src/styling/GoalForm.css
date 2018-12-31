@@ -20,7 +20,7 @@
   font-weight: 700;
 }
 
-#submit-btn {
+.circular.ui.icon.button {
   position: relative;
   margin-left: 5em;
   background-color: rgba(133,207,218);

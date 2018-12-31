@@ -23,6 +23,7 @@ class ModalManager extends React.Component {
   }
 
   render() {
+
     const { showModal } = this.state
 
     return (

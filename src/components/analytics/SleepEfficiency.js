@@ -5,7 +5,7 @@ import { fetchUserData } from '../../store/actionCreators/userActions'
 import Profile from '../Profile'
 
 import { Progress } from 'react-sweet-progress'
-import "react-sweet-progress/lib/style.css"
+import 'react-sweet-progress/lib/style.css'
 
 class SleepEfficiency extends React.Component {
 
@@ -33,7 +33,7 @@ class SleepEfficiency extends React.Component {
     return (
       <div className='progress-circle'>
         <Progress
-          type="circle"
+          type='circle'
           width={160}
           strokeWidth={13}
           percent={efficiency}

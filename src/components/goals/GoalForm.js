@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals,fetchBackendUserData, fetchUserData, fetchEditedGoals } from '../../store/actionCreators/userActions'
+import { fetchSleepGoals,fetchBackendUserData, fetchUserData, fetchEditedGoal } from '../../store/actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -84,15 +84,21 @@ class GoalForm extends React.Component {
   handleSubmit = (handleChange, handleBedtimeChange, handleWaketimeChange, e) => {
     e.preventDefault()
 
-    if (window.location.href.includes('edit')) {
-      this.props.editedGoals(this.props.id,
+    if (this.props.editGoal) {
+      this.props.editedGoal(this.props.goal.id,
         this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
         this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
-    }
-    else {
-      this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent), this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
+    } else {
+      this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
+      this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
     }
   }
+
+  // if (window.location.href.includes('edit')) {
+  //   this.props.editedGoals(this.props.id,
+  //     this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
+  //     this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
+  //   }
 
   render() {
     return (
@@ -106,7 +112,7 @@ class GoalForm extends React.Component {
 
                     <label>
                       Goal Date
-                        <Form.Group style={{minWidth:3}} >
+                        <Form.Group >
                           <DatePicker
                             className='datepicker'
                             isClearable={false}
@@ -150,7 +156,7 @@ class GoalForm extends React.Component {
                         </Form.Group>
                     </label>
 
-                    <button className="circular ui icon button" id='submit-btn'>
+                    <button className="circular ui icon button">
                       <i className="plus icon"></i>
                     </button>
 
@@ -185,8 +191,8 @@ const mapDispatchToProps = (dispatch) => {
     backendUser: (token, user) => {
       dispatch(fetchBackendUserData(token, user))
     },
-    editedGoals: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
-      dispatch(fetchEditedGoals(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
+    editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
+      dispatch(fetchEditedGoal(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
     },
     sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
   }

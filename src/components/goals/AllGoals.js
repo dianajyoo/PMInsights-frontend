@@ -30,17 +30,18 @@ class AllGoals extends React.Component {
   }
 
   render() {
-    console.log(this.state.editGoal)
     let goals
 
     if (this.props.goals.length > 0) {
+      console.log(this.props.goals)
       goals = this.props.goals.map(goal => <Goal props={this.props} goal={goal} handleClickedGoal={this.handleClickedGoal} />)
     }
 
     return (
       <div className='goal-container'>
-        {this.state.editGoal.id ? <EditGoal goal={this.state.editGoal}  /> :
-        <div> {goals} </div>}
+        <span id='profile'><Profile /></span>
+        {this.state.editGoal.id ? <EditGoal goal={this.state.editGoal} /> :
+        <div className='ui grid'> {goals} </div>}
       </div>
     )
   }
