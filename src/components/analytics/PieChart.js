@@ -78,7 +78,7 @@ class TwoLevelPieChart extends React.Component {
           cy={200}
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
+          fill='rgba(255,163,0)'
           onMouseEnter={this.onPieEnter}
         />
        </PieChart>

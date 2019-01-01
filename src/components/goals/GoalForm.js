@@ -94,12 +94,6 @@ class GoalForm extends React.Component {
     }
   }
 
-  // if (window.location.href.includes('edit')) {
-  //   this.props.editedGoals(this.props.id,
-  //     this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-  //     this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
-  //   }
-
   render() {
     return (
       <div className='goal-form'>
@@ -127,8 +121,8 @@ class GoalForm extends React.Component {
                         <Form.Group >
                           <DatePicker
                             className='datepicker'
+                            placeholderText='Click to select time'
                             isClearable={false}
-                            selected={this.state.startDate}
                             onChange={e => this.handleBedtimeChange(e)}
                             showTimeSelect
                             showTimeSelectOnly
@@ -145,7 +139,7 @@ class GoalForm extends React.Component {
                           <DatePicker
                             className='datepicker'
                             isClearable={false}
-                            selected={this.state.startDate}
+                            placeholderText='Click to select time'
                             onChange={e => this.handleWaketimeChange(e)}
                             showTimeSelect
                             showTimeSelectOnly

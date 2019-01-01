@@ -9,22 +9,22 @@ const Cards = () => {
   return (
     <div className='grid-container'>
       <div className='efficiency-card'>
-        <span className='card-title'>Sleep Efficiency</span>
-        <SleepEfficiency />
+        <div className='card-title'>Sleep Efficiency</div>
+        <span id='efficiency'><SleepEfficiency /></span>
       </div>
 
       <div className='sleep-card'>
-        <span className='card-title'>Sleep Cycle</span>
+        <div className='card-title'>Sleep Cycle</div>
         <span id='piechart'><PieChart /></span>
       </div>
 
       <div className='heart-card'>
-        <span className='card-title'>Resting HR</span>
+        <div className='card-title'>Resting HR</div>
         <Heartrate />
       </div>
 
       <div className='chart-card'>
-        <span className='card-title'>Sleep Pattern</span>
+        <div className='card-title'>Sleep Pattern</div>
         <span id='linegraph'><LineGraph /></span>
       </div>
     </div>

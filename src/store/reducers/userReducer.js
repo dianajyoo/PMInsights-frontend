@@ -16,6 +16,15 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, user: action.user
       }
+    case 'LOGOUT_USER':
+      localStorage.clear()
+      return {
+        user: {},
+        fetchIsLoading: false,
+        token: '',
+        sleep: {},
+        fitBitUser: {}
+      }
     case 'STORE_TOKEN':
       localStorage.setItem("token", action.token)
       return {

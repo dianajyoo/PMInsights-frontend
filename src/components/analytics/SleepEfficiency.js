@@ -40,7 +40,7 @@ class SleepEfficiency extends React.Component {
           theme={{
             active: {
               trailColor: 'rgb(236,236,236)',
-              color: 'rgb(133,207,218)'
+              color: 'rgba(133,207,218)'
             }
           }}
         />

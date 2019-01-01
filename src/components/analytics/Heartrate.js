@@ -15,7 +15,7 @@ class Heartrate extends React.Component {
   render() {
     return (
       <div className='bpm'>
-        <img src={require('../../imgs/heart.png')} alt={'heart'} />
+        <img id='heart' src={require('../../imgs/heart.png')} alt={'heart'} />
         {this.props.heartRate['activities-heart'] ? this.props.heartRate['activities-heart'][0].value.restingHeartRate + ' bpm' : null}
       </div>
     )

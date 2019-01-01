@@ -32,14 +32,17 @@
 
 /* menu buttons */
 #grid-user {
-  /* padding: 6em 0em 0em 1.5em; */
-  margin-top: 5em;
-  margin-left: -4em;
+  position: absolute;
+  padding: 2em 0em 0em 1.5em;
+  margin-top: 7em;
+  margin-left: -5em;
 }
 
 #grid-chart {
-  /* padding: 2em 0em 0em 1.5em; */
-  margin-left: -4em;
+  position: absolute;
+  padding: 2em 0em 0em 1.5em;
+  margin-top: 13em;
+  margin-left: -5em;
 }
 
 #grid-chart, #grid-user {
@@ -58,9 +61,3 @@ i {
 #chart {
   background-color: rgba(228, 65, 4);
 }
-
-/* .grid-container {
-  display: grid;
-  grid-template-columns: 25em 25em 25em;
-  grid-template-rows: 25em 25em;
-} */

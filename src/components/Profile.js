@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import ModalPost from './ModalPost'
+import ModalPost from './modal/ModalPost'
 import { fetchUserData } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
@@ -13,6 +13,11 @@ class Profile extends React.Component {
     if (userToken) {
       this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
     }
+  }
+
+  handleLogout = () => {
+    localStorage.clear()
+    this.props.logout()
   }
 
   render() {
@@ -33,12 +38,19 @@ class Profile extends React.Component {
 
           {this.props.user.user ? this.props.user.user.weight + ' kg' : null}
 
-          <span className='profile-link'>
-            <i className="star outline icon"></i><ModalPost />
+          <span>
+            <i className="star outline icon"></i>
+            <ModalPost />
           </span>
 
-          <span className='profile-link'>
-            <i className="chart bar outline icon"></i><NavLink to='/sleep_stats' className='navlink'>Statistics</NavLink>
+          <span>
+            <i className="chart bar outline icon"></i>
+            <NavLink to='/sleep_stats' className='navlink'>Statistics</NavLink>
+          </span>
+
+          <span>
+            <i className="arrow alternate circle right outline icon"></i>
+            <NavLink to='/' onClick={this.handleLogout} className='navlink'>Log Out</NavLink>
           </span>
         </span>
       </div>
@@ -54,7 +66,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    getUser: (url, access_token) => dispatch(fetchUserData(url, access_token)),
+    logout: () => dispatch({type: 'LOGOUT_USER'})
   }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Modal, Form, Button } from 'semantic-ui-react'
 
-import GoalForm from './goals/GoalForm'
-import '../styling/ModalPost.css'
+import GoalForm from '../goals/GoalForm'
+import '../../styling/ModalPost.css'
 
 class ModalPost extends React.Component {
 

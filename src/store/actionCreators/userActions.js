@@ -1,3 +1,5 @@
+// USER ACTIONS
+
 export const fetchIsLoading = (bool) => {
   return {
     type: 'FETCH_IS_LOADING',
@@ -9,6 +11,12 @@ export const fetchUserSuccess = (user) => {
   return {
     type: 'FETCH_USER_SUCCESS',
     user
+  }
+}
+
+export const logoutUser = () => {
+  return {
+    type: 'LOGOUT_USER'
   }
 }
 

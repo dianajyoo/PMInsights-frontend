@@ -1,6 +1,6 @@
 import React from 'react'
 import EditGoal from './EditGoal'
-import ModalEdit from '../ModalEdit'
+import ModalEdit from '../modal/ModalEdit'
 
 import { connect } from 'react-redux'
 import { fetchUserData, fetchDeleteGoal } from '../../store/actionCreators/userActions'
@@ -41,7 +41,7 @@ class Goal extends React.Component {
           </button>
 
           <button id='delete-btn' className='circular ui icon button' onClick={this.handleDelete}>
-            <i className='close icon'></i>
+            <i className='close icon large'></i>
           </button>
         </div>
       </div>

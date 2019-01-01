@@ -1,8 +1,7 @@
 import React from 'react'
 import { Modal, Form, Button } from 'semantic-ui-react'
 
-import GoalForm from './goals/GoalForm'
-// import '../styling/ModalManager.css'
+import GoalForm from '../goals/GoalForm'
 
 class ModalEdit extends React.Component {
 
@@ -29,7 +28,7 @@ class ModalEdit extends React.Component {
     return (
       <Modal className='ui tiny modal' closeIcon onClose={this.closeModal} open={showModal}
       trigger={<span onClick={() => this.setState({ showModal: true })}>
-      <i className='edit outline icon'></i></span>}>
+      <i className='edit outline icon large'></i></span>}>
         <Modal.Header id='edit-header'>Edit Sleep Goal</Modal.Header>
         <Modal.Content id='edit-form'>
           <GoalForm handleClose={this.handleClose} editGoal={this.props.editGoal} goal={this.props.goal} />
