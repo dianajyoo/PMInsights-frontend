@@ -7,20 +7,40 @@
   justify-content: center;
   position: fixed;
   width: 100vw;
-  height: 7vh;
-  background-color: rgba(38,43,73);
+  height: 5.5vh;
+  background-color: rgba(27,31,57);
   z-index: 1000;
 }
 
-#date {
+#header-1 img {
+  position: absolute;
+  float: left;
+  left: 12em;
+  bottom: 1em;
+  height: 4vh;
+  width: 2vw;
+}
+
+#date, #date-of-sleep {
+  position: absolute;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 1.5em;
-  color: white
+  color: white;
 }
 
 #date-input {
   float: right;
   top: 0;
   right: 0;
+}
+
+#sleepmode {
+  position: absolute;
+  float: left;
+  left: 2em;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: white;
 }

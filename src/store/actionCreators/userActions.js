@@ -183,6 +183,26 @@ export const fetchSleepData = (date, token) => {
   }
 }
 
+// fitbit logout
+export const logoutFitbit = (base64) => {
+  // debugger
+    return (dispatch) => {
+    fetch('https://api.fitbit.com/oauth2/revoke', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + base64
+      }
+    })
+      .then(res => res.json())
+      .then(user => {
+        // debugger
+        dispatch(logoutUser())
+      })
+      .catch(console.error)
+  }
+}
+
 export const fetchHeartRate = (date, token) => {
     return (dispatch) => {
       fetch(`https://api.fitbit.com/1/user/-/activities/heart/date/${date}/1d.json`, {

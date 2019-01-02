@@ -6,7 +6,7 @@ const Home = () => {
     <div className='welcome'>
       <MenuContainer />
       <div className='title'>
-        <span id='title-1'>SLEEPTRACKER</span>
+        <span id='title-1'>SLEEPMODE</span>
       </div>
     </div>
   )

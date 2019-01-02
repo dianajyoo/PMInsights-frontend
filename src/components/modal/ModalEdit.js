@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from 'semantic-ui-react'
 
 import GoalForm from '../goals/GoalForm'
+import '../../styling/ModalEdit.css'
 
 class ModalEdit extends React.Component {
 
@@ -30,7 +31,7 @@ class ModalEdit extends React.Component {
       trigger={<span onClick={() => this.setState({ showModal: true })}>
       <i className='edit outline icon large'></i></span>}>
         <Modal.Header id='edit-header'>Edit Sleep Goal</Modal.Header>
-        <Modal.Content id='edit-form'>
+        <Modal.Content id='edit-content'>
           <GoalForm handleClose={this.handleClose} editGoal={this.props.editGoal} goal={this.props.goal} />
         </Modal.Content>
       </Modal>

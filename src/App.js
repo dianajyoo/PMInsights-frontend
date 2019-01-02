@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchUser } from './store/actionCreators/userActions'
+import { fetchUser, logoutFitbit } from './store/actionCreators/userActions'
 
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -27,17 +27,32 @@ class App extends Component {
     if (current_hash.includes('token') && current_hash.includes('user_id')) {
       access_token = current_hash.split('&')[0].split('=')[1]
       user_id = current_hash.split('&')[1].split('=')[1]
+
+      if (access_token) {
+        this.props.storeToken(access_token)
+        this.props.user('https://api.fitbit.com/1/user/-/profile.json', access_token)
+      }
+
+      if (localStorage.length === 0) {
+
+        this.props.logout(access_token)
+        const userToken = localStorage.getItem('token')
+
+        // if (userToken) {
+        //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
+        // }
+      }
     }
 
-    if (access_token) {
-      this.props.storeToken(access_token)
-    }
+    // if (access_token) {
+    //   this.props.storeToken(access_token)
+    // }
 
-    const userToken = localStorage.getItem('token')
-
-    if (userToken) {
-      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
+    // const userToken = localStorage.getItem('token')
+    //
+    // if (userToken) {
+    //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    // }
 
   }
 
@@ -67,14 +82,15 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token
+    token: state.user.token
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     user: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token})
+    storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token}),
+    logout: (access_token) => dispatch(logoutFitbit(access_token))
   }
 }
 

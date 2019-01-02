@@ -24,7 +24,12 @@ const userReducer = (state = initialState, action) => {
         fetchIsLoading: false,
         token: '',
         sleep: {},
-        fitBitUser: {}
+        fitBitUser: {},
+        heartRate: {},
+        goalDate: '',
+        bedtimeTarget: '',
+        wakeupTarget: '',
+        goals: []
       }
     case 'STORE_TOKEN':
       localStorage.setItem("token", action.token)

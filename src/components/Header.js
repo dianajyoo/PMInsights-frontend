@@ -1,19 +1,29 @@
 import React from 'react'
 import DateForm from './DateForm'
+import { connect } from 'react-redux'
 
 import '../styling/Header.css'
+import '../imgs/moon.png'
 
 class Header extends React.Component {
   render() {
     return (
       <div id='header-1'>
-
+        <span id='sleepmode'>sleepmode</span>
+        <span id='date-of-sleep'>{this.props.date}</span>
+        <img src={require('../imgs/moon.png')} alt={''} />
         <span id='date-input'><DateForm /></span>
       </div>
     )
   }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    date: state.user.date
+  }
+}
+
+export default connect(mapStateToProps)(Header)
 
 // <span id='date'>Date of Sleep:</span>

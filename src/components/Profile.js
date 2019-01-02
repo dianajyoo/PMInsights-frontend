@@ -3,21 +3,23 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import ModalPost from './modal/ModalPost'
-import { fetchUser } from '../store/actionCreators/userActions'
+import { fetchUser, logoutFitbit } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
 
   componentDidMount() {
-    const userToken = localStorage.getItem('token')
+    // const userToken = localStorage.getItem('token')
 
     // if (userToken && this.props.date !== '')  {
-      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', userToken)
+      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
     // }
   }
 
   handleLogout = () => {
+    // const userToken = localStorage.getItem('token')
+
+    this.props.logout(this.props.token)
     localStorage.clear()
-    this.props.logout()
   }
 
   render() {
@@ -57,6 +59,7 @@ class Profile extends React.Component {
             <i className="arrow alternate circle right outline icon"></i>
             <NavLink to='/' onClick={this.handleLogout} className='navlink'>Log Out</NavLink>
           </span>
+
         </span>
       </div>
     )
@@ -66,14 +69,15 @@ class Profile extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    date: state.user.date
+    date: state.user.date,
+    token: state.user.token
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    logout: () => dispatch({type: 'LOGOUT_USER'})
+    logout: (access_token) => dispatch(logoutFitbit(access_token))
   }
 }
 
