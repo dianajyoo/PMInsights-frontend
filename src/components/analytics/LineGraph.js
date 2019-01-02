@@ -5,10 +5,10 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 class LineGraph extends React.Component {
 
   componentDidUpdate(prevProps) {
-    const userToken = localStorage.getItem('token')
+    // const userToken = localStorage.getItem('token')
 
     if (this.props.date !== prevProps.date) {
-      this.props.sleepInfo(this.props.date, userToken)
+      this.props.sleepInfo(this.props.date, this.props.token)
     }
   }
 
@@ -45,7 +45,8 @@ class LineGraph extends React.Component {
 const mapStateToProps = (state) => {
   return {
     date: state.user.date,
-    sleep: state.user.sleep
+    sleep: state.user.sleep,
+    token: state.user.token
   }
 }
 

@@ -7,10 +7,10 @@ import 'react-sweet-progress/lib/style.css'
 class SleepEfficiency extends React.Component {
 
   componentDidUpdate(prevProps) {
-    const userToken = localStorage.getItem('token')
+    // const userToken = localStorage.getItem('token')
 
     if (this.props.date !== prevProps.date) {
-      this.props.sleepInfo(this.props.date, userToken)
+      this.props.sleepInfo(this.props.date, this.props.token)
     }
   }
 
@@ -50,7 +50,8 @@ const mapStateToProps = (state) => {
   // debugger
   return {
     date: state.user.date,
-    sleep: state.user.sleep
+    sleep: state.user.sleep,
+    token: state.user.token
   }
 }
 

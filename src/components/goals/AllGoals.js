@@ -15,13 +15,13 @@ class AllGoals extends React.Component {
 
   componentDidMount() {
 
-    const userToken = localStorage.getItem('token')
+    // const userToken = localStorage.getItem('token')
 
     // if (userToken) {
     //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
     // }
 
-    this.props.goal(userToken)
+    this.props.goal(this.props.token)
   }
 
   handleClickedGoal = (goal) => {
@@ -52,7 +52,8 @@ class AllGoals extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    goals: state.goal.goals
+    goals: state.goal.goals,
+    token: state.user.token
   }
 }
 
