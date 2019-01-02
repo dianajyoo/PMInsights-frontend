@@ -19,11 +19,11 @@ class App extends Component {
 
   componentDidMount() {
 
-    const userToken = localStorage.getItem('token')
-
-    if (userToken) {
-      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
+    // const userToken = localStorage.getItem('token')
+    //
+    // if (userToken) {
+    //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    // }
 
     let access_token
     let user_id

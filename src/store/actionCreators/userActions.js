@@ -119,6 +119,15 @@ export const getHeartRate = (heartRate) => {
   }
 }
 
+// STORE DATE INPUT
+
+export const storeDate = (date) => {
+  return {
+    type: 'STORE_DATE',
+    date: date
+  }
+}
+
 // <--- redux thunk here --->
 
 // FETCH GET
@@ -156,9 +165,9 @@ export const fetchSleepData = (url, token) => {
     }
 }
 
-export const fetchHeartRate = (token) => {
+export const fetchHeartRate = (date, token) => {
     return (dispatch) => {
-      fetch(`https://api.fitbit.com/1/user/-/activities/heart/date/2018-12-18/1d.json`, {
+      fetch(`https://api.fitbit.com/1/user/-/activities/heart/date/${date}/1d.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUserData } from '../../store/actionCreators/userActions'
 
 import Profile from '../Profile'
 
@@ -8,16 +7,6 @@ import { Progress } from 'react-sweet-progress'
 import 'react-sweet-progress/lib/style.css'
 
 class SleepEfficiency extends React.Component {
-
-  componentDidMount() {
-
-    const userToken = localStorage.getItem('token')
-
-    if (userToken) {
-      this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
-
-  }
 
   render() {
     let efficiency
@@ -55,13 +44,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SleepEfficiency)
+export default connect(mapStateToProps)(SleepEfficiency)
 
 // <div className='sleep-stats'>
 // <h3>Date of Sleep:</h3>

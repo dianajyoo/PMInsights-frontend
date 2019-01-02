@@ -6,10 +6,14 @@ import '../../styling/Heartrate.css'
 
 class Heartrate extends React.Component {
 
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
     const userToken = localStorage.getItem('token')
+    console.log(this.props)
+    console.log(prevProps)
 
-    this.props.getHeartRate(userToken)
+    if (this.props.date !== prevProps.date) {
+      this.props.getHeartRate(this.props.date, userToken)
+    }
   }
 
   render() {
@@ -24,13 +28,14 @@ class Heartrate extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    heartRate: state.heartRate.heartRate
+    heartRate: state.heartRate.heartRate,
+    date: state.user.date
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getHeartRate: (access_token) => dispatch(fetchHeartRate(access_token))
+    getHeartRate: (date, access_token) => dispatch(fetchHeartRate(date, access_token))
   }
 }
 

@@ -32,9 +32,3 @@ const Cards = () => {
 }
 
 export default Cards
-
-// <NavLink to='/sleep_stats' className='analytics'>analytics</NavLink>
-// <NavLink to='/my_goals' className='goals'>my sleep goals</NavLink>
-// <NavLink to='/my_goals' className='heartrate'>heart rate</NavLink>
-
-// <img src={require('../imgs/moon.png')} alt={'moon'} id='moon' />

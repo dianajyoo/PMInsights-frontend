@@ -3,18 +3,9 @@ import EditGoal from './EditGoal'
 import ModalEdit from '../modal/ModalEdit'
 
 import { connect } from 'react-redux'
-import { fetchUserData, fetchDeleteGoal } from '../../store/actionCreators/userActions'
+import { fetchDeleteGoal } from '../../store/actionCreators/userActions'
 
 class Goal extends React.Component {
-
-  componentDidMount() {
-    const userToken = localStorage.getItem('token')
-
-    if (userToken) {
-      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
-
-  }
 
   handleEdit = () => {
     // this.props.props.history.replace(`/my_goals/edit/${this.props.goal.id}`)
@@ -57,8 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoal(goalId, access_token)),
-    user: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoal(goalId, access_token))
   }
 }
 

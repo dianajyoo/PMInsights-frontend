@@ -21,9 +21,9 @@ class GoalForm extends React.Component {
 
     const userToken = localStorage.getItem('token')
 
-    if (userToken) {
-      this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
+    // if (userToken) {
+    //   this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    // }
 
     if (this.props.user.user) {
       this.props.backendUser(this.props.token, this.props.user.user)
@@ -187,8 +187,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
       dispatch(fetchEditedGoal(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
-    },
-    sleepInfo: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    }
   }
 }
 

@@ -3,7 +3,8 @@ const initialState = {
   fetchIsLoading: false,
   token: '',
   sleep: {},
-  fitBitUser: {}
+  fitBitUser: {},
+  date: ''
 }
 
 const userReducer = (state = initialState, action) => {
@@ -34,9 +35,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, sleep: action.data
       }
-    case "SET_FITBIT_USER":
+    case 'SET_FITBIT_USER':
       return {
         ...state, fitBitUser: action.user
+      }
+    case 'STORE_DATE':
+      return {
+        ...state, date: action.date
       }
     default:
       return state

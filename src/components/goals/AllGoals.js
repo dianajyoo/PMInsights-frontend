@@ -5,7 +5,7 @@ import Goal from './Goal'
 import Profile from '../Profile'
 import EditGoal from './EditGoal'
 import Header from '../Header'
-import { fetchUserData, fetchGoalData } from '../../store/actionCreators/userActions'
+import { fetchGoalData } from '../../store/actionCreators/userActions'
 
 class AllGoals extends React.Component {
 
@@ -17,9 +17,9 @@ class AllGoals extends React.Component {
 
     const userToken = localStorage.getItem('token')
 
-    if (userToken) {
-      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    }
+    // if (userToken) {
+    //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    // }
 
     this.props.goal(userToken)
   }
@@ -58,8 +58,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    goal: (access_token) => dispatch(fetchGoalData(access_token)),
-    user: (url, access_token) => dispatch(fetchUserData(url, access_token))
+    goal: (access_token) => dispatch(fetchGoalData(access_token))
   }
 }
 
