@@ -28,8 +28,8 @@ class Heartrate extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    heartRate: state.heartRate.heartRate,
-    date: state.user.date
+    date: state.user.date,
+    heartRate: state.heartRate.heartRate
   }
 }
 

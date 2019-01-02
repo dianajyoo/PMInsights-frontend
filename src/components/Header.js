@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <div id='header-1'>
-        <span id='date'>Date of Sleep:</span>
+
         <span id='date-input'><DateForm /></span>
       </div>
     )
@@ -15,3 +15,5 @@ class Header extends React.Component {
 }
 
 export default Header
+
+// <span id='date'>Date of Sleep:</span>

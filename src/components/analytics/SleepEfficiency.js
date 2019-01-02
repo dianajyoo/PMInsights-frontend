@@ -1,18 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Profile from '../Profile'
-
 import { Progress } from 'react-sweet-progress'
 import 'react-sweet-progress/lib/style.css'
 
 class SleepEfficiency extends React.Component {
 
+  componentDidUpdate(prevProps) {
+    const userToken = localStorage.getItem('token')
+
+    if (this.props.date !== prevProps.date) {
+      this.props.sleepInfo(this.props.date, userToken)
+    }
+  }
+
   render() {
     let efficiency
     let hours_slept
+    console.log(this.props)
 
     if (this.props.sleep.sleep) {
+      console.log(this.props.sleep)
       efficiency = this.props.sleep.sleep[0].efficiency
 
       // round to one decimal place
@@ -39,7 +47,9 @@ class SleepEfficiency extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  // debugger
   return {
+    date: state.user.date,
     sleep: state.user.sleep
   }
 }

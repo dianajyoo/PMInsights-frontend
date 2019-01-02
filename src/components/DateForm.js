@@ -1,17 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Form, Input } from 'semantic-ui-react'
+
+import '../styling/DateForm.css'
 
 class DateForm extends React.Component {
 
+  state = {
+    date: ''
+  }
+
   handleChange = (e) => {
-    // debugger
-    this.props.getDate(e.target.value)
+    this.setState({
+      date: e.target.value
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
 
     console.log('Submitted!')
+    this.props.getDate(this.state.date)
     // debugger
     // reset input field
   }
@@ -19,10 +28,18 @@ class DateForm extends React.Component {
   render() {
     return (
       <div className='dateform'>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input type='text' name='date' placeholder='yyyy-mm-dd'
-            value={this.props.date} onChange={e => this.handleChange(e)} />
-        </form>
+        <Form onSubmit={e => this.handleSubmit(e)} size={'small'}>
+          <Form.Field inline>
+            <label id='label'>DATE</label>
+            <Input type='text' name='date' placeholder='yyyy-mm-dd'
+              value={this.state.date} onChange={e => this.handleChange(e)} />
+
+              <button className="circular ui icon button">
+                <i className="search icon"></i>
+              </button>
+
+          </Form.Field>
+        </Form>
       </div>
     )
   }

@@ -3,17 +3,25 @@ import { connect } from 'react-redux'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 class LineGraph extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    const userToken = localStorage.getItem('token')
+
+    if (this.props.date !== prevProps.date) {
+      this.props.sleepInfo(this.props.date, userToken)
+    }
+  }
+
   render() {
 
     if (this.props.sleep.sleep) {
-      console.log(this.props.sleep.sleep[0])
       const level = this.props.sleep.sleep[0].levels.data
 
       var data = [
-        {name: '10 PM', light: level[0].seconds, rem: level[4].seconds, wake: level[8].seconds, deep: level[12].seconds, amt: 2400},
-        {name: '1 AM', light: level[1].seconds, rem: level[5].seconds, wake: level[9].seconds, deep: level[13].seconds, amt: 2400},
-        {name: '4 AM', light: level[2].seconds, rem: level[6].seconds, wake: level[10].seconds, deep: level[14].seconds, amt: 2400},
-        {name: '7 AM', light: level[3].seconds, rem: level[7].seconds, wake: level[11].seconds, deep: level[15].seconds, amt: 2400}
+        {name: '10 PM', light: level[0].seconds, rem: level[4].seconds, wake: level[0].seconds, deep: level[6].seconds, amt: 2400},
+        {name: '1 AM', light: level[1].seconds, rem: level[5].seconds, wake: level[1].seconds, deep: level[0].seconds, amt: 2400},
+        {name: '4 AM', light: level[2].seconds, rem: level[0].seconds, wake: level[2].seconds, deep: level[3].seconds, amt: 2400},
+        {name: '7 AM', light: level[3].seconds, rem: level[3].seconds, wake: level[3].seconds, deep: level[2].seconds, amt: 2400}
       ]
     }
 
@@ -36,6 +44,7 @@ class LineGraph extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    date: state.user.date,
     sleep: state.user.sleep
   }
 }

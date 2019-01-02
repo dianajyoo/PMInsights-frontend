@@ -12,7 +12,6 @@ class Dashboard extends React.Component {
         <Header />
         <Profile />
         <Cards />
-        <div id='mountain'></div>
       </div>
     )
   }

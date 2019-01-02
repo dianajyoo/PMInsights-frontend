@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchUserData } from './store/actionCreators/userActions'
+import { fetchUser } from './store/actionCreators/userActions'
 
-import MenuContainer from './components/menu/MenuContainer'
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
-import Profile from './components/Profile'
 import AllGoals from './components/goals/AllGoals'
 import NoMatch from './components/NoMatch'
 
@@ -18,12 +16,6 @@ import './App.css'
 class App extends Component {
 
   componentDidMount() {
-
-    // const userToken = localStorage.getItem('token')
-    //
-    // if (userToken) {
-    //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    // }
 
     let access_token
     let user_id
@@ -40,6 +32,13 @@ class App extends Component {
     if (access_token) {
       this.props.storeToken(access_token)
     }
+
+    const userToken = localStorage.getItem('token')
+
+    if (userToken) {
+      this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    }
+
   }
 
   render() {
@@ -54,9 +53,6 @@ class App extends Component {
               render={(props) => <Dashboard {...props} />} />
             <Route
               exact path='/my_goals'
-              render={(props) => <AllGoals {...props} />} />
-            <Route
-              exact path='/my_goals/edit/:goalId'
               render={(props) => <AllGoals {...props} />} />
             <Route
               exact path='/my_goals/delete/:goalId'
@@ -77,7 +73,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    user: (url, access_token) => dispatch(fetchUserData(url, access_token)),
+    user: (url, access_token) => dispatch(fetchUser(url, access_token)),
     storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token})
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals,fetchBackendUserData, fetchUserData, fetchEditedGoal } from '../../store/actionCreators/userActions'
+import { fetchSleepGoals,fetchBackendUserData, fetchEditedGoal } from '../../store/actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -19,7 +19,7 @@ class GoalForm extends React.Component {
 
   componentDidMount() {
 
-    const userToken = localStorage.getItem('token')
+    // const userToken = localStorage.getItem('token')
 
     // if (userToken) {
     //   this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
@@ -170,9 +170,9 @@ const mapStateToProps = (state) => {
     user: state.user.user,
     token: state.user.token,
     fitBitUser: state.user.fitBitUser,
-    goalDate: state.setGoal.goalDate,
-    bedtimeTarget: state.setGoal.bedtimeTarget,
-    wakeupTarget: state.setGoal.wakeupTarget
+    goalDate: state.goal.goalDate,
+    bedtimeTarget: state.goal.bedtimeTarget,
+    wakeupTarget: state.goal.wakeupTarget
   }
 }
 

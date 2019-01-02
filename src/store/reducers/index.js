@@ -5,6 +5,6 @@ import heartRateReducer from './heartRateReducer'
 
 export default combineReducers({
   user: userReducer,
-  setGoal: setGoalReducer,
+  goal: setGoalReducer,
   heartRate: heartRateReducer
 })

@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../styling/BurgerButton.css'
-import menu from '../../imgs/menu.png'
 
 import { Button } from 'semantic-ui-react'
 

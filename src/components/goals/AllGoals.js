@@ -52,7 +52,7 @@ class AllGoals extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    goals: state.setGoal.goals
+    goals: state.goal.goals
   }
 }
 

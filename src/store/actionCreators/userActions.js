@@ -131,7 +131,25 @@ export const storeDate = (date) => {
 // <--- redux thunk here --->
 
 // FETCH GET
-export const fetchUserData = (url, token) => {
+export const fetchUser = (url, token) => {
+    return (dispatch) => {
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    })
+      .then(res => res.json())
+      .then(user => {
+        dispatch(fetchUserSuccess(user))
+      })
+      .catch(console.error)
+  }
+}
+
+// below not needed??
+export const fetchUserData = (url, date, token) => {
     return (dispatch) => {
       fetch(url, {
         method: 'GET',
@@ -142,27 +160,27 @@ export const fetchUserData = (url, token) => {
       })
         .then(res => res.json())
         .then(user => dispatch(fetchUserSuccess(user)))
-        .then( data => {
-          fetchSleepData(`https://api.fitbit.com/1.2/user/-/sleep/date/2018-12-18.json`, token)(dispatch)
+        .then(data => {
+          fetchSleepData(date, token)(dispatch)
         })
         .catch(console.error)
     }
 }
 
-export const fetchSleepData = (url, token) => {
+export const fetchSleepData = (date, token) => {
     return (dispatch) => {
-      fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        }
-      })
-        .then(res => res.json())
-        .then(data => {
-          dispatch(storeSleepData(data))})
-        .catch(console.error)
-    }
+    fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch(storeSleepData(data))})
+      .catch(console.error)
+  }
 }
 
 export const fetchHeartRate = (date, token) => {
