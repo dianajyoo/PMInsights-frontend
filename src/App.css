@@ -96,7 +96,7 @@
 }
 
 /* Cards */
-.sleep-card, .heart-card, .efficiency-card, .chart-card {
+.sleep-card, .heart-card, .efficiency-card, .chart-card, .duration-card {
   display: grid;
   align-items: center;
   justify-content: center;
@@ -126,28 +126,33 @@
 
 .chart-card {
   height: 25em;
-  width: 55em;
+  width: 49em;
   margin-top: 20em;
   margin-left: 2em;
-  border-top-color: rgba(71,37,202);
+  border-top-color: rgba(125,121,210);
 }
 
 .efficiency-card {
-  /* background: linear-gradient(60deg, rgba(189,138,255,0.6) 0%, rgba(133,207,218,0.6) 40%); */
-  /* background-color: transparent; */
   border-top-color: rgba(133,207,218);
 }
 
+.duration-card {
+  border-top-color: rgba(255,37,75);
+}
+
 .sleep-card {
-  /* background: linear-gradient(60deg, rgba(255,37,75,0.6) 0%, rgba(253,173,32,0.6) 40%); */
-  /* background-color: transparent; */
   border-top-color: rgba(253,173,32);
 }
 
 .heart-card {
-  /* background: linear-gradient(60deg, rgba(143,244,76,0.6) 0%, rgba(255,111,104,0.7) 40%); */
-  /* background-color: transparent; */
   border-top-color: rgba(255,37,75);
+}
+
+#hours {
+  position: absolute;
+  font-size: 3em;
+  margin-left: 2em;
+  margin-top: 3em;
 }
 
 #piechart {
@@ -165,6 +170,7 @@
 #linegraph {
   position: absolute;
   margin-top: 2.5em;
+  margin-left: -2.5em;
 }
 
 #heart {
@@ -236,4 +242,38 @@
 
 .edit.outline.icon:hover, .close.icon:hover {
   transform: scale(1.1);
+}
+
+/* nomatch */
+.no-match {
+  background-image: url('./imgs/cat.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  z-index: -1
+}
+
+#break, #go-back {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 5em;
+  color: white;
+  top: 2em;
+  left: 1em;
+  position: fixed;
+  z-index: 1;
+}
+
+#go-back {
+  font-size: 2em;
+  top: 8em;
+  left: 5em;
+}
+
+.back {
+  color: rgba(253,173,32);
+}
+
+.navlink:hover {
+  color: white;
 }

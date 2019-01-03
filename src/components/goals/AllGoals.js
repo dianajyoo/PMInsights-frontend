@@ -20,8 +20,9 @@ class AllGoals extends React.Component {
     // if (userToken) {
     //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
     // }
-
-    this.props.goal(this.props.token)
+    if (this.props.token !== '') {
+      this.props.goal(this.props.token)
+    }
   }
 
   handleClickedGoal = (goal) => {
@@ -32,7 +33,6 @@ class AllGoals extends React.Component {
 
   render() {
     let goals
-
     if (this.props.goals.length > 0) {
       console.log(this.props.goals)
       goals = this.props.goals.map(goal => <Goal goal={goal} handleClickedGoal={this.handleClickedGoal} />)

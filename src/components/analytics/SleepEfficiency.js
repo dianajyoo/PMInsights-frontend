@@ -16,15 +16,12 @@ class SleepEfficiency extends React.Component {
 
   render() {
     let efficiency
-    let hours_slept
+
     console.log(this.props)
 
     if (this.props.sleep.sleep) {
       console.log(this.props.sleep)
       efficiency = this.props.sleep.sleep[0].efficiency
-
-      // round to one decimal place
-      hours_slept = Math.round((this.props.sleep.sleep[0].duration / 3600000) * 10 / 10)
     }
 
     return (
@@ -56,11 +53,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(SleepEfficiency)
-
-// <div className='sleep-stats'>
-// <h3>Date of Sleep:</h3>
-// { this.props.sleep_data.sleep ? this.props.sleep_data.sleep[0].dateOfSleep : ' N/A' } <br /><br />
-//
-// <h3>Duration of Sleep:</h3>
-// { this.props.sleep_data.sleep ? hours_slept + ' hrs' : ' N/A' }
-// </div>
