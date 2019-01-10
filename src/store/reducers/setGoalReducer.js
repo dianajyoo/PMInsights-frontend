@@ -20,6 +20,8 @@ const setGoalReducer = (state = initialState, action) => {
         ...state, wakeupTarget: action.wakeupTarget
       }
     case "SET_GOALS":
+    // debugger
+      console.log(action.goal)
       return {
         ...state, goals: action.goals
       }
