@@ -30,14 +30,14 @@
   position: fixed;
   height: 20vh;
   width: 60vw;
-  top: 30em;
-  left: 35em;
+  top: 400px;
+  left: 300px;
 }
 
 #title-1 {
   font-family: 'Raleway', sans-serif;
   font-weight: 900;
-  font-size: 10.5em;
+  font-size: 150px;
   background: url('./imgs/background.jpg') no-repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -106,8 +106,8 @@
   color: rgba(62,74,76);
   height: 20em;
   width: 22em;
-  margin-top: 15em;
-  margin-left: 2em;
+  margin-top: 100px;
+  margin-left: 30px;
   box-shadow: 0.3em 0.5em 0.3em rgba(0,0,0,0.1);
   padding: 1em;
   border-top: solid
@@ -127,7 +127,7 @@
 .chart-card {
   height: 25em;
   width: 49em;
-  margin-top: 20em;
+  margin-top: 150px;
   margin-left: 2em;
   border-top-color: rgba(125,121,210);
 }

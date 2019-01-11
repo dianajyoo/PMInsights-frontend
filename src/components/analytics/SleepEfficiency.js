@@ -7,8 +7,6 @@ import 'react-sweet-progress/lib/style.css'
 class SleepEfficiency extends React.Component {
 
   componentDidUpdate(prevProps) {
-    // const userToken = localStorage.getItem('token')
-
     if (this.props.date !== prevProps.date) {
       this.props.sleepInfo(this.props.date, this.props.token)
     }
@@ -17,11 +15,10 @@ class SleepEfficiency extends React.Component {
   render() {
     let efficiency
 
-    console.log(this.props)
-
     if (this.props.sleep.sleep) {
-      console.log(this.props.sleep)
-      efficiency = this.props.sleep.sleep[0].efficiency
+      if (this.props.sleep.sleep[0]) {
+        efficiency = this.props.sleep.sleep[0].efficiency
+      }
     }
 
     return (
@@ -30,7 +27,7 @@ class SleepEfficiency extends React.Component {
           type='circle'
           width={160}
           strokeWidth={13}
-          percent={efficiency}
+          percent={this.props.sleep.sleep ? efficiency : ''}
           theme={{
             active: {
               trailColor: 'rgb(236,236,236)',
@@ -44,7 +41,6 @@ class SleepEfficiency extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // debugger
   return {
     date: state.user.date,
     sleep: state.user.sleep,

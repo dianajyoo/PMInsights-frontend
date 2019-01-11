@@ -7,12 +7,19 @@ import '../../styling/Heartrate.css'
 class Heartrate extends React.Component {
 
   componentDidUpdate(prevProps) {
-    // const userToken = localStorage.getItem('token')
-    console.log(this.props)
-    console.log(prevProps)
+    console.log('Props', this.props)
+    console.log('PrevProps', prevProps)
 
     if (this.props.date !== prevProps.date) {
       this.props.getHeartRate(this.props.date, this.props.token)
+    }
+  }
+
+  heartActivity = () => {
+    if (this.props.heartRate['activities-heart'] && this.props.heartRate['activities-heart'][0].value.restingHeartRate) {
+      return this.props.heartRate['activities-heart'][0].value.restingHeartRate + ' bpm'
+    } else {
+      return 'No Data'
     }
   }
 
@@ -20,7 +27,7 @@ class Heartrate extends React.Component {
     return (
       <div className='bpm'>
         <img id='heart' src={require('../../imgs/heart.png')} alt={'heart'} />
-        {this.props.heartRate['activities-heart'] ? this.props.heartRate['activities-heart'][0].value.restingHeartRate + ' bpm' : null}
+        {this.heartActivity()}
       </div>
     )
   }

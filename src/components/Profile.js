@@ -8,16 +8,10 @@ import { fetchUser, logoutFitbit } from '../store/actionCreators/userActions'
 class Profile extends React.Component {
 
   componentDidMount() {
-    // const userToken = localStorage.getItem('token')
-
-    // if (userToken && this.props.date !== '')  {
-      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
-    // }
+    this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
   }
 
   handleLogout = () => {
-    // const userToken = localStorage.getItem('token')
-
     this.props.logout(this.props.token)
     localStorage.clear()
   }

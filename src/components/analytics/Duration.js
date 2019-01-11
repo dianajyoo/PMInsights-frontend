@@ -12,13 +12,12 @@ class Duration extends React.Component {
   }
 
   render() {
-
     let hours_slept
 
     if (this.props.sleep.sleep) {
-
-      // round to one decimal place
-      hours_slept = Math.round((this.props.sleep.sleep[0].duration / 3600000) * 10 / 10)
+      if (this.props.sleep.sleep[0]) {
+        hours_slept = Math.round((this.props.sleep.sleep[0].duration / 3600000) * 10 / 10)
+      }
     }
 
     return (

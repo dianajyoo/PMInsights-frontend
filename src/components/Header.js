@@ -9,9 +9,9 @@ class Header extends React.Component {
   render() {
     return (
       <div id='header-1'>
-        <span id='sleepmode'>sleepmode</span>
-        <span id='date-of-sleep'>{this.props.date}</span>
         <img src={require('../imgs/moon.png')} alt={''} />
+        <span id='insights'>Insights</span>
+        <span id='date-of-sleep'>{this.props.date}</span>
         <span id='date-input'><DateForm /></span>
       </div>
     )

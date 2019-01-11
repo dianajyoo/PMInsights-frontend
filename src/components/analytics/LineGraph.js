@@ -15,14 +15,16 @@ class LineGraph extends React.Component {
   render() {
 
     if (this.props.sleep.sleep) {
-      const level = this.props.sleep.sleep[0].levels.data
+      if (this.props.sleep.sleep[0]) {
+        const level = this.props.sleep.sleep[0].levels.data
 
-      var data = [
-        {name: '10 PM', light: level[0].seconds, rem: level[4].seconds, wake: level[0].seconds, deep: level[6].seconds, amt: 2400},
-        {name: '1 AM', light: level[1].seconds, rem: level[5].seconds, wake: level[1].seconds, deep: level[0].seconds, amt: 2400},
-        {name: '4 AM', light: level[2].seconds, rem: level[0].seconds, wake: level[2].seconds, deep: level[3].seconds, amt: 2400},
-        {name: '7 AM', light: level[3].seconds, rem: level[3].seconds, wake: level[3].seconds, deep: level[2].seconds, amt: 2400}
-      ]
+        var data = [
+          {name: '10 PM', light: level[0].seconds, rem: level[4].seconds, wake: level[0].seconds, deep: level[6].seconds, amt: 2400},
+          {name: '1 AM', light: level[1].seconds, rem: level[5].seconds, wake: level[1].seconds, deep: level[0].seconds, amt: 2400},
+          {name: '4 AM', light: level[2].seconds, rem: level[0].seconds, wake: level[2].seconds, deep: level[3].seconds, amt: 2400},
+          {name: '7 AM', light: level[3].seconds, rem: level[3].seconds, wake: level[3].seconds, deep: level[2].seconds, amt: 2400}
+        ]
+      }
     }
 
   	return (

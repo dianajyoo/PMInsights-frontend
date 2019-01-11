@@ -60,13 +60,16 @@ class TwoLevelPieChart extends React.Component {
   }
 
 	render() {
+    let data
 
-    const data = [
-      {name: 'Deep', value: this.props.sleep.summary ? this.props.sleep.summary.stages.deep : null},
-      {name: 'Light', value: this.props.sleep.summary ? this.props.sleep.summary.stages.light : null},
-      {name: 'Rem', value: this.props.sleep.summary ? this.props.sleep.summary.stages.rem : null},
-      {name: 'Wake', value: this.props.sleep.summary ? this.props.sleep.summary.stages.wake : null}
-    ]
+    if (this.props.sleep.summary) {
+      data = [
+        {name: 'Deep', value: this.props.sleep.summary.stages ? this.props.sleep.summary.stages.deep : null},
+        {name: 'Light', value: this.props.sleep.summary.stages ? this.props.sleep.summary.stages.light : null},
+        {name: 'Rem', value: this.props.sleep.summary.stages ? this.props.sleep.summary.stages.rem : null},
+        {name: 'Wake', value: this.props.sleep.summary.stages ? this.props.sleep.summary.stages.wake : null}
+      ]
+    }
 
   	return (
     	<PieChart width={800} height={400}>
