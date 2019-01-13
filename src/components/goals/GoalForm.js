@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSleepGoals,fetchBackendUserData, fetchEditedGoal } from '../../store/actionCreators/userActions'
+import { addSleepGoal, updateGoal } from '../../store/actionCreators/goalActions'
+import { fetchBackendUserData } from '../../store/actionCreators/userActions'
 
 import DatePicker from 'react-datepicker'
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -180,13 +181,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     sleepGoal: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
       console.log("in mapDispatchToProps", user);
-      dispatch(fetchSleepGoals(goalDate, bedtimeTarget, wakeupTarget, user, token))
+      dispatch(addSleepGoal(goalDate, bedtimeTarget, wakeupTarget, user, token))
     },
     backendUser: (token, user) => {
       dispatch(fetchBackendUserData(token, user))
     },
     editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
-      dispatch(fetchEditedGoal(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
+      dispatch(updateGoal(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
     }
   }
 }

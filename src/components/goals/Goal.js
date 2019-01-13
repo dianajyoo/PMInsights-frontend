@@ -2,7 +2,7 @@ import React from 'react'
 import ModalEdit from '../modal/ModalEdit'
 
 import { connect } from 'react-redux'
-import { fetchDeleteGoal } from '../../store/actionCreators/userActions'
+import { destroyGoal } from '../../store/actionCreators/goalActions'
 
 class Goal extends React.Component {
 
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteGoal: (goalId, access_token) => dispatch(fetchDeleteGoal(goalId, access_token))
+    deleteGoal: (goalId, access_token) => dispatch(destroyGoal(goalId, access_token))
   }
 }
 

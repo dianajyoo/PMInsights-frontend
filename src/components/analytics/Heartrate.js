@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchHeartRate } from '../../store/actionCreators/userActions'
+import { fetchHeartRate } from '../../store/actionCreators/heartRateActions'
 
 import '../../styling/Heartrate.css'
 

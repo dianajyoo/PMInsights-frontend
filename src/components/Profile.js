@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import ModalPost from './modal/ModalPost'
-import { fetchUser, logoutFitbit } from '../store/actionCreators/userActions'
+import { fetchUser, logoutFitbitUser } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
 
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    logout: (base64, access_token) => dispatch(logoutFitbit(base64, access_token))
+    logout: (base64, access_token) => dispatch(logoutFitbitUser(base64, access_token))
   }
 }
 

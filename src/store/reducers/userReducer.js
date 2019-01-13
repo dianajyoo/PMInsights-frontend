@@ -36,7 +36,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, token: action.token
       }
-    case 'STORE_SLEEP':
+    case 'STORE_SLEEP_DATA':
       return {
         ...state, sleep: action.data
       }
@@ -44,7 +44,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, fitBitUser: action.user
       }
-    case 'STORE_DATE':
+    case 'STORE_SLEEP_DATE':
       return {
         ...state, date: action.date
       }

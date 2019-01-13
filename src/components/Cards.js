@@ -7,7 +7,7 @@ import LineGraph from './analytics/LineGraph'
 import Duration from './analytics/Duration'
 
 import { connect } from 'react-redux'
-import { fetchSleepData } from '../store/actionCreators/userActions'
+import { fetchSleepData } from '../store/actionCreators/sleepActions'
 
 class Cards extends React.Component {
   render() {

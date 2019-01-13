@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getAccessToken } from './store/actionCreators/userActions'
+import { getAccessToken } from './store/actionCreators/tokenActions'
 
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'

@@ -53,7 +53,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDate: (date) => dispatch({type: 'STORE_DATE', date})
+    getDate: (date) => dispatch({type: 'STORE_SLEEP_DATE', date})
   }
 }
 
