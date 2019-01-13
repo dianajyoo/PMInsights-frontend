@@ -169,38 +169,38 @@ export const fetchUserData = (url, date, token) => {
 
 export const fetchSleepData = (date, token) => {
     return (dispatch) => {
-    fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        dispatch(storeSleepData(data))})
-      .catch(console.error)
-  }
+      fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(storeSleepData(data))})
+        .catch(console.error)
+    }
 }
 
 // fitbit logout
 export const logoutFitbit = (base64) => {
   // debugger
     return (dispatch) => {
-    fetch('https://api.fitbit.com/oauth2/revoke', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + base64
-      }
-    })
-      .then(res => res.json())
-      .then(user => {
-        // debugger
-        dispatch(logoutUser())
+      fetch('https://api.fitbit.com/oauth2/revoke', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + base64
+        }
       })
-      .catch(console.error)
-  }
+        .then(res => res.json())
+        .then(user => {
+          // debugger
+          dispatch(logoutUser())
+        })
+        .catch(console.error)
+    }
 }
 
 export const fetchHeartRate = (date, token) => {
