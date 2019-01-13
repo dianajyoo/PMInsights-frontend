@@ -190,7 +190,7 @@ export const logoutFitbit = (base64) => {
       fetch('https://api.fitbit.com/oauth2/revoke', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Basic ' + base64
         }
       })
@@ -198,6 +198,27 @@ export const logoutFitbit = (base64) => {
         .then(user => {
           // debugger
           dispatch(logoutUser())
+        })
+        .catch(console.error)
+    }
+}
+
+// grab access token
+export const getAccessToken = (base64, code) => {
+  // debugger
+    return (dispatch) => {
+      fetch('https://api.fitbit.com/oauth2/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + base64
+        },
+        body: `client_id=22DFCL&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fdashboard&code=${code}`
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          dispatch(storeToken())
         })
         .catch(console.error)
     }

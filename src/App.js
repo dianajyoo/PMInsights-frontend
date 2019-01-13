@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchUser, logoutFitbit } from './store/actionCreators/userActions'
+import { fetchUser, logoutFitbit, getAccessToken } from './store/actionCreators/userActions'
 
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -12,21 +12,22 @@ import '../node_modules/semantic-ui/dist/semantic.min.css'
 import logo from './logo.svg'
 import './App.css'
 
-
 class App extends Component {
 
   componentDidMount() {
 
     let access_token
-    let user_id
+    let code
 
     // grab hash of current url
-    const current_hash = window.location.hash
+    const current_url = window.location.href
 
     // grab access token from url
-    if (current_hash.includes('token') && current_hash.includes('user_id')) {
-      access_token = current_hash.split('&')[0].split('=')[1]
-      user_id = current_hash.split('&')[1].split('=')[1]
+    if (current_url.includes('code') && current_url !== undefined) {
+      // access_token = current_hash.split('&')[0].split('=')[1]
+      // debugger
+      code = current_url.split('=')[1].split('#')[0]
+      this.props.grabToken(process.env.REACT_APP_BASE64, code)
 
       if (access_token) {
         this.props.storeToken(access_token)
@@ -76,7 +77,7 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
-    );
+    )
   }
 }
 
@@ -90,7 +91,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     user: (url, access_token) => dispatch(fetchUser(url, access_token)),
     storeToken: (access_token) => dispatch({type: 'STORE_TOKEN', token: access_token}),
-    logout: (access_token) => dispatch(logoutFitbit(access_token))
+    logout: (access_token) => dispatch(logoutFitbit(access_token)),
+    grabToken: (base64, code) => dispatch(getAccessToken(base64, code))
   }
 }
 

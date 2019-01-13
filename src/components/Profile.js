@@ -12,7 +12,7 @@ class Profile extends React.Component {
   }
 
   handleLogout = () => {
-    this.props.logout(process.env.REACT_APP_CLIENT_SECRET)
+    this.props.logout(process.env.REACT_APP_BASE64)
     localStorage.clear()
   }
 
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    logout: (base64, access_token) => dispatch(logoutFitbit(base64, access_token))
+    logout: (base64) => dispatch(logoutFitbit(base64))
   }
 }
 
