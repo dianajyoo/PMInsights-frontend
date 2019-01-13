@@ -7,12 +7,14 @@ import { fetchUser, logoutFitbit } from '../store/actionCreators/userActions'
 
 class Profile extends React.Component {
 
-  componentDidMount() {
-    this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
+  componentDidUpdate(prevProps) {
+    if (this.props.token !== prevProps.token) {
+      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', this.props.token)
+    }
   }
 
   handleLogout = () => {
-    this.props.logout(process.env.REACT_APP_BASE64)
+    this.props.logout(process.env.REACT_APP_BASE64, this.props.token)
     localStorage.clear()
   }
 
@@ -71,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    logout: (base64) => dispatch(logoutFitbit(base64))
+    logout: (base64, access_token) => dispatch(logoutFitbit(base64, access_token))
   }
 }
 

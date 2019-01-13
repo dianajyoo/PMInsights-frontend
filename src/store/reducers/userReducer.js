@@ -32,7 +32,7 @@ const userReducer = (state = initialState, action) => {
         goals: []
       }
     case 'STORE_TOKEN':
-      localStorage.setItem("token", action.token)
+      localStorage.setItem('token', action.token)
       return {
         ...state, token: action.token
       }

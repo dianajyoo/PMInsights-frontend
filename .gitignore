@@ -1,5 +1,6 @@
 # ignore these files
+
 node_modules/
 semantic/
-process.env
+
 .env

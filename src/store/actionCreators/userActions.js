@@ -130,6 +130,44 @@ export const storeDate = (date) => {
 
 // <--- redux thunk here --->
 
+// grab access token
+export const getAccessToken = (base64, code, clientId) => {
+    return (dispatch) => {
+      fetch('https://api.fitbit.com/oauth2/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + base64
+        },
+        body: `client_id=${clientId}&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fdashboard&code=${code}`
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(storeToken(data.access_token))
+        })
+        .catch(console.error)
+    }
+}
+
+// fitbit logout
+export const logoutFitbit = (base64, token) => {
+    return (dispatch) => {
+      fetch('https://api.fitbit.com/oauth2/revoke', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + base64
+        },
+        body: `token=${token}`
+      })
+        .then(res => res.json())
+        .then(user => {
+          dispatch(logoutUser())
+        })
+        .catch(console.error)
+    }
+}
+
 // FETCH GET
 export const fetchUser = (url, token) => {
     return (dispatch) => {
@@ -179,47 +217,6 @@ export const fetchSleepData = (date, token) => {
         .then(res => res.json())
         .then(data => {
           dispatch(storeSleepData(data))})
-        .catch(console.error)
-    }
-}
-
-// fitbit logout
-export const logoutFitbit = (base64) => {
-  // debugger
-    return (dispatch) => {
-      fetch('https://api.fitbit.com/oauth2/revoke', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + base64
-        }
-      })
-        .then(res => res.json())
-        .then(user => {
-          // debugger
-          dispatch(logoutUser())
-        })
-        .catch(console.error)
-    }
-}
-
-// grab access token
-export const getAccessToken = (base64, code) => {
-  // debugger
-    return (dispatch) => {
-      fetch('https://api.fitbit.com/oauth2/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + base64
-        },
-        body: `client_id=22DFCL&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fdashboard&code=${code}`
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          dispatch(storeToken())
-        })
         .catch(console.error)
     }
 }
