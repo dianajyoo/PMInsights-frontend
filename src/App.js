@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getAccessToken } from './store/actionCreators/tokenActions'
+import { getAccessToken, getNewToken } from './store/actionCreators/tokenActions'
 
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -17,24 +17,28 @@ class App extends Component {
   componentDidMount() {
 
     let code
+    let auth_code
 
     // grab current url
     const current_url = window.location.href
 
     // grab authorization code from url
-    if (current_url.includes('code') && current_url !== undefined) {
+    if (current_url.includes('code')) {
 
       code = current_url.split('=')[1].split('#')[0]
-      this.props.grabToken(process.env.REACT_APP_BASE64, code, process.env.REACT_APP_CLIENT_ID)
 
-      localStorage.setItem('token', this.props.token)
+      // store code to localStorage
+      localStorage.setItem('code', code)
+      auth_code = localStorage.getItem('code')
 
+      this.props.grabToken(process.env.REACT_APP_BASE64, auth_code, process.env.REACT_APP_CLIENT_ID)
+
+      console.log(localStorage)
     }
 
   }
 
   render() {
-    console.log(this.props.token)
     return (
       <Router>
         <div className='App'>
@@ -57,16 +61,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.user.token
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     token: state.user.token,
+//     refresh_token: state.user.refresh_token
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    grabToken: (base64, code) => dispatch(getAccessToken(base64, code))
+    grabToken: (base64, code, clientId) => dispatch(getAccessToken(base64, code, clientId)),
+    newToken: (base64, refresh_token) => dispatch(getNewToken(base64, refresh_token))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App)

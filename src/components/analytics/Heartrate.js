@@ -7,11 +7,11 @@ import '../../styling/Heartrate.css'
 class Heartrate extends React.Component {
 
   componentDidUpdate(prevProps) {
-    console.log('Props', this.props)
-    console.log('PrevProps', prevProps)
+    // console.log('Props', this.props)
+    // console.log('PrevProps', prevProps)
 
     if (this.props.date !== prevProps.date) {
-      this.props.getHeartRate(this.props.date, this.props.token)
+      this.props.getHeartRate(this.props.date, localStorage.getItem('token'))
     }
   }
 

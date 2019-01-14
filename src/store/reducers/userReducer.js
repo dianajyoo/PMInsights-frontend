@@ -1,7 +1,6 @@
 const initialState = {
   user: {},
   fetchIsLoading: false,
-  token: '',
   sleep: {},
   fitBitUser: {},
   date: ''
@@ -22,7 +21,6 @@ const userReducer = (state = initialState, action) => {
       return {
         user: {},
         fetchIsLoading: false,
-        token: '',
         sleep: {},
         fitBitUser: {},
         heartRate: {},
@@ -30,11 +28,6 @@ const userReducer = (state = initialState, action) => {
         bedtimeTarget: '',
         wakeupTarget: '',
         goals: []
-      }
-    case 'STORE_TOKEN':
-      localStorage.setItem('token', action.token)
-      return {
-        ...state, token: action.token
       }
     case 'STORE_SLEEP_DATA':
       return {

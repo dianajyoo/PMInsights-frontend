@@ -8,7 +8,7 @@ class LineGraph extends React.Component {
     // const userToken = localStorage.getItem('token')
 
     if (this.props.date !== prevProps.date) {
-      this.props.sleepInfo(this.props.date, this.props.token)
+      this.props.sleepInfo(this.props.date, localStorage.getItem('token'))
     }
   }
 

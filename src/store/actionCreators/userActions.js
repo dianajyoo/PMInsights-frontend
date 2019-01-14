@@ -27,7 +27,6 @@ export const logoutUser = () => {
 
 // <--- redux thunk here --->
 
-// FETCH GET
 export const fetchUser = (url, token) => {
     return (dispatch) => {
     fetch(url, {
@@ -44,24 +43,6 @@ export const fetchUser = (url, token) => {
       .catch(console.error)
   }
 }
-
-// export const fetchUserData = (url, date, token) => {
-//     return (dispatch) => {
-//       fetch(url, {
-//         method: 'GET',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': 'Bearer ' + token
-//         }
-//       })
-//         .then(res => res.json())
-//         .then(user => dispatch(fetchUserSuccess(user)))
-//         .then(data => {
-//           fetchSleepData(date, token)(dispatch)
-//         })
-//         .catch(console.error)
-//     }
-// }
 
 export const fetchBackendUserData = (token, fitBitUser) => {
     return (dispatch) => {
@@ -101,3 +82,22 @@ export const logoutFitbitUser = (base64, token) => {
         .catch(console.error)
     }
 }
+
+
+// export const fetchUserData = (url, date, token) => {
+//     return (dispatch) => {
+//       fetch(url, {
+//         method: 'GET',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': 'Bearer ' + token
+//         }
+//       })
+//         .then(res => res.json())
+//         .then(user => dispatch(fetchUserSuccess(user)))
+//         .then(data => {
+//           fetchSleepData(date, token)(dispatch)
+//         })
+//         .catch(console.error)
+//     }
+// }

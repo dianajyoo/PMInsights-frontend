@@ -8,7 +8,7 @@ class SleepEfficiency extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
-      this.props.sleepInfo(this.props.date, this.props.token)
+      this.props.sleepInfo(this.props.date, localStorage.getItem('token'))
     }
   }
 
