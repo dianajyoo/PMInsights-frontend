@@ -44,13 +44,12 @@ export const fetchUser = (url, token) => {
   }
 }
 
-export const fetchBackendUserData = (token, fitBitUser) => {
+export const fetchBackendUserData = (fitBitUser) => {
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/users', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Content-Type': 'application/json'
         }
       })
         .then(res => res.json())

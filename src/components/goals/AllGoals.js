@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect, Route } from 'react-router-dom'
 
 import Goal from './Goal'
 import Profile from '../Profile'
@@ -14,16 +15,9 @@ class AllGoals extends React.Component {
   }
 
   componentDidMount() {
-
-    // const userToken = localStorage.getItem('token')
-
-    // if (userToken) {
-    //   this.props.user('https://api.fitbit.com/1/user/-/profile.json', userToken)
+    // if (this.props.token !== '') {
+    //   this.props.goal(this.props.token)
     // }
-
-    if (this.props.token !== '') {
-      this.props.goal(this.props.token)
-    }
   }
 
   handleClickedGoal = (goal) => {
@@ -33,19 +27,28 @@ class AllGoals extends React.Component {
   }
 
   render() {
+
     let goals
+    let loggedIn = false
+
+    if (localStorage.getItem('token')) {
+      loggedIn = true
+    }
+
     if (this.props.goals.length > 0) {
       console.log(this.props.goals)
       goals = this.props.goals.map(goal => <Goal goal={goal} handleClickedGoal={this.handleClickedGoal} />)
     }
 
     return (
-      <div className='goal-container'>
-        <Header />
-        <span id='profile'><Profile /></span>
-        {this.state.editGoal.id ? <EditGoal goal={this.state.editGoal} /> :
-        <div className='ui grid'> {goals} </div>}
-      </div>
+      <Route
+        render={props =>
+        loggedIn ? (<div className='goal-container'>
+          <Header />
+          <span id='profile'><Profile /></span>
+          {this.state.editGoal.id ? <EditGoal goal={this.state.editGoal} /> :
+          <div className='ui grid'> {goals} </div>}
+        </div>) : (<Redirect to={ { pathname: '/', state: { from: props.location } }} />)} />
     )
   }
 }
@@ -53,14 +56,13 @@ class AllGoals extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    goals: state.goal.goals,
-    token: state.user.token
+    goals: state.goal.goals
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    goal: (access_token) => dispatch(getGoal(access_token))
+    goal: () => dispatch(getGoal())
   }
 }
 

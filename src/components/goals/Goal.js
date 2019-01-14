@@ -13,7 +13,7 @@ class Goal extends React.Component {
   }
 
   handleDelete = () => {
-    this.props.deleteGoal(this.props.goal.id, this.props.token)
+    this.props.deleteGoal(this.props.goal.id)
   }
 
   render() {
@@ -39,20 +39,20 @@ class Goal extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.user.token
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     token: state.user.token
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteGoal: (goalId, access_token) => dispatch(destroyGoal(goalId, access_token))
+    deleteGoal: (goalId) => dispatch(destroyGoal(goalId))
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Goal)
+export default connect(null, mapDispatchToProps)(Goal)
 
 // this.props.goal.id === parseInt(this.props.props.match.params.goalId) ?
 //   <EditGoal props={this.props.props} goal={this.props.goal} handleEdit={this.handleEdit} /> :

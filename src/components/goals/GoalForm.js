@@ -27,7 +27,7 @@ class GoalForm extends React.Component {
     // }
 
     if (this.props.user.user) {
-      this.props.backendUser(this.props.token, this.props.user.user)
+      this.props.backendUser(this.props.user.user)
     }
   }
 
@@ -88,10 +88,10 @@ class GoalForm extends React.Component {
     if (this.props.editGoal) {
       this.props.editedGoal(this.props.goal.id,
         this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-        this.handleWaketimeChange(this.state.wakeupEvent), this.props.token)
+        this.handleWaketimeChange(this.state.wakeupEvent))
     } else {
       this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-      this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser, this.props.token)
+      this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser)
     }
   }
 
@@ -169,7 +169,6 @@ class GoalForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    token: state.user.token,
     fitBitUser: state.user.fitBitUser,
     goalDate: state.goal.goalDate,
     bedtimeTarget: state.goal.bedtimeTarget,
@@ -179,15 +178,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sleepGoal: (goalDate, bedtimeTarget, wakeupTarget, user, token) => {
+    sleepGoal: (goalDate, bedtimeTarget, wakeupTarget, user) => {
       console.log("in mapDispatchToProps", user);
-      dispatch(addSleepGoal(goalDate, bedtimeTarget, wakeupTarget, user, token))
+      dispatch(addSleepGoal(goalDate, bedtimeTarget, wakeupTarget, user))
     },
-    backendUser: (token, user) => {
-      dispatch(fetchBackendUserData(token, user))
+    backendUser: (user) => {
+      dispatch(fetchBackendUserData(user))
     },
-    editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget, token) => {
-      dispatch(updateGoal(goalId, goalDate, bedTimeTarget, wakeupTarget, token))
+    editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget) => {
+      dispatch(updateGoal(goalId, goalDate, bedTimeTarget, wakeupTarget))
     }
   }
 }

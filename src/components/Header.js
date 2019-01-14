@@ -25,5 +25,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Header)
-
-// <span id='date'>Date of Sleep:</span>

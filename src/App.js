@@ -15,7 +15,7 @@ import './App.css'
 class App extends Component {
 
   componentDidMount() {
-
+    console.log("made it here")
     let code
     let auth_code
 

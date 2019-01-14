@@ -69,13 +69,12 @@ export const deleteGoal = (goalId) => {
 
 // <--- redux thunk here --->
 
-export const getGoal = (token) => {
+export const getGoal = () => {
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/goals', {
         method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Content-Type': 'application/json'
         }
       })
         .then(res => res.json())
@@ -86,13 +85,12 @@ export const getGoal = (token) => {
     }
 }
 
-export const addSleepGoal = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser, token) => {
+export const addSleepGoal = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser) => {
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/goals', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           goalDate: goalDate,
@@ -111,13 +109,12 @@ export const addSleepGoal = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser, 
     }
 }
 
-export const updateGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget, token) => {
+export const updateGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget) => {
     return (dispatch) => {
       fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           goalDate: goalDate,
@@ -137,13 +134,12 @@ export const updateGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget, token)
     }
 }
 
-export const destroyGoal = (goalId, token) => {
+export const destroyGoal = (goalId) => {
     return (dispatch) => {
       fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           id: goalId
