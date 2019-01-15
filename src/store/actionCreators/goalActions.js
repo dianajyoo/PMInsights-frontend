@@ -1,9 +1,9 @@
 // SET GOAL
 
-export const setGoals = (goals) => {
+export const addGoal = (goal) => {
   return {
-    type: 'SET_GOALS',
-    goals: goals
+    type: 'ADD_GOAL',
+    goal: goal
   }
 }
 
@@ -25,6 +25,15 @@ export const setWakeupTime = (time) => {
   return {
     type: 'SET_WAKEUP_TIME',
     wakeupTarget: time
+  }
+}
+
+// LOAD GOALS
+
+export const loadGoals = (goal) => {
+  return {
+    type: 'LOAD_GOALS',
+    goal
   }
 }
 
@@ -69,7 +78,7 @@ export const deleteGoal = (goalId) => {
 
 // <--- redux thunk here --->
 
-export const getGoal = () => {
+export const getGoals = () => {
     return (dispatch) => {
       fetch('http://localhost:3000/api/v1/goals', {
         method: "GET",
@@ -79,7 +88,9 @@ export const getGoal = () => {
       })
         .then(res => res.json())
         .then(data => {
-          dispatch(setGoals(data))
+          data.forEach(goal => {
+            dispatch(loadGoals(goal))
+          })
         })
         .catch(console.error)
     }
@@ -101,6 +112,8 @@ export const addSleepGoal = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser) 
       })
         .then(res => res.json())
         .then(data => {
+          debugger
+          dispatch(addGoal(data))
           dispatch(setGoalDate(data.goalDate))
           dispatch(setBedtime(data.bedtimeTarget))
           dispatch(setWakeupTime(data.wakeupTarget))

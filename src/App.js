@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getAccessToken, getNewToken } from './store/actionCreators/tokenActions'
+import { getAccessToken } from './store/actionCreators/tokenActions'
 
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -15,7 +15,6 @@ import './App.css'
 class App extends Component {
 
   componentDidMount() {
-    console.log("made it here")
     let code
     let auth_code
 
@@ -33,9 +32,7 @@ class App extends Component {
 
       this.props.grabToken(process.env.REACT_APP_BASE64, auth_code, process.env.REACT_APP_CLIENT_ID)
 
-      console.log(localStorage)
     }
-
   }
 
   render() {
@@ -61,17 +58,9 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.user.token,
-//     refresh_token: state.user.refresh_token
-//   }
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    grabToken: (base64, code, clientId) => dispatch(getAccessToken(base64, code, clientId)),
-    newToken: (base64, refresh_token) => dispatch(getNewToken(base64, refresh_token))
+    grabToken: (base64, code, clientId) => dispatch(getAccessToken(base64, code, clientId))
   }
 }
 

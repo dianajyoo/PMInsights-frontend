@@ -13,6 +13,7 @@ class Profile extends React.Component {
 
   handleLogout = () => {
     this.props.logout(process.env.REACT_APP_BASE64, localStorage.getItem('token'))
+
     localStorage.clear()
   }
 

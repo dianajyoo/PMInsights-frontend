@@ -19,11 +19,15 @@ const setGoalReducer = (state = initialState, action) => {
       return {
         ...state, wakeupTarget: action.wakeupTarget
       }
-    case "SET_GOALS":
-    // debugger
+    case 'ADD_GOAL':
       console.log(action.goal)
+      const addedGoals = state.goals.concat(action.goal)
       return {
-        ...state, goals: action.goals
+        ...state, goals: addedGoals
+      }
+    case 'LOAD_GOALS':
+      return {
+        ...state, goals: [...state.goals, action.goal]
       }
     case 'EDIT_GOAL_DATE':
       return {
@@ -38,7 +42,6 @@ const setGoalReducer = (state = initialState, action) => {
         ...state, wakeupTarget: action.wakeupTarget
       }
     case 'EDIT_GOAL':
-      console.log(action.goal)
       const editedGoals = state.goals.map( goal => {
         if (action.goal.id === goal.id) {
           return {...goal, ...action.goal}

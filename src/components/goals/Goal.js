@@ -39,12 +39,6 @@ class Goal extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.user.token
-//   }
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteGoal: (goalId) => dispatch(destroyGoal(goalId))

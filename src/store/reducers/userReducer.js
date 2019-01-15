@@ -17,7 +17,6 @@ const userReducer = (state = initialState, action) => {
         ...state, user: action.user
       }
     case 'LOGOUT_USER':
-      localStorage.clear()
       return {
         user: {},
         fetchIsLoading: false,

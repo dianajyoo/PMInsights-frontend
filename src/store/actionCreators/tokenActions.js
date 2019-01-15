@@ -35,6 +35,11 @@ export const getAccessToken = (base64, code, clientId) => {
           }
         })
         .then(data => {
+
+          // first time user signs in, localStorage has a length of 1; upon refresh, code becomes invalid and tokens become undefined
+
+          // add condition below to set localStorage only once
+
           if (localStorage.length === 1) {
             localStorage.setItem('token', data.access_token)
             localStorage.setItem('refresh_token', data.refresh_token)

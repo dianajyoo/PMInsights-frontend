@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
   render() {
     let loggedIn = false
 
-    if (window.location.search.includes("?") || localStorage.length === 3) {
+    if (window.location.search.includes('?') || localStorage.length === 3) {
       loggedIn = true
     }
 
@@ -23,7 +23,8 @@ class Dashboard extends React.Component {
         <Header />
         <Profile />
         <Cards />
-      </div>) : (<Redirect to={ { pathname: '/', state: { from: props.location } }} />)} />
+      </div>) : (<Redirect to={ { pathname: '/', state: { from: props.location } }} />)}
+      />
     )
   }
 }
