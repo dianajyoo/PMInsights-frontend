@@ -4,6 +4,11 @@ Analyzes and displays your sleep data using your Fitbit device (similar to the F
 
 This is the frontend and the backend can be found [here](https://github.com/dianajyoo/PMInsights-backend).
 
+Link to video demo [here](https://drive.google.com/file/d/168aKz4nVn3j6AVr6p5X9pETjRObLKG_t/view)
+
+![pm-insights-home](https://user-images.githubusercontent.com/38845162/51297554-bde01180-19ee-11e9-9a7a-9522d1e43a08.png)
+![pm-insights-dashboard](https://user-images.githubusercontent.com/38845162/51297555-bde01180-19ee-11e9-9647-b76f0904852e.png)
+
 ## Development Setup
 
 ### Frontend Instructions
