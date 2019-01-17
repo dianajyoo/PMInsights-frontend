@@ -15,6 +15,7 @@ import './App.css'
 class App extends Component {
 
   componentDidMount() {
+
     let code
     let auth_code
 
@@ -31,7 +32,6 @@ class App extends Component {
       auth_code = localStorage.getItem('code')
 
       this.props.grabToken(process.env.REACT_APP_BASE64, auth_code, process.env.REACT_APP_CLIENT_ID)
-
     }
   }
 

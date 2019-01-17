@@ -4,11 +4,30 @@ import { NavLink } from 'react-router-dom'
 
 import ModalPost from './modal/ModalPost'
 import { fetchUser, logoutFitbitUser } from '../store/actionCreators/userActions'
+import { getAccessToken } from '../store/actionCreators/tokenActions'
 
 class Profile extends React.Component {
 
   componentDidMount() {
-    this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', localStorage.getItem('token'))
+    // console.log('in profile', localStorage.token, localStorage.length)
+
+    this.props.grabToken(process.env.REACT_APP_BASE64, localStorage.getItem('code'), process.env.REACT_APP_CLIENT_ID)
+
+    if (localStorage.getItem('token') && localStorage.length > 1) {
+      this.props.getUser('https://api.fitbit.com/1/user/-/profile.json', localStorage.getItem('token'))
+    }
+
+  }
+
+  componentDidUpdate(prevProps) {
+
+    // console.log(localStorage.token, localStorage.length)
+
+    if (this.props.id !== prevProps.id) {
+      // console.log('inside componentdidupdate')
+
+      this.props.grabToken(process.env.REACT_APP_BASE64, localStorage.getItem('code'), process.env.REACT_APP_CLIENT_ID)
+    }
   }
 
   handleLogout = () => {
@@ -64,14 +83,16 @@ class Profile extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    date: state.user.date
+    date: state.user.date,
+    id: state.user.id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (url, access_token) => dispatch(fetchUser(url, access_token)),
-    logout: (base64, access_token) => dispatch(logoutFitbitUser(base64, access_token))
+    logout: (base64, access_token) => dispatch(logoutFitbitUser(base64, access_token)),
+    grabToken: (base64, access_token, clientId) => dispatch(getAccessToken(base64, access_token, clientId))
   }
 }
 

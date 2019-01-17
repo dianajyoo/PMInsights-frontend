@@ -112,7 +112,6 @@ export const addSleepGoal = (goalDate, bedtimeTarget, wakeupTarget, fitBitUser) 
       })
         .then(res => res.json())
         .then(data => {
-          debugger
           dispatch(addGoal(data))
           dispatch(setGoalDate(data.goalDate))
           dispatch(setBedtime(data.bedtimeTarget))

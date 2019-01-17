@@ -1,5 +1,6 @@
 const initialState = {
   user: {},
+  id: '',
   fetchIsLoading: false,
   sleep: {},
   fitBitUser: {},
@@ -16,9 +17,15 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state, user: action.user
       }
+    case 'STORE_SPECIAL_ID':
+      return {
+        ...state, id: action.id
+      }
     case 'LOGOUT_USER':
       return {
         user: {},
+        id: '',
+        token: '',
         fetchIsLoading: false,
         sleep: {},
         fitBitUser: {},
