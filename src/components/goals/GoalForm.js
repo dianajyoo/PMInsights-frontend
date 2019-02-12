@@ -13,85 +13,104 @@ class GoalForm extends React.Component {
 
   state = {
     startDate: new Date(),
-    dateEvent: {},
-    bedtimeEvent: {},
-    wakeupEvent: {}
+    bedtime: "",
+    wakeupTime: ""
   }
 
   componentDidMount() {
-
-    // const userToken = localStorage.getItem('token')
-
-    // if (userToken) {
-    //   this.props.sleepInfo('https://api.fitbit.com/1/user/-/profile.json', userToken)
-    // }
 
     if (this.props.user.user) {
       this.props.backendUser(this.props.user.user)
     }
   }
 
-  handleChange = (e, date) => {
-    // debugger
-
+  handleChange = (date) => {
     this.setState({
-      startDate: date,
-      dateEvent: e
+      startDate: date
+      // dateEvent: e
     })
-
-    console.log(e.toString().split(' ').slice(0, 4).join(' '))
-
-    return e.toString().split(' ').slice(0, 4).join(' ')
   }
 
-  handleBedtimeChange = (e) => {
+  // handleChange = (e, date) => {
+  //
+  //   this.setState({
+  //     startDate: date,
+  //     dateEvent: e
+  //   })
+  //
+  //   return e.toString().split(' ').slice(0, 4).join(' ')
+  // }
 
-    let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
-    let minutes = e.toString().split(' ')[4].split(':')[1]
+  handleBedtimeChange = (date) => {
 
-    this.setState({
-      bedtimeEvent: e
-    })
-
-    if (militaryHour > 12) {
-      militaryHour -= 12
-      console.log(militaryHour.toString() + ':' + minutes + ' PM')
-      return militaryHour.toString() + ':' + minutes + ' PM'
-    } else {
-      console.log(militaryHour.toString() + ':' + minutes + ' AM')
-      return militaryHour.toString() + ':' + minutes + ' AM'
-    }
-  }
-
-  handleWaketimeChange = (e) => {
-
-    let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
-    let minutes = e.toString().split(' ')[4].split(':')[1]
+    let hours = date.getHours(),
+        minutes = '0' + date.getMinutes(),
+        formattedTime = hours + ':' + minutes.substr(-2)
 
     this.setState({
-      wakeupEvent: e
+      bedtime: formattedTime
     })
-
-    if (militaryHour > 12) {
-      militaryHour -= 12
-      console.log(militaryHour.toString() + ':' + minutes + ' PM')
-      return militaryHour.toString() + ':' + minutes + ' PM'
-    } else {
-      console.log(militaryHour.toString() + ':' + minutes + ' AM')
-      return militaryHour.toString() + ':' + minutes + ' AM'
-    }
   }
+
+  // handleBedtimeChange = (e) => {
+  //
+  //   let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
+  //   let minutes = e.toString().split(' ')[4].split(':')[1]
+  //
+  //   this.setState({
+  //     bedtimeEvent: e
+  //   })
+  //
+  //   if (militaryHour > 12) {
+  //     militaryHour -= 12
+  //     return militaryHour.toString() + ':' + minutes + ' PM'
+  //   } else {
+  //     return militaryHour.toString() + ':' + minutes + ' AM'
+  //   }
+  // }
+
+  handleWaketimeChange = (date) => {
+
+    let hours = date.getHours(),
+        minutes = '0' + date.getMinutes(),
+        formattedTime = hours + ':' + minutes.substr(-2)
+
+    this.setState({
+      wakeupTime: formattedTime
+    })
+  }
+
+  // handleWaketimeChange = (date) => {
+  //
+  //   let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
+  //   let minutes = e.toString().split(' ')[4].split(':')[1]
+  //
+  //   this.setState({
+  //     wakeupEvent: e
+  //   })
+  //
+  //   if (militaryHour > 12) {
+  //     militaryHour -= 12
+  //     return militaryHour.toString() + ':' + minutes + ' PM'
+  //   } else {
+  //     return militaryHour.toString() + ':' + minutes + ' AM'
+  //   }
+  // }
 
   handleSubmit = (handleChange, handleBedtimeChange, handleWaketimeChange, e) => {
     e.preventDefault()
 
     if (this.props.editGoal) {
       this.props.editedGoal(this.props.goal.id,
-        this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-        this.handleWaketimeChange(this.state.wakeupEvent))
+        this.state.startDate, this.state.bedtime,
+        this.state.wakeupTime)
+        // this.props.editedGoal(this.props.goal.id,
+        //   this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
+        //   this.handleWaketimeChange(this.state.wakeupEvent))
     } else {
-      this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-      this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser)
+      // this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
+      // this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser)
+      this.props.sleepGoal(this.state.startDate, this.state.bedtime, this.state.wakeupTime, this.props.fitBitUser)
     }
   }
 
@@ -110,9 +129,9 @@ class GoalForm extends React.Component {
                         <Form.Group >
                           <DatePicker
                             className='datepicker'
-                            isClearable={false}
                             selected={this.state.startDate}
-                            onChange={e => this.handleChange(e)}
+                            // onChange={e => this.handleChange(e)}
+                            onChange={this.handleChange}
                           />
                         </Form.Group>
                     </label>
@@ -122,12 +141,13 @@ class GoalForm extends React.Component {
                         <Form.Group >
                           <DatePicker
                             className='datepicker'
-                            placeholderText='Click to select time'
-                            isClearable={false}
-                            onChange={e => this.handleBedtimeChange(e)}
+                            onChange={this.handleBedtimeChange}
+                            selected={this.state.startDate}
+                            // dateFormat="Pp"
                             showTimeSelect
                             showTimeSelectOnly
                             timeIntervals={15}
+                            timeFormat='HH:mm'
                             dateFormat='h:mm aa'
                             timeCaption='Time'
                           />
@@ -139,12 +159,12 @@ class GoalForm extends React.Component {
                         <Form.Group >
                           <DatePicker
                             className='datepicker'
-                            isClearable={false}
-                            placeholderText='Click to select time'
-                            onChange={e => this.handleWaketimeChange(e)}
+                            onChange={this.handleWaketimeChange}
+                            selected={this.state.startDate}
                             showTimeSelect
                             showTimeSelectOnly
                             timeIntervals={15}
+                            timeFormat='HH:mm'
                             dateFormat='h:mm aa'
                             timeCaption='Time'
                           />
