@@ -1,10 +1,10 @@
 #edit-content {
-  background-image:
+  /* background-image:
   linear-gradient(
     rgba(0, 0, 0, 0.4),
     rgba(0, 0, 0, 0.4)
     ),
-  url('../images/sleeping.jpg');
+  url('../images/sleeping.jpg'); */
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Noto Sans', sans-serif;

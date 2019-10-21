@@ -14,58 +14,6 @@
   overflow: scroll;
 }
 
-/* profile info */
-.profile {
-  background-color: rgba(38,43,73);
-  /* background-image:
-    linear-gradient(
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.6)
-    ); */
-    /* url('./images/profile.jpg') !important; */
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Noto Sans', sans-serif;
-  color: white;
-  float: left;
-  /* margin-top: 2em; */
-  /* margin-left: 2em; */
-  height: 100vh;
-  width: 15vw;
-  /* opacity: 0.9; */
-}
-
-#biometrics {
-  /* margin-bottom: 5em; */
-  display: grid;
-  margin-top: -20em;
-  line-height: 3em;
-  font-weight: 400;
-  font-size: 1.2em;
-  font-weight: 700;
-}
-
-#name {
-  font-size: 2.5em;
-  font-weight: 700;
-  margin-left: 0.65em;
-  overflow: hidden;
-}
-
-#photo {
-  height: 6em;
-  width: 6em;
-  padding: 0.5em;
-}
-
-.navlink {
-  color: white;
-}
-
 /* all goals */
 .goal {
   position: relative;

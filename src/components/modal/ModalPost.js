@@ -31,7 +31,7 @@ class ModalPost extends React.Component {
         onClose={this.closeModal}
         open={showModal}
         trigger={
-          <span onClick={() => this.setState({ showModal: true })}>
+          <span className='addSleepGoal' onClick={() => this.setState({ showModal: true })}>
             Add Sleep Goal
           </span>
         }

@@ -3,7 +3,6 @@ import DateForm from './DateForm';
 import { connect } from 'react-redux';
 
 import '../stylesheets/Header.css';
-import '../images/moon.png';
 
 class Header extends React.Component {
   render() {

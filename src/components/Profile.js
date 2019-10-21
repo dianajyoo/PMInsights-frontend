@@ -1,14 +1,15 @@
 import React from 'react';
+import ModalPost from './modal/ModalPost';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
-import ModalPost from './modal/ModalPost';
 import { fetchUser, logoutFitbitUser } from '../store/actionCreators/userActions';
 import { getAccessToken } from '../store/actionCreators/tokenActions';
 
+import '../stylesheets/Profile.css';
+
 class Profile extends React.Component {
   componentDidMount() {
-    // console.log('in profile', localStorage.token, localStorage.length)
+    const URL = 'https://api.fitbit.com/1/user/-/profile.json';
 
     this.props.grabToken(
       process.env.REACT_APP_BASE64,
@@ -17,10 +18,7 @@ class Profile extends React.Component {
     );
 
     if (localStorage.getItem('token') && localStorage.length > 1) {
-      this.props.getUser(
-        'https://api.fitbit.com/1/user/-/profile.json',
-        localStorage.getItem('token')
-      );
+      this.props.getUser(URL, localStorage.getItem('token'));
     }
   }
 
@@ -36,7 +34,7 @@ class Profile extends React.Component {
     }
   }
 
-  handleLogout = () => {
+  logoutUser = () => {
     this.props.logout(
       process.env.REACT_APP_BASE64,
       localStorage.getItem('token')
@@ -48,56 +46,59 @@ class Profile extends React.Component {
   render() {
     return (
       <div className='profile'>
-        <span id='identity'>
-          <span id='name'>
+        <div className='userName'>
+          <h2>
             {this.props.user.user ? this.props.user.user.firstName : null}
-          </span>
+          </h2>
+        </div>
+
+        <div className='userPhoto'>
           {this.props.user.user ? (
             <img
-              className='ui massive circular image'
-              id='photo'
               src={this.props.user.user.avatar}
-              alt='profile pic'
+              alt='profile photo'
             />
-          ) : null}
+          ) : <div></div>}
+        </div>
 
-          <span id='map'>
-            <i className='map marker alternate icon'></i>
-            {this.props.user.user ? this.props.user.user.timezone : null}
-          </span>
-        </span>
+        <div className='userLocation'>
+          <i className='map marker alternate icon'></i>
+          {this.props.user.user ? this.props.user.user.timezone.split('/')[1] : null}
+        </div>
 
-        <span id='biometrics'>
+        <div className='userHeightWeight'>
           {this.props.user.user ? this.props.user.user.height + ' cm ' : null}
 
           {this.props.user.user ? this.props.user.user.weight + ' kg' : null}
+        </div>
 
-          <span>
+        <div className='dashboardMenu'>
+          <div className='menuSelect'>
             <i className='home icon'></i>
             <NavLink to='/dashboard' className='navlink'>
               Dashboard
             </NavLink>
-          </span>
+          </div>
 
-          <span>
+          <div className='menuSelect'>
             <i className='star outline icon'></i>
             <ModalPost />
-          </span>
+          </div>
 
-          <span>
+          <div className='menuSelect'>
             <i className='tasks icon'></i>
             <NavLink to='/my_goals' className='navlink'>
               My Goals
             </NavLink>
-          </span>
+          </div>
 
-          <span>
+          <div className='menuSelect'>
             <i className='arrow alternate circle right outline icon'></i>
-            <NavLink to='/' onClick={this.handleLogout} className='navlink'>
+            <NavLink to='/' onClick={this.logoutUser} className='navlink'>
               Log Out
             </NavLink>
-          </span>
-        </span>
+          </div>
+        </div>
       </div>
     );
   }

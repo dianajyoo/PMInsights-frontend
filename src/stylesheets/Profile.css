@@ -1,0 +1,33 @@
+.profile {
+  height: 100vh;
+  width: 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(38,43,73);
+  font-family: 'Noto Sans', sans-serif;
+  color: white;
+}
+
+.profile div {
+  padding: 1rem;
+}
+
+.userName h2 {
+  font-size: 3rem;
+}
+
+.menuSelect {
+  cursor: pointer;
+}
+
+.userHeightWeight {
+  margin: 4rem 0;
+}
+
+.navlink, .addSleepGoal {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.75rem;
+  color: white;
+}
