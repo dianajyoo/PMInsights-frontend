@@ -1,0 +1,10 @@
+.dashboard {
+  background-color: rgba(236,236,236);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  float: right;
+  min-height: 100vh;
+  min-width: 100vw;
+  z-index: 1000;
+}

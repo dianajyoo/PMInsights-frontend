@@ -1,60 +1,64 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Form, Input } from 'semantic-ui-react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Form, Input, Button } from 'semantic-ui-react';
 
-import '../styling/DateForm.css'
+import '../stylesheets/DateForm.css';
 
 class DateForm extends React.Component {
-
   state = {
     date: ''
-  }
+  };
 
   handleChange = (e) => {
     this.setState({
       date: e.target.value
-    })
-  }
+    });
+  };
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log('Submitted!')
-    this.props.getDate(this.state.date)
-    // debugger
-    // reset input field
-  }
+    console.log('Submitted!');
+    this.props.getDate(this.state.date);
+
+    this.clearInput();
+  };
+
+  clearInput = () => {
+    this.setState({
+      date: ''
+    });
+  };
 
   render() {
     return (
-      <div className='dateform'>
-        <Form onSubmit={e => this.handleSubmit(e)} size={'small'}>
-          <Form.Field inline>
-            <label id='label'>DATE</label>
-            <Input type='text' name='date' placeholder='yyyy-mm-dd'
-              value={this.state.date} onChange={e => this.handleChange(e)} />
+      <Form className='dateForm' onSubmit={this.handleSubmit} size='large'>
+        <label>DATE</label>
+        <Input
+          className='dateFormInput'
+          type='text'
+          name='date'
+          placeholder='yyyy-mm-dd'
+          value={this.state.date}
+          onChange={this.handleChange}
+        />
 
-              <button className="circular ui icon button">
-                <i className="search icon"></i>
-              </button>
-
-          </Form.Field>
-        </Form>
-      </div>
-    )
+        <Button className='submitButton' circular icon='search' size='large' />
+      </Form>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     date: state.user.date
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDate: (date) => dispatch({type: 'STORE_SLEEP_DATE', date})
-  }
-}
+    getDate: (date) => dispatch({ type: 'STORE_SLEEP_DATE', date })
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(DateForm)
+export default connect(mapStateToProps, mapDispatchToProps)(DateForm);

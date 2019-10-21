@@ -1,19 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
-
-#content {
+#edit-content {
   background-image:
   linear-gradient(
     rgba(0, 0, 0, 0.4),
     rgba(0, 0, 0, 0.4)
     ),
-  url('../imgs/clock.jpg');
+  url('../images/sleeping.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Noto Sans', sans-serif;
   color: white;
 }
 
-#header {
+#edit-header {
   background-color: rgba(133,207,218);
   color: rgba(38,44,51);
   font-weight: 700;

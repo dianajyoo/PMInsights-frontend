@@ -1,0 +1,65 @@
+.gridContainer {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 40rem 40rem 40rem;
+  grid-template-rows: 40rem 40rem;
+  padding: 10rem;
+  z-index: -1000;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: white;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+  color: rgba(62,74,76);
+  box-shadow: 0.3rem 0.5rem 0.3rem rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  border-top: solid;
+}
+
+.squareCard {
+  height: 35rem;
+  width: 35rem;
+}
+
+.chartCard {
+  height: 35rem;
+  width: 75rem;
+}
+
+.cardItem {
+  padding: 10rem;
+}
+
+.hoursOfSleep {
+  font-size: 3rem;
+}
+
+.cardItem.lineGraph {
+  padding: 0;
+}
+
+h2.cardTitle {
+  font-size: 2rem;
+}
+
+.efficiencyCard {
+  border-top-color: rgba(133,207,218);
+}
+
+.durationCard {
+  border-top-color: rgba(255,37,75);
+}
+
+.sleepCard {
+  border-top-color: rgba(253,173,32);
+}
+
+.heartCard {
+  border-top-color: rgba(255,37,75);
+}

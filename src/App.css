@@ -5,42 +5,13 @@
   height: 100vh;
 }
 
-/* Home Page */
-.welcome {
-  background-image:
-  linear-gradient(
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.6)
-    ),
-    url('./imgs/home-1.jpeg') !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
+.goal-container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  width: 100vw;
-  display: block;
-  align-items: center;
-  justify-content: center;
-}
-
-.title {
-  display: block;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  height: 20vh;
-  width: 60vw;
-  top: 400px;
-  left: 300px;
-}
-
-#title-1 {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: 150px;
-  background: url('./imgs/background.jpg') no-repeat;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-color: rgba(236,236,236);
+  overflow: scroll;
 }
 
 /* profile info */
@@ -51,7 +22,7 @@
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.6)
     ); */
-    /* url('./imgs/profile.jpg') !important; */
+    /* url('./images/profile.jpg') !important; */
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -93,108 +64,6 @@
 
 .navlink {
   color: white;
-}
-
-/* Cards */
-.sleep-card, .heart-card, .efficiency-card, .chart-card, .duration-card {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 700;
-  color: rgba(62,74,76);
-  height: 20em;
-  width: 22em;
-  margin-top: 100px;
-  margin-left: 30px;
-  box-shadow: 0.3em 0.5em 0.3em rgba(0,0,0,0.1);
-  padding: 1em;
-  border-top: solid
-}
-
-.card-title {
-  position: absolute;
-  align-items: center;
-  font-size: 1.5em;
-  /* margin-left: 1em; */
-  width: inherit;
-  height: 10vh;
-  padding: 1em;
-  overflow: hidden;
-}
-
-.chart-card {
-  height: 25em;
-  width: 49em;
-  margin-top: 150px;
-  margin-left: 2em;
-  border-top-color: rgba(125,121,210);
-}
-
-.efficiency-card {
-  border-top-color: rgba(133,207,218);
-}
-
-.duration-card {
-  border-top-color: rgba(255,37,75);
-}
-
-.sleep-card {
-  border-top-color: rgba(253,173,32);
-}
-
-.heart-card {
-  border-top-color: rgba(255,37,75);
-}
-
-#hours {
-  position: absolute;
-  font-size: 3em;
-  margin-left: 2em;
-  margin-top: 3em;
-}
-
-#piechart {
-  position: absolute;
-  margin-left: -11em;
-  margin-top: -4em;
-}
-
-#efficiency {
-  position: absolute;
-  margin-left: 4em;
-  margin-top: 5em;
-}
-
-#linegraph {
-  position: absolute;
-  margin-top: 2.5em;
-  margin-left: -2.5em;
-}
-
-#heart {
-  max-width: 6em;
-  max-height: 6em;
-  margin-top: 2em;
-}
-
-.grid-container {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  grid-template-columns: 25em 25em 25em;
-  grid-template-rows: 25em 25em;
-  z-index: -1000;
-}
-
-.goal-container {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: rgba(236,236,236);
-  overflow: scroll;
 }
 
 /* all goals */
@@ -247,7 +116,7 @@
 
 /* nomatch */
 .no-match {
-  background-image: url('./imgs/cat.jpg');
+  background-image: url('./images/cat.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

@@ -5,22 +5,25 @@ const initialState = {
   sleep: {},
   fitBitUser: {},
   date: ''
-}
+};
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_IS_LOADING':
       return {
-        ...state, fetchIsLoading: action.fetchIsLoading
-      }
+        ...state,
+        fetchIsLoading: action.fetchIsLoading
+      };
     case 'FETCH_USER_SUCCESS':
       return {
-        ...state, user: action.user
-      }
+        ...state,
+        user: action.user
+      };
     case 'STORE_SPECIAL_ID':
       return {
-        ...state, id: action.id
-      }
+        ...state,
+        id: action.id
+      };
     case 'LOGOUT_USER':
       return {
         user: {},
@@ -34,22 +37,25 @@ const userReducer = (state = initialState, action) => {
         bedtimeTarget: '',
         wakeupTarget: '',
         goals: []
-      }
+      };
     case 'STORE_SLEEP_DATA':
       return {
-        ...state, sleep: action.data
-      }
+        ...state,
+        sleep: action.data
+      };
     case 'SET_FITBIT_USER':
       return {
-        ...state, fitBitUser: action.user
-      }
+        ...state,
+        fitBitUser: action.user
+      };
     case 'STORE_SLEEP_DATE':
       return {
-        ...state, date: action.date
-      }
+        ...state,
+        date: action.date
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default userReducer
+export default userReducer;

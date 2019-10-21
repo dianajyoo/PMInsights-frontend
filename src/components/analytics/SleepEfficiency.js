@@ -1,23 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { Progress } from 'react-sweet-progress'
-import 'react-sweet-progress/lib/style.css'
+import { Progress } from 'react-sweet-progress';
+import 'react-sweet-progress/lib/style.css';
 
 class SleepEfficiency extends React.Component {
-
   componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
-      this.props.sleepInfo(this.props.date, localStorage.getItem('token'))
+      this.props.sleepInfo(this.props.date, localStorage.getItem('token'));
     }
   }
 
   render() {
-    let efficiency
+    let efficiency;
 
     if (this.props.sleep.sleep) {
       if (this.props.sleep.sleep[0]) {
-        efficiency = this.props.sleep.sleep[0].efficiency
+        efficiency = this.props.sleep.sleep[0].efficiency;
       }
     }
 
@@ -36,7 +35,7 @@ class SleepEfficiency extends React.Component {
           }}
         />
       </div>
-    )
+    );
   }
 }
 
@@ -45,7 +44,7 @@ const mapStateToProps = (state) => {
     date: state.user.date,
     sleep: state.user.sleep,
     token: state.user.token
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(SleepEfficiency)
+export default connect(mapStateToProps)(SleepEfficiency);

@@ -1,15 +1,16 @@
-import React from 'react'
-import MenuContainer from './menu/MenuContainer'
+import React from 'react';
+import LoginButton from './LoginButton';
+import '../stylesheets/Home.css';
 
 const Home = () => {
   return (
-    <div className='welcome'>
-      <MenuContainer />
-      <div className='title'>
-        <span id='title-1'>PM Insights</span>
+    <div className='landingPage'>
+      <div className='titleWrapper'>
+        <span className='title'>PM Insights</span>
       </div>
+      <LoginButton />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
