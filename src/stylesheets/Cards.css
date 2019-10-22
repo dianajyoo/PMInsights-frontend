@@ -5,7 +5,6 @@
   grid-template-columns: 40rem 40rem 40rem;
   grid-template-rows: 40rem 40rem;
   padding: 10rem;
-  z-index: -1000;
 }
 
 .card {
@@ -27,7 +26,7 @@
   width: 35rem;
 }
 
-.chartCard {
+.activityCard {
   height: 35rem;
   width: 75rem;
 }
@@ -40,12 +39,9 @@
   font-size: 3rem;
 }
 
-.cardItem.lineGraph {
-  padding: 0;
-}
-
 h2.cardTitle {
-  font-size: 2rem;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 2.1rem;
 }
 
 .efficiencyCard {

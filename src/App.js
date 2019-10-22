@@ -13,23 +13,19 @@ import './App.css';
 
 class App extends Component {
   componentDidMount() {
-    let code;
-    let auth_code;
-
     // grab current url
     const current_url = window.location.href;
 
     // grab authorization code from url
     if (current_url.includes('code')) {
-      code = current_url.split('=')[1].split('#')[0];
+      let authCode = current_url.split('=')[1].split('#')[0];
 
       // store code to localStorage
-      localStorage.setItem('code', code);
-      auth_code = localStorage.getItem('code');
+      localStorage.setItem('code', authCode);
 
-      this.props.grabToken(
+      this.props.getToken(
         process.env.REACT_APP_BASE64,
-        auth_code,
+        authCode,
         process.env.REACT_APP_CLIENT_ID
       );
     }
@@ -65,7 +61,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    grabToken: (base64, code, clientId) =>
+    getToken: (base64, code, clientId) =>
       dispatch(getAccessToken(base64, code, clientId))
   };
 };

@@ -48,7 +48,7 @@ class Profile extends React.Component {
       <div className='profile'>
         <div className='userName'>
           <h2>
-            {this.props.user.user ? this.props.user.user.firstName : null}
+            Hi, {this.props.user.user ? this.props.user.user.firstName : null}
           </h2>
         </div>
 

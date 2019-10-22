@@ -4,9 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  float: left;
   flex-direction: column;
   background: rgba(38,43,73);
   font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   color: white;
 }
 
@@ -28,6 +30,7 @@
 
 .navlink, .addSleepGoal {
   font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 1.75rem;
   color: white;
 }

@@ -2,8 +2,8 @@ import React from 'react';
 import SleepEfficiency from './analytics/SleepEfficiency';
 import PieChart from './analytics/PieChart';
 import Heartrate from './analytics/Heartrate';
-import LineGraph from './analytics/LineGraph';
 import Duration from './analytics/Duration';
+import Activity from './analytics/Activity';
 import { connect } from 'react-redux';
 import { fetchSleepData } from '../store/actionCreators/sleepActions';
 
@@ -39,10 +39,10 @@ class Cards extends React.Component {
           </div>
         </div>
 
-        <div className='card chartCard'>
-          <h2 className='cardTitle'>Sleep Pattern</h2>
-          <div className='cardItem lineGraph'>
-            <LineGraph sleepInfo={this.props.sleepInfo} />
+        <div className='card activityCard'>
+          <h2 className='cardTitle'>Activity</h2>
+          <div className='cardItem activity'>
+            <Activity />
           </div>
         </div>
       </div>

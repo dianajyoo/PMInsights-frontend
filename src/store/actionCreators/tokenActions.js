@@ -14,8 +14,6 @@ export const storeSpecialId = (id) => {
   };
 };
 
-// <--- redux thunk here --->
-
 export const getAccessToken = (base64, code, clientId) => {
   return (dispatch) => {
     fetch('https://api.fitbit.com/oauth2/token', {
@@ -30,10 +28,11 @@ export const getAccessToken = (base64, code, clientId) => {
         if (res.status === 401) {
           console.log('expired token');
           getNewToken(base64, res.json().refresh_token)(dispatch);
-          return res.json();
-        } else {
+
           return res.json();
         }
+        
+        return res.json();
       })
       .then((data) => {
         // dynamic 'special id' needed to trigger componentDidUpdate in profile
