@@ -1,37 +1,29 @@
-/* .goal-form {
-  height: 100vh;
-  margin: auto;
-  background-image:
-    -webkit-linear-gradient(
-      top,
-      rgba(0,0,0,0.8) 0%,
-      /* rgba(31,33,50,1) 5%, */
-
-/* .form {
-  display: grid;
+.goalForm {
+  display: flex;
   align-items: center;
   justify-content: center;
-} */
-
-.goal-form {
+  flex-direction: column;
   font-family: 'Noto Sans', sans-serif;
   font-weight: 700;
 }
 
-button {
-  position: relative;
-  margin-left: 5em;
-  background-color: rgba(133,207,218);
+.goalInput {
+  width: 20rem;
+  height: 5rem;
+}
+
+label, .submitButton {
+  padding: 2rem;
 }
 
 .react-datepicker {
-  font-size: 1em;
+  font-size: 1.5rem;
+}
+
+.react-datepicker__month-container {
+  width: 20rem;
 }
 
 .react-datepicker__header {
-  padding-top: 1em;
-}
-
-.react-datepicker__time-container {
-  width: 6em !important
+  padding-top: 2rem;
 }

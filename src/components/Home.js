@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className='landingPage'>
       <div className='titleWrapper'>
-        <span className='title'>PM Insights</span>
+        <span className='title'>wellness</span>
       </div>
       <LoginButton />
     </div>

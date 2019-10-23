@@ -1,13 +1,11 @@
-# PM Insights
+# wellness
 
-Analyzes and displays your sleep data using your Fitbit device (similar to the Fitbit app). Requires a Fitbit account in order to log in and gain consent to access your data. Using Recharts node package, it will display a pie chart and line graph with a breakdown of total minutes spent in the light, wake, rem, and deep cycles as well as sleep duration and resting heart rate for a specific night of rest. Additional feature includes adding, editing, and deleting your sleep goals.    
+Analyzes and displays your activity and sleep data using your Fitbit device. Requires a Fitbit account in order to log in and gain consent to access your data. Using Recharts node package, it will display a pie chart with a breakdown of total minutes spent in the light, wake, rem, and deep cycles as well as sleep duration, resting heart rate, and activity for a specific day. Also allows you to add personal goals.    
 
-This is the frontend and the backend can be found [here](https://github.com/dianajyoo/PMInsights-backend).
+This is the frontend and the backend can be found [here](https://github.com/dianajyoo/wellness-backend).
 
-Link to video demo [here](https://drive.google.com/file/d/168aKz4nVn3j6AVr6p5X9pETjRObLKG_t/view)
-
-![pm-insights-home](https://user-images.githubusercontent.com/38845162/51297554-bde01180-19ee-11e9-9a7a-9522d1e43a08.png)
-![pm-insights-dashboard](https://user-images.githubusercontent.com/38845162/51297555-bde01180-19ee-11e9-9647-b76f0904852e.png)
+![home](./src/images/wellness-home.png)
+![dashboard](./src/images/wellness-dashboard.png)
 
 ## Development Setup
 

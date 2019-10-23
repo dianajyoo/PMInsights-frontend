@@ -8,7 +8,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className='header'>
-        <p className='headerItem'>PM Insights</p>
+        <p className='headerItem'>wellness</p>
         <div className='headerItem'>{this.props.date}</div>
         <div className='dateInput'>
           <DateForm />

@@ -1,82 +1,34 @@
-// SET GOAL
+// GET GOALS
+export const loadGoals = (goals) => {
+  return {
+    type: 'LOAD_GOALS',
+    goals
+  };
+};
 
+// POST GOAL
 export const addGoal = (goal) => {
   return {
     type: 'ADD_GOAL',
-    goal: goal
-  };
-};
-
-export const setGoalDate = (date) => {
-  return {
-    type: 'SET_GOAL_DATE',
-    goalDate: date
-  };
-};
-
-export const setBedtime = (time) => {
-  return {
-    type: 'SET_BEDTIME',
-    bedtimeTarget: time
-  };
-};
-
-export const setWakeupTime = (time) => {
-  return {
-    type: 'SET_WAKEUP_TIME',
-    wakeupTarget: time
-  };
-};
-
-// LOAD GOALS
-
-export const loadGoals = (goal) => {
-  return {
-    type: 'LOAD_GOALS',
     goal
   };
 };
 
 // EDIT GOAL
-
 export const editGoal = (goal) => {
   return {
     type: 'EDIT_GOAL',
-    goal: goal
-  };
-};
-
-export const editGoalDate = (date) => {
-  return {
-    type: 'EDIT_GOAL_DATE',
-    goalDate: date
-  };
-};
-
-export const editBedtime = (time) => {
-  return {
-    type: 'EDIT_BEDTIME',
-    bedtimeTarget: time
-  };
-};
-
-export const editWakeupTime = (time) => {
-  return {
-    type: 'EDIT_WAKEUP_TIME',
-    wakeupTarget: time
+    goal
   };
 };
 
 // DELETE GOAL
-
 export const deleteGoal = (goalId) => {
   return {
     type: 'DELETE_GOAL',
     id: goalId
   };
 };
-
-// <--- redux thunk here --->
 
 export const getGoals = () => {
   return (dispatch) => {
@@ -87,19 +39,16 @@ export const getGoals = () => {
       }
     })
       .then((res) => res.json())
-      .then((data) => {
-        data.forEach((goal) => {
-          dispatch(loadGoals(goal));
-        });
+      .then((goals) => {
+        dispatch(loadGoals(goals));
       })
       .catch(console.error);
   };
 };
 
-export const addSleepGoal = (
+export const postGoal = (
   goalDate,
-  bedtimeTarget,
-  wakeupTarget,
+  goal,
   fitBitUser
 ) => {
   return (dispatch) => {
@@ -109,24 +58,20 @@ export const addSleepGoal = (
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        goalDate: goalDate,
-        bedtimeTarget: bedtimeTarget,
-        wakeupTarget: wakeupTarget,
-        user_id: fitBitUser.id
+        goalDate,
+        goal,
+        user_id: fitBitUser.user.encodedId
       })
     })
       .then((res) => res.json())
-      .then((data) => {
-        dispatch(addGoal(data));
-        dispatch(setGoalDate(data.goalDate));
-        dispatch(setBedtime(data.bedtimeTarget));
-        dispatch(setWakeupTime(data.wakeupTarget));
+      .then((goal) => {
+        dispatch(addGoal(goal));
       })
       .catch(console.error);
   };
 };
 
-export const updateGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget) => {
+export const updateGoal = (goalId, goalDate, goal) => {
   return (dispatch) => {
     fetch(`http://localhost:3000/api/v1/goals/${goalId}`, {
       method: 'PATCH',
@@ -135,17 +80,12 @@ export const updateGoal = (goalId, goalDate, bedtimeTarget, wakeupTarget) => {
       },
       body: JSON.stringify({
         goalDate: goalDate,
-        bedtimeTarget: bedtimeTarget,
-        wakeupTarget: wakeupTarget
+        goal: goal
       })
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        dispatch(editGoal(data));
-        // dispatch(editGoalDate(data.goalDate))
-        // dispatch(editBedtime(data.bedtimeTarget))
-        // dispatch(editWakeupTime(data.wakeupTarget))
+      .then((goal) => {
+        dispatch(editGoal(goal));
       })
       .catch(console.error);
   };

@@ -1,48 +1,42 @@
 import React from 'react';
+import GoalForm from '../goals/GoalForm';
 import { Modal } from 'semantic-ui-react';
 
-import GoalForm from '../goals/GoalForm';
-import '../../stylesheets/ModalEdit.css';
+import '../../stylesheets/Modal.css';
 
 class ModalEdit extends React.Component {
   state = {
-    showModal: false
+    showModal: false,
+    shouldEditGoal: false
   };
 
-  handleClose = (e) => {
-    e.preventDefault();
-
-    this.closeModal();
-  };
+  openModal = () => {
+    this.setState({ showModal: true, shouldEditGoal: true });
+  }
 
   closeModal = () => {
-    this.setState({
-      showModal: false
-    });
+    this.setState({ showModal: false, showEditGoal: false });
   };
-
+  
   render() {
     const { showModal } = this.state;
+    const { goal } = this.props;
 
     return (
       <Modal
-        className='ui tiny modal'
+        size='tiny'
         closeIcon
         onClose={this.closeModal}
         open={showModal}
         trigger={
-          <span onClick={() => this.setState({ showModal: true })}>
+          <span onClick={this.openModal}>
             <i className='edit outline icon large'></i>
           </span>
         }
       >
-        <Modal.Header id='edit-header'>Edit Sleep Goal</Modal.Header>
-        <Modal.Content id='edit-content'>
-          <GoalForm
-            handleClose={this.handleClose}
-            editGoal={this.props.editGoal}
-            goal={this.props.goal}
-          />
+        {/* <Modal.Header id='edit-header'>Edit Sleep Goal</Modal.Header> */}
+        <Modal.Content id='goalForm'>
+          <GoalForm shouldEditGoal={this.state.shouldEditGoal} goal={goal} />
         </Modal.Content>
       </Modal>
     );

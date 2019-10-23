@@ -25,8 +25,6 @@ export const logoutUser = () => {
   };
 };
 
-// <--- redux thunk here --->
-
 export const fetchUser = (url, token) => {
   return (dispatch) => {
     fetch(url, {
@@ -44,7 +42,7 @@ export const fetchUser = (url, token) => {
   };
 };
 
-export const fetchBackendUserData = (fitBitUser) => {
+export const getBackendUser = (fitBitUser) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/users', {
       method: 'GET',
@@ -54,6 +52,7 @@ export const fetchBackendUserData = (fitBitUser) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log('backend user', data)
         data.forEach((user) => {
           if (fitBitUser.encodedId === user.encodedId) {
             dispatch(setFitbitUser(user));

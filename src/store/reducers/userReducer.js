@@ -33,9 +33,7 @@ const userReducer = (state = initialState, action) => {
         sleep: {},
         fitBitUser: {},
         heartRate: {},
-        goalDate: '',
-        bedtimeTarget: '',
-        wakeupTarget: '',
+        goal: {},
         goals: []
       };
     case 'STORE_SLEEP_DATA':

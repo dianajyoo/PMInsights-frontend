@@ -1,202 +1,76 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
-import { addSleepGoal, updateGoal } from '../../store/actionCreators/goalActions';
-import { fetchBackendUserData } from '../../store/actionCreators/userActions';
-import { Form, Container, Grid } from 'semantic-ui-react';
+import { postGoal, updateGoal } from '../../store/actionCreators/goalActions';
+import { getBackendUser } from '../../store/actionCreators/userActions';
+import { Form, Input, Button } from 'semantic-ui-react';
 
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
 import '../../stylesheets/GoalForm.css';
 
 class GoalForm extends React.Component {
   state = {
-    startDate: new Date(),
-    bedtime: '',
-    wakeupTime: ''
-  };
-
+    goalDate: new Date(),
+    goal: ''
+  }
+  
   componentDidMount() {
-    if (this.props.user.user) {
-      this.props.backendUser(this.props.user.user);
+    const { user, backendUser } = this.props;
+
+    if (user.user) {
+      backendUser(user.user);
     }
   }
 
-  handleChange = (date) => {
+  handleDateChange = (e) => {
     this.setState({
-      startDate: date
-      // dateEvent: e
+      goalDate: new Date(e)
     });
   };
 
-  // handleChange = (e, date) => {
-  //
-  //   this.setState({
-  //     startDate: date,
-  //     dateEvent: e
-  //   })
-  //
-  //   return e.toString().split(' ').slice(0, 4).join(' ')
-  // }
-
-  handleBedtimeChange = (date) => {
-    let hours = date.getHours(),
-      minutes = '0' + date.getMinutes(),
-      formattedTime = hours + ':' + minutes.substr(-2);
-
+  handleChange = (e) => {
     this.setState({
-      bedtime: formattedTime
+      goal: e.target.value
     });
   };
 
-  // handleBedtimeChange = (e) => {
-  //
-  //   let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
-  //   let minutes = e.toString().split(' ')[4].split(':')[1]
-  //
-  //   this.setState({
-  //     bedtimeEvent: e
-  //   })
-  //
-  //   if (militaryHour > 12) {
-  //     militaryHour -= 12
-  //     return militaryHour.toString() + ':' + minutes + ' PM'
-  //   } else {
-  //     return militaryHour.toString() + ':' + minutes + ' AM'
-  //   }
-  // }
-
-  handleWaketimeChange = (date) => {
-    let hours = date.getHours(),
-      minutes = '0' + date.getMinutes(),
-      formattedTime = hours + ':' + minutes.substr(-2);
-
-    this.setState({
-      wakeupTime: formattedTime
-    });
-  };
-
-  // handleWaketimeChange = (date) => {
-  //
-  //   let militaryHour = Number(e.toString().split(' ')[4].split(':')[0])
-  //   let minutes = e.toString().split(' ')[4].split(':')[1]
-  //
-  //   this.setState({
-  //     wakeupEvent: e
-  //   })
-  //
-  //   if (militaryHour > 12) {
-  //     militaryHour -= 12
-  //     return militaryHour.toString() + ':' + minutes + ' PM'
-  //   } else {
-  //     return militaryHour.toString() + ':' + minutes + ' AM'
-  //   }
-  // }
-
-  handleSubmit = (
-    handleChange,
-    handleBedtimeChange,
-    handleWaketimeChange,
-    e
-  ) => {
+  handleSubmit = (e) => {
     e.preventDefault();
+    const { shouldEditGoal, editGoal, addGoal, user } = this.props;
+    const { goalDate, goal } = this.state;
 
-    if (this.props.editGoal) {
-      this.props.editedGoal(
-        this.props.goal.id,
-        this.state.startDate,
-        this.state.bedtime,
-        this.state.wakeupTime
-      );
-      // this.props.editedGoal(this.props.goal.id,
-      //   this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-      //   this.handleWaketimeChange(this.state.wakeupEvent))
+    if (shouldEditGoal) {
+      editGoal(this.props.goal.id, goalDate, goal);
     } else {
-      // this.props.sleepGoal(this.handleChange(this.state.dateEvent), this.handleBedtimeChange(this.state.bedtimeEvent),
-      // this.handleWaketimeChange(this.state.wakeupEvent), this.props.fitBitUser)
-      this.props.sleepGoal(
-        this.state.startDate,
-        this.state.bedtime,
-        this.state.wakeupTime,
-        this.props.fitBitUser
-      );
+      addGoal(goalDate, goal, user);
     }
   };
 
   render() {
+    const { goalDate } = this.state;
+
     return (
-      <div className='goal-form'>
-        <Container>
-          <Grid>
-            <Grid.Row centered>
-              <Grid.Column width={6}>
-                <div className='form'>
-                  <Form
-                    onSubmit={(e) =>
-                      this.handleSubmit(
-                        this.handleChange,
-                        this.handleBedtimeChange,
-                        this.handleWaketimeChange,
-                        e
-                      )
-                    }
-                  >
-                    <label>
-                      Goal Date
-                      <Form.Group>
-                        <DatePicker
-                          className='datepicker'
-                          selected={this.state.startDate}
-                          // onChange={e => this.handleChange(e)}
-                          onChange={this.handleChange}
-                        />
-                      </Form.Group>
-                    </label>
+      <Form className='goalForm' onSubmit={this.handleSubmit}>
+        <label>Date</label>
+        <Input className='dateInput' size='big'>
+          <DatePicker
+            className='datePicker'
+            selected={goalDate}
+            onChange={this.handleDateChange}
+          />
+        </Input>
 
-                    <label>
-                      Bedtime Target
-                      <Form.Group>
-                        <DatePicker
-                          className='datepicker'
-                          onChange={this.handleBedtimeChange}
-                          selected={this.state.startDate}
-                          // dateFormat="Pp"
-                          showTimeSelect
-                          showTimeSelectOnly
-                          timeIntervals={15}
-                          timeFormat='HH:mm'
-                          dateFormat='h:mm aa'
-                          timeCaption='Time'
-                        />
-                      </Form.Group>
-                    </label>
+        <label>Goal</label>
+        <Input
+          transparent
+          className='goalInput'
+          size='big'
+          placeholder='My goal today is...'
+          onChange={this.handleChange}
+        />
 
-                    <label>
-                      Wakeup Time Target
-                      <Form.Group>
-                        <DatePicker
-                          className='datepicker'
-                          onChange={this.handleWaketimeChange}
-                          selected={this.state.startDate}
-                          showTimeSelect
-                          showTimeSelectOnly
-                          timeIntervals={15}
-                          timeFormat='HH:mm'
-                          dateFormat='h:mm aa'
-                          timeCaption='Time'
-                        />
-                      </Form.Group>
-                    </label>
-
-                    <button className='circular ui icon button'>
-                      <i className='plus icon'></i>
-                    </button>
-                  </Form>
-                </div>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </div>
+        <Button className='submitButton' circular icon='plus' size='large' />
+      </Form>
     );
   }
 }
@@ -204,26 +78,22 @@ class GoalForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
-    fitBitUser: state.user.fitBitUser,
-    goalDate: state.goal.goalDate,
-    bedtimeTarget: state.goal.bedtimeTarget,
-    wakeupTarget: state.goal.wakeupTarget
+    fitBitUser: state.user.fitBitUser
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sleepGoal: (goalDate, bedtimeTarget, wakeupTarget, user) => {
-      console.log('in mapDispatchToProps', user);
-      dispatch(addSleepGoal(goalDate, bedtimeTarget, wakeupTarget, user));
+    addGoal: (goalDate, goal, user) => {
+      dispatch(postGoal(goalDate, goal, user));
     },
     backendUser: (user) => {
-      dispatch(fetchBackendUserData(user));
+      dispatch(getBackendUser(user));
     },
-    editedGoal: (goalId, goalDate, bedTimeTarget, wakeupTarget) => {
-      dispatch(updateGoal(goalId, goalDate, bedTimeTarget, wakeupTarget));
+    editGoal: (goalId, goalDate, goal) => {
+      dispatch(updateGoal(goalId, goalDate, goal));
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoalForm)
+export default connect(mapStateToProps, mapDispatchToProps)(GoalForm);

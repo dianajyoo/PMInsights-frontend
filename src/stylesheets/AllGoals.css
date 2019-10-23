@@ -1,0 +1,11 @@
+.goalContainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(236,236,236);
+  overflow: scroll;
+}
+
+.goalWrapper {
+  display: grid;
+  grid-template-columns: 45rem 45rem 45rem;
+}

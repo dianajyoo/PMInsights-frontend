@@ -1,0 +1,11 @@
+#goalForm {
+  background: rgba(133,207,218);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Noto Sans', sans-serif;
+  color: white;
+}
+
+.addGoal {
+  font-size: 1.5rem;
+}

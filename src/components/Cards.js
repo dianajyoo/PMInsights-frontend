@@ -41,7 +41,7 @@ class Cards extends React.Component {
 
         <div className='card activityCard'>
           <h2 className='cardTitle'>Activity</h2>
-          <div className='cardItem activity'>
+          <div className='activity'>
             <Activity />
           </div>
         </div>

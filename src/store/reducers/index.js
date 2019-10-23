@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
-import setGoalReducer from './setGoalReducer';
+import goalReducer from './goalReducer';
 import heartRateReducer from './heartRateReducer';
 import activityReducer from './activityReducer';
 
 export default combineReducers({
   user: userReducer,
-  goal: setGoalReducer,
+  goal: goalReducer,
   heartRate: heartRateReducer,
   activity: activityReducer
 });

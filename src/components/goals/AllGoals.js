@@ -1,29 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-
 import Goal from './Goal';
 import Profile from '../Profile';
-import EditGoal from './EditGoal';
-import Header from '../Header';
 import { getGoals } from '../../store/actionCreators/goalActions';
 
-class AllGoals extends React.Component {
-  state = {
-    editGoal: {}
-  };
+import '../../stylesheets/AllGoals.css';
 
+class AllGoals extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('token') !== 'undefined') {
       this.props.allGoals();
     }
   }
-
-  handleClickedGoal = (goal) => {
-    this.setState({
-      editGoal: goal
-    });
-  };
 
   render() {
     let goals;
@@ -35,7 +24,7 @@ class AllGoals extends React.Component {
 
     if (this.props.goals.length > 0) {
       goals = this.props.goals.map((goal) => (
-        <Goal goal={goal} handleClickedGoal={this.handleClickedGoal} />
+        <Goal key={`goal-${goal.id}`} goal={goal} />
       ));
     }
 
@@ -43,16 +32,9 @@ class AllGoals extends React.Component {
       <Route
         render={(props) =>
           loggedIn ? (
-            <div className='goal-container'>
-              <Header />
-              <span id='profile'>
-                <Profile />
-              </span>
-              {this.state.editGoal.id ? (
-                <EditGoal goal={this.state.editGoal} />
-              ) : (
-                <div className='ui grid'> {goals} </div>
-              )}
+            <div className='goalContainer'>
+              <Profile />
+              <div className='goalWrapper'>{goals}</div>
             </div>
           ) : (
             <Redirect to={{ pathname: '/', state: { from: props.location } }} />

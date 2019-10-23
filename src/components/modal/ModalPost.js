@@ -1,24 +1,20 @@
 import React from 'react';
+import GoalForm from '../goals/GoalForm';
 import { Modal } from 'semantic-ui-react';
 
-import GoalForm from '../goals/GoalForm';
-import '../../stylesheets/ModalPost.css';
+import '../../stylesheets/Modal.css';
 
 class ModalPost extends React.Component {
   state = {
     showModal: false
   };
 
-  handleClose = (e) => {
-    e.preventDefault();
-
-    this.closeModal();
-  };
+  openModal = () => {
+    this.setState({ showModal: true });
+  }
 
   closeModal = () => {
-    this.setState({
-      showModal: false
-    });
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -26,19 +22,19 @@ class ModalPost extends React.Component {
 
     return (
       <Modal
-        className='ui tiny modal'
+        size='tiny'
         closeIcon
         onClose={this.closeModal}
         open={showModal}
         trigger={
-          <span className='addSleepGoal' onClick={() => this.setState({ showModal: true })}>
-            Add Sleep Goal
+          <span className='addGoal' onClick={this.openModal}>
+            Add Goal
           </span>
         }
       >
-        <Modal.Header id='header'>Add Sleep Goal</Modal.Header>
-        <Modal.Content id='content'>
-          <GoalForm handleClose={this.handleClose} />
+        {/* <Modal.Header className='goalHeader'>Goal</Modal.Header> */}
+        <Modal.Content id='goalForm'>
+          <GoalForm />
         </Modal.Content>
       </Modal>
     );

@@ -1,0 +1,53 @@
+.goalCard {
+  position: relative;
+  background-color: white;
+  color: rgba(38, 44, 51);
+  height: 25rem;
+  width: 40rem;
+  margin: 5rem 0 0 29.5rem;
+  padding: 3rem;
+  box-shadow: 0.3rem 0.5rem 0.3rem rgba(0,0,0,0.15);
+  border-top: solid;
+  border-top-color: rgba(228, 65, 4);
+}
+
+.goalDateField {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  margin: 0 0 5rem;
+}
+
+.goalField {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+#editButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2rem;
+  background-color: transparent;
+  height: 2.55rem;
+  width: 2.55rem;
+}
+
+#deleteButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2.55rem;
+  width: 2.55rem;
+  background-color: transparent;
+}
+
+.edit.outline.icon, .close.icon {
+  color: rgba(245,40,0, 0.75);
+}
+
+.edit.outline.icon:hover, .close.icon:hover {
+  transform: scale(1.1);
+}
